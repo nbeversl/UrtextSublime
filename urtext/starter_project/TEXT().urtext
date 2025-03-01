@@ -1,0 +1,42 @@
+TEXT() _ #call
+
+Outputs arbitrary text. Can be used at any location in a dynamic output.
+
+Example:
+
+[[	>(| Example Use of TEXT() >)
+.		TEXT(\nThis text appears at the top\n\n)
+.		INCLUDE(*)
+.		LIMIT(5)
+.		TREE()
+.		TEXT(\nThis text appears in the middle\n\n)
+.		INCLUDE(*)
+.		SORT(title -r)
+.		LIMIT(5)
+.		TREE()
+.		TEXT(\nThis text appears at the end\n) ]]
+
+Output:
+
+	{~ Example Use of TEXT() _
+
+	  This text appears at the top
+
+	  | AND/OR >
+	  | About Urtext >
+	  | Accessing Nested Metadata in Frames >
+	  | Action Links ^ Links >
+	  | Action Links ^ WHEN() >
+
+	  This text appears in the middle
+
+	  | self >
+	  | project_settings >
+	  | popup _ >
+	  | oldest_timestamp >
+	  | newest_timestamp >
+
+	  This text appears at the end
+	}
+
+See next: | MAX_LENGTH() >

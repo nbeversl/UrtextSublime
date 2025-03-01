@@ -1,0 +1,12 @@
+Show _
+
+%%Python
+class Show:
+
+	name = ["SHOW"]    
+	
+	def dynamic_output(self, text_contents):
+		self.frame.show = self.argument_string
+
+ThisProject.add_call(Show)
+%%

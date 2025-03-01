@@ -1,0 +1,166 @@
+INCLUDE() _  #call
+
+INCLUDE accepts one or more key/operator/value combinations, and optional flag(s).
+
+Example:
+
+[[ 	...
+.	INCLUDE(keyword = example value)
+.	...
+]]
+Includes all nodes that have a metadata like: keyword::example value
+
+	{ Operators _
+
+	  `=` "equal to"
+	  Example: [[ INCLUDE(key = value) ]]
+	  Includes all nodes with the given key containing the given value
+
+	  `?` "contains"
+	  Example: [[ INCLUDE(_contents ? some text or content) ]]
+	  Includes all nodes containing "some text or content" in their text contents.
+
+	  `*` "anything"
+	  Example: [[ INCLUDE(index = *) ]]
+	  Includes all nodes containing the metadata key `index`
+
+	  `before`
+	  Compares timestamps
+	  Example: [[ INCLUDE(_oldest_timestamp before <October 30, 2024> )]]
+	  (See | System Keys > for more information on `_oldest_timestamp`)
+
+	  `after`
+	  Compares timestamps
+	  Example: [[ INCLUDE(_oldest_timestamp after <October 30, 2024> )]]
+	  (See | System Keys > for more information on `_oldest_timestamp`)
+
+	}
+
+	{ AND/OR _
+
+	  Two include nodes matching multiple overlapping criteria (an AND comparison), use multiple parameters in the same call, separated by semicolon.
+	  Example:
+
+	  [[ INCLUDE(index=*; kw=example) ]]
+	  Includes all nodes that have both an index metadata key with any value AND the key "kw" equal to "example".
+
+	  To include nodes matching multiple non-overlapping criteria (an OR comparison), use multiple calls.
+	  Example:
+
+	  [[  INCLUDE(index=*) INCLUDE(kw=example) ]]
+	  Includes all nodes that have an index metadata key AND all all nodes with key "kw" equal to "example".
+	}
+
+	{ EXCLUDE() _ #call
+
+	  Exclude works as INCLUDE, except that it removes nodes from inclusion in the output.
+	  Example:
+
+	  [[ INCLUDE(*) EXCLUDE(keyword = not relevant) ]]
+	  Includes all nodes in the project except those with metadata like: keyword::not relevant.
+
+	  EXCLUDE must be preceded by at least one INCLUDE to have any effect.
+	}
+
+	{ Evaluation Order _
+
+	  Calls are evaluated in the order written.
+	  Example:
+
+	  [[
+	  .	INCLUDE(topic=*)
+	  .	EXCLUDE(_oldest_timestamp before <Nov. 13, 2021>)
+	  .	EXCLUDE(kw=archived)
+	  .	SORT()
+	  . INCLUDE(author=Stan) ]]
+
+	  Will gather all nodes with the metadata key "topic", remove from those all with the oldest timestamp before November 13, 2021, remove all with the metadata key "archived", sort the remaining nodes alphabetically, then add all nodes with the metadata key "author" equal to "Stan".
+	}
+
+	{ Example Use of INCLUDE and EXCLUDE _
+
+	  [[
+	  .	INCLUDE(#call)
+	  .	TARGET(| All Available Calls >)
+	  .	LIST()
+	  ]]
+
+	  Populates the node below (| All Available Calls >) with all nodes about calls in this starter project.
+	  Note each included node contains the hash meta `#call` or the metadata syntax `kw::call`.
+
+		{~ All Available Calls _
+		  | COLLECT() >
+		  | EXCLUDE() >
+		  | EXEC() >
+		  | INCLUDE() >
+		  | LIMIT() >
+		  | LOG() >
+		  | MAX_LENGTH() >
+		  | POP and PULL >
+		  | RENAME_FILES() >
+		  | SHOW() >
+		  | SORT() >
+		  | TARGET() >
+		  | TEXT() >
+		  | TREE() >
+		  | WHEN() >
+		}
+
+	}
+
+	{ Shorthand _
+
+	  INCLUDE has the shorthand syntax +
+	  EXCLUDE has the shorthand syntax -
+
+	  Example:
+	  [[ INCLUDE(*) EXCLUDE(kw=example) ]]
+	  [[ +(*) -(kw=example) ]]
+	  The above two example are equivalent.
+	}
+
+	{ Asterisk _
+
+	  `*`
+	  Includes all of a key, value, or used alone, all nodes. Can be applied to the entire call or to either of key/value pairs
+
+	  Examples:
+	  [[ INCLUDE(*)
+	  Includes all nodes in the project ]]
+
+	  [[ INCLUDE(*=example value)
+	  Includes all nodes with any value matching "example value" ]]
+
+	  [[ INCLUDE(example_key=*)
+	  Includes all nodes with any key matching "example_key" ]]
+
+	}
+
+	{ Flags _
+
+	  Flags modify the inclusion by limiting the query.
+
+	  `-blank`
+	  Limits the INCLUDE to nodes that are blank or contain only whitespace as their content.
+
+	  `-title_only`
+	  Limits the INCLUDE to nodes that have only a title, and are otherwise blank or contain only whitespace.
+
+	  `-dynamic`
+	  Limits the INCLUDE to only dynamic nodes
+
+	  `-untitled`
+
+	  `-is_meta`
+	  Limits the INCLUDE to nodes that are metadata values
+	  See | Nodes as Metadata Values >
+
+	}
+
+Accepts a single optional number paramenter providing a level of depth, such as TREE(5).
+To show unlimited depth (until recursion), use the asterisk: TREE(*)
+
+INCLUDE and EXCLUDE can both accept | System Keys >
+
+See next: | LIMIT() >
+

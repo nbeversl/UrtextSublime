@@ -1,0 +1,28 @@
+COLLECT() _ #call
+
+Example:
+
+[[
+.	+(*)
+.	Includes all nodes in the project
+.
+.	SHOW($_link\n)
+.
+.	COLLECT(_inline_timestamp=*)
+.	Collects all occurences of inline timestamps
+.
+.	>(| Example Use of COLLECT() >)
+]]
+
+Output:
+
+	{~ Example Use of COLLECT() _
+	  | Example Timstamps >:22
+	  | Example Timstamps >:57
+	  | Example Timstamps >:80
+	  | Example Timstamps >:94
+	}
+
+Note that the output links directly to the location of the metadata entry using the syntax described in | Link to Character Location >
+
+See next: | TEXT() >

@@ -1,0 +1,27 @@
+Node Browser _
+
+%%Python
+class NodeBrowser:
+	
+	name = 'Node Browser'
+	thread_safe = True
+
+	def run(self):
+		if self.project_list.current_project:
+			selections = [[n.id, n.display_detail] for n in self.project_list.current_project.sort_for_node_browser()]
+
+		def on_highlight(index):
+			if self.selection_has_changed:
+				self.project_list.current_project.run_editor_method('preview_urtext_node', selections[index][0])
+			else:
+				self.selection_has_changed = True
+
+		def callback(index):
+			if index > -1 :
+				self.project_list.current_project.open_node(selections[index][0])
+
+		self.project_list.run_editor_method('show_panel', selections, callback, on_highlight=on_highlight)
+		
+ThisProject.add_selector(NodeBrowser)
+
+%%

@@ -1,0 +1,31 @@
+Timestamps _
+
+Text between two angled brackets (`< >`) is parsed as a timestamp. Urtext utilizes the Python `dateutil` module to loosely parse dates in almost any format. For instance, all of the following are valid:
+
+	{ Example Timstamps
+
+	  <Fri., Oct. 09, 2020, 09:59 AM>
+	  <February 23, 1848>
+	  <May 1946>
+	  <1066>
+	}
+
+The first character inside the brackets may not be `!`, `-`, or whitespace.
+
+Press `Ctrl+Shift+t` to insert the current date and time anywhere.
+The format of the timestamp can be changed in | project_settings > using the `timestamp_format` > key.
+
+Timestamps may also be created manually.
+
+Timestamps may be used anywhere. Like all metadata, they remember their position and so function also as anchors/bookmarks.
+
+	{ Tracking Node Dates and Times _
+
+	  Reliance on the operating system's "created" or "modified" file date metadata is avoided, since these can be inadvertently overwritten during ordinary file system operations. Instead, new file-level nodes receive a "timestamp" metadata key by default when created.
+	}
+
+	{ Time Zones _
+
+	  Time zones are not required. If no time zone is present, Coordinated Universal Time (UTC) is interpreted by default for parsing/comparison purposes. To modify this default, set the `timezone` key in | project_settings
+	}
+

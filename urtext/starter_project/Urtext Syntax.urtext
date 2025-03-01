@@ -1,0 +1,99 @@
+Urtext Syntax _
+
+Square brackets in this syntax documentation (`[`, `]`) indicate the enclosed text is variable.
+
+	{ `{`   `}`
+
+	  Bracket Node Wrappers _
+
+	  Can appear anywhere. Can be nested aribrarily deep.
+	  More information: | Bracket Nodes >
+	}
+
+	{ `•`
+
+	  Bullet _
+
+	  Must be the first non-whitespace character on a line.
+	  More information: | Bullet Nodes >
+	}
+
+	{ ` _`
+
+	  Space-Underscore _
+
+	  Marks all previous text on the line as the title of the node.
+	  If this syntax appears more than once in a node, only the first use is observed.
+	  This syntax can be overridden in any node using the reserved `title` metadata key.
+	  More information: | Metadata Syntax >
+	}
+
+	{ `| [ node id ] >`
+
+	  Node Link _
+
+	  Links to the specified node by ID, like a hyperlink, and can be opened with `Ctrl + Shift + /` or `Ctrl + Shift + mouseclick`.
+	  More information: | Links >
+	  Links updated dynamically if their destination title changes. See | Dynamic IDs >
+	  You can also link to files: | File Links >
+	  and to HTTP(S)/web links: | Web/HTTP(S) Links >
+	}
+
+	{ `| [ node id ] >>`
+
+	  Pointer _
+
+	  An alias to the specified node, as though the node were included in full at the position of the pointer.
+	  More Information:
+	  | TREE() >
+	  | PULL >
+	  | POP >
+
+	}
+
+	{ `<` and `>`
+
+	  Timestamp Wrappers _
+
+	  Parses datetime strings as metadata.
+	  More information: | Timestamps >
+	}
+
+	{ `[ key ]::[ value ] - [ value ] - [ ... value ] [ ... <timestamp> ] - [...] ;`
+
+	  Metadata _
+
+	  Accepts a key on the left and one or more values, optionally with timestamps, on the right.
+	  More information: | Metadata Syntax >
+	}
+
+	{ `**`
+
+	  Bold Text _
+
+	  Makes **bold** text.
+
+	}
+
+	{ `__`
+
+	  Italic Text _
+
+	  Makes __italic__ text.
+
+	}
+
+	{ `.`
+
+	  Whitespace Anchor _
+
+	  When the first non-whitespace character on a line, it will not be parsed and permits manual whitespace when using | Lint >
+
+	  Dot (period) at the beginning of a line.
+
+	  Example:
+	  .		This text is indented and the whitespace anchor is not very visible.
+
+	}
+
+See next: | Links >

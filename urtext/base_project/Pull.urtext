@@ -1,0 +1,88 @@
+Pull _
+
+Pulls a node into another node from a pointer.
+See also | Pop >
+
+%%Python
+ 
+class PullNode:
+
+    name = "Pull"
+    is_running = False
+
+    def run(self):
+
+        if self.project_list.selectors['pop'].is_running:
+            return
+
+        string, col_pos, file_pos, _ = self.run_editor_method('get_line_and_cursor')
+        destination_filename = self.run_editor_method('get_current_filename')
+        file_pos = self.run_editor_method('get_position')
+
+        self.is_running = True
+        self.run_editor_method('save_file', destination_filename)
+        return self._pull_node(string, col_pos, destination_filename, file_pos)
+
+    def _pull_node(self, string, col_pos, destination_filename, file_pos):
+
+        if not self.current_project().compiled:
+            self.is_running = False
+            return self.current_project().handle_info_message('Project not yet compiled.')
+
+        link = self.utils.get_link_from_position_in_string(string, col_pos, None, self.current_project().project_list)
+        source_node = link.get_node()
+        if not link or not source_node:
+            self.is_running = False
+            return self.current_project().handle_info_message('link is not a node')
+        
+        destination_node = self.current_project().get_node_from_position(destination_filename, file_pos)
+        if not destination_node:
+            self.is_running = False
+            return self.current_project().handle_info_message('No destination node found here')
+
+        if destination_node.is_dynamic:
+            self.is_running = False
+            return self.current_project().handle_info_message('Not pulling content into a dynamic node')
+
+        source_filename = source_node.filename
+
+        for ancestor in destination_node.ancestors():
+            if ancestor.id == source_node.id:
+                return self.current_project().handle_info_message('Cannot pull a node into its own child or descendant.')
+
+        start = source_node.start_position
+        end = source_node.end_position
+
+        source_file_contents = source_node.file._get_contents()
+
+        if not self.current_project().nodes[source_node.id].is_root_node:
+            updated_source_file_contents = ''.join([
+                source_file_contents[0:end],
+                source_file_contents[end:len(source_file_contents)]
+                ])
+            self.current_project().files[source_filename].set_buffer_contents(
+                updated_source_file_contents)
+            self.current_project().files[source_filename].write_buffer_contents()
+        else:
+            self.current_project().delete_file(source_filename)
+
+        pulled_contents = source_file_contents[start:end]
+        destination_file_contents = self.current_project().files[destination_filename]._get_contents()
+
+        wrapped_contents = ''.join([
+            self.syntax.node_opening_wrapper,
+            ' ',
+            pulled_contents,
+            ' ',
+            self.syntax.node_closing_wrapper])
+        
+        destination_file_contents = destination_file_contents.replace(
+            link.matching_string,
+            wrapped_contents)
+        self.current_project().files[destination_filename].set_buffer_contents(destination_file_contents)
+        self.current_project().files[destination_filename].write_buffer_contents()
+        self.is_running = False
+
+ThisProject.add_selector(PullNode)
+        
+%%

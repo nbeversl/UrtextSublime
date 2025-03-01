@@ -1,0 +1,19 @@
+Using Multiple Projects _
+
+To use multiple projects at once, there is a project context manager. When you initially pass a path to Urtext, it looks recursively in all sub folders for additional projects. If it finds a compilable Urtext project in any one, it adds these to the context manager.  You can then freely switch among projects, either explicitly, or using links between the projects (described below). When switching projects, all Urtext's features, content and behavior, including links, compiling, and all functions linked to UI buttons, will operate in the context of the selected project.
+
+You can put all your Urtext projects into sub folders of a single path. Alternatively, you may put them anyplace in the file system and choose as your Urtext root a folder that encompasses them all. Compiling may take longer if Urtext has to search through many unused directories.
+
+Using the standalone Urtext module, it is possible to only instantiate a single project, without the context manager. The current implementations in Sublime and Pythonista, however, use the context manager by default, even if you are only using a single project.
+
+Recall that what defines a project is a folder. This is also what separates it from other projects. If you add other Urtext project folders into the initial path, they will all be accessible from the same project list.
+
+To switch among projects in Sublime, select "Urtext: Select Project" from the command palette or press Ctrl-Shift-O.
+
+	{ Project Naming (Identification) _
+
+	  Unlike nodes, projects are uniquely identified by name. For this reason, each project must have an unique name within the running instance of Urtext. Projects can be named using the `project_title` key in the `project_settings` node. If no name is present, the project's name becomes its absolute path in the file system.
+
+	}
+
+| Cross-Project Linking >>

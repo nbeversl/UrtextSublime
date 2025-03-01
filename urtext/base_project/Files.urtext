@@ -1,0 +1,57 @@
+
+Files _
+
+Outputs a list of files at the folder location specified.
+
+%%Python
+class UrtextFiles:
+	
+	import os
+
+	name = ["FILES"]
+
+	def dynamic_output(self, text_contents):
+		paths, replaced_contents = self.utils.get_all_links_from_string(self.argument_string)
+		if paths:
+			path = paths[0].path
+		else:
+			path = self.argument_string
+		if path and path.strip() == '':
+			path = self.os.path.dirname(self.frame.source_node.filename)
+		if not self.os.path.exists(path):
+			return text_contents + 'Path does not exist "%s"' % path
+		file_list = self.os.listdir(path)
+		output = []
+		root = self.Node('|/ '+path+ ' >')
+		root = self.walk_tree(root)
+		tree_render = []
+		level = 0
+		indented_pre = ' '
+
+		for pre, _, this_node in self.RenderTree(root):
+			indented_pre = '  ' + pre	
+			if level == 0:
+				prefix = pre
+			else:
+				prefix = indented_pre 
+			tree_render.append("%s%s" % (pre, this_node.name))
+
+		return text_contents + '\n'.join(tree_render)
+
+	def walk_tree(self, root_node, max_nested=-1):
+		path = self.utils.get_path_from_link(root_node.name)
+		for f in self.os.listdir(path):
+			node_name_link = ''.join(['|/ ',
+				self.os.path.abspath(self.os.path.join(path, f)),
+				' >'])
+			if self.os.path.isdir(self.os.path.join(path, f)):
+				d_node = self.Node(node_name_link, parent=root_node)
+				d_node = self.walk_tree(d_node)		
+			else:
+				f_node = self.Node(node_name_link, parent=root_node)
+		return root_node
+
+ThisProject.add_call(UrtextFiles)
+
+%%
+																																																																			 

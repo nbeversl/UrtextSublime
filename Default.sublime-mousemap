@@ -1,0 +1,6 @@
+ [
+ 	{
+        "button": "button1", "modifiers": ["shift", "ctrl"],
+        "press_command": "mouse_open_urtext_link",
+  	}
+  ]

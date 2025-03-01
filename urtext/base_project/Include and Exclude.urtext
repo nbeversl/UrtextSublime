@@ -1,0 +1,113 @@
+Include and Exclude _ 
+
+INCLUDE/+: Adds nodes to the current definition
+EXCLUDE/-: Removes nodes to the current definition
+
+NodeQuery is a base class that provides the main query logic inherited by both and should not be used directly.
+
+%%Python 
+
+class NodeQuery:
+
+	name = ["QUERY"]
+	import re
+
+	def build_list(self):
+		added_nodes = set([l.node_id for l in self.links if l.node_id and l.node_id in self.project.nodes])
+
+		for arg in self.arguments:
+			if self.re.match(self.syntax.virtual_target_marker+'self', arg):
+				added_nodes.update([self.frame.source_node.id])
+				break
+
+			if self.re.match(self.syntax.virtual_target_marker+'parent', arg):
+				if self.frame.source_node.parent:
+					added_nodes.update([self.frame.source_node.parent.id])
+				break
+
+		if not added_nodes:
+			added_nodes = set()
+			if self.have_flags('*'):
+				added_nodes.update([node_id for node_id in self.project.nodes])
+			added_nodes = added_nodes.union(self._build_group_and(
+					self.project,
+					self.params,
+					self.frame,
+					include_dynamic=self.have_flags('-dynamic'))
+				)
+
+		# flags specify how to LIMIT the query, whether it is + or -
+		if self.have_flags('-title_only'):
+			added_nodes = set([node_id for node_id in added_nodes if self.project.nodes[node_id].title_only])
+
+		if self.have_flags('-untitled'):
+			added_nodes = set([node_id for node_id in added_nodes if self.project.nodes[node_id].untitled])
+
+		if self.have_flags('-is_meta'):
+			added_nodes = set([node_id for node_id in added_nodes if self.project.nodes[node_id].is_meta])
+
+		if self.have_flags('-blank'):
+			added_nodes = set([node_id for node_id in added_nodes if self.project.nodes[node_id].title_only])
+		
+		for target_id in self.frame.target_ids():
+			added_nodes.discard(target_id)  
+
+		return list(added_nodes)
+
+	def _build_group_and(
+		self,
+		project, 
+		params, 
+		dd,
+		include_dynamic=False):
+
+		found_sets = []
+		new_group = set([])
+		for group in params:
+			key, value, operator = group
+			if key.lower() == 'id' and operator == '=':
+				if '"' not in value and value != "@parent":
+					print('(debugging) NO READABLE VALUE in ', value)
+					continue
+				value = value.split('"')[1]
+				new_group = set([value])
+			else:
+				if value == "@parent" and dd.source_node.parent:
+					value = dd.source_node.parent.id
+				new_group = set(project.get_by_meta(key, value, operator))
+			found_sets.append(new_group)
+		
+		for this_set in found_sets:
+			new_group = new_group.intersection(this_set)
+		
+		return [n.id for n in new_group]
+
+class Exclude(NodeQuery):
+	
+	name = ["EXCLUDE","-"]
+
+	def dynamic_output(self, nodes):
+		excluded_nodes = self.build_list()
+		# this flag will have to be reimplemented
+		# if self.have_flags('-including_as_descendants'):
+		self.frame.excluded_nodes.extend(excluded_nodes)
+		self.frame.excluded_nodes = list(set(self.frame.excluded_nodes))
+		self.frame.included_nodes = [node for node in list(self.frame.included_nodes) if node.id not in self.frame.excluded_nodes]
+
+class Include(NodeQuery):
+
+	name = ["INCLUDE","+"] 	
+
+	def dynamic_output(self, nodes):
+		current_included_nids = [node.id for node in self.frame.included_nodes]
+		new_included_nodes = self.build_list()
+		new_included_nodes = [nid for nid in new_included_nodes if nid not in [n.id for n in self.frame.included_nodes]]
+		self.frame.included_nodes.extend(sorted([self.project.nodes[nid] for nid in new_included_nodes if nid in self.project.nodes], key=lambda node: node.id))
+		
+	def default_output(self):
+		return ''.join([n.dynamic_output(self.frame.show) for n in self.frame.included_nodes])
+
+ThisProject.add_call(Include)
+ThisProject.add_call(Exclude)
+
+%%

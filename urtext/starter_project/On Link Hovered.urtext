@@ -1,0 +1,13 @@
+On Link Hovered
+
+	{~ Example def _
+	  OUTPUT TEXT!
+
+	  [[
+	  WHEN(-target_link_clicked)
+	  TEXT(OUTPUT TEXT!)
+	  >(@self)
+	  >(@popup)
+	  ]]}
+
+|! Example def >

@@ -1,0 +1,113 @@
+TARGET() _ #call
+
+TARGET directs the output of any frame (see | Frames >) to a target, either a node in the project, a file, or a virtual target (| Virtual Targets >).
+
+	{ Node Output _
+
+	  If no special syntax is included, the target is assumed to be an existing node in the project.
+	  The | Node Link ^ Links > syntax is not required inside TARGET() but is more readable and also provides a working link to the output node.
+
+	  Example:
+
+	  [[ 	TARGET(some node) ]]
+	  [[	TARGET(|? some node >) ]]
+	  The above to examples are equivalent.
+	}
+
+	{ Shorthand _
+
+	  TARGET has the shorthand syntax >
+
+	  Example:
+	  [[ TARGET(|? some node >) ]]
+	  [[ >(|? some node >) ]]
+	  The above two example are equivalent.
+
+	}
+
+	{ File Output _
+
+	  Using the | File Links > syntax inside TARGET() will output the content to the specified file, creating the file if it does not exist.
+	  Example:
+
+	  [[ >(|/ example file output.txt >)
+	  TEXT(example output)
+	  ]]
+
+	  Click the file link to see the outputted text
+
+	}
+
+	{ Virtual Targets _
+
+	  Virtual outputs begin with the `@` character and signify a location other than a node or file.
+	  Several “virtual outputs” are available.
+
+		{ self _
+
+		  Sends the output to the same node containing the frame, overwriting/updating any existing content but preserving the frame.
+
+		  Example:
+
+			{~ Example Use of self _
+			  This text outputs to the same node containing the frame
+
+			  [[>(@self) TEXT(This text outputs to the same node containing the frame)]]}
+		}
+
+		{ @clipboard _
+
+		  Sends the output to the clipboard, from which it can be pasted.
+
+		  Example:
+
+		  [[
+		  >(@clipboard) TEXT(example text to the clipboard. Paste to see the output. Change this text to change the output.) ]]
+		}
+
+		{ @log _
+
+		  sends the output to the project log, if it exists.
+
+		  [[ >(@log) TEXT(Example text to output to the log) ]]
+
+		  See results here:
+		  | Example use of LOG >
+		}
+
+		{ @console _
+
+		  sends the output to the Python console
+
+		  Example:
+		  [[ >(@console) TEXT(Check the Python console for this message) ]]
+		}
+
+		{ @popup _
+
+		  Sends the output to a popup in the editor.
+		  [[ WHEN(-target_link_clicked)
+		  >(@popup)
+		  >(| output dest >)
+		  TEXT(This message will appear in a popup.) ]]
+
+			{~ output dest _
+			  This message will appear in a popup.
+			}
+		  |! output dest >
+		}
+
+		{ @buffer _
+
+		  Sends the output to a scratch buffer, if available in the editor. Use for output that you don't need saved.
+		  [[   WHEN(-target_link_clicked) >(| target link >) >(@buffer) TEXT(T434sdfasdcratch buffer.) ]]
+
+		  Some problem is happening with the calls being all on the same fucking line.
+
+			{~ target link _
+			  T434sdfasdcratch buffer.
+			}
+
+		  |! target link > }
+
+	}

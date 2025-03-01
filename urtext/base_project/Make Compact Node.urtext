@@ -1,0 +1,24 @@
+Make Compact Node _
+%%Python
+class CompactNode:
+
+    selector_string = 'compact_node'
+    name = "Compact Node"
+    thread_safe = True
+ 
+    def run(self):
+        line_contents, col_pos, file_pos = self.run_editor_method('get_line_and_cursor')
+        if self.utils.match_compact_node(line_contents):
+            contents = self.current_project().add_compact_node()
+            self.project_list.run_editor_method('replace', full_line=True, replacement_text=line_contents+'\n'+contents)
+            distance_to_end = len(line_contents) - col_pos
+            dest_position = file_pos + distance_to_end + len(contents) + 1
+            self.project_list.run_editor_method('set_position', dest_position)
+        elif line_contents.strip() == '':
+            contents = self.current_project().add_compact_node(contents=line_contents.strip())
+            self.project_list.run_editor_method('insert_text', contents)            
+        else:
+            contents = self.current_project().add_compact_node(contents=line_contents.strip())
+            self.project_list.run_editor_method('replace', full_line=True, replacement_text=contents)
+ThisProject.add_selector(CompactNode)
+%%

@@ -1,0 +1,334 @@
+{
+    "name": "Urtext Monokai",
+    "variables":
+    {   
+        "blue-bright": "hsl(216, 95.1%, 47.8%)",
+        "blue-brighter": "hsl(225, 80%, 60%)",
+        "blue-grey": "hsl(225, 10%, 50%)",
+        "yellow": "hsl(54, 95%, 67%)",
+        "bright-green2": "hsl(113, 40%, 70%)",
+        "red": "hsl(0, 100%, 50%)",
+        "bright-green": "hsl(225, 80%, 60%)",
+        "reg-text-white": "hsl(300, 4%, 100%)",
+        "lime2": "hsl(164, 40%, 46%)",
+        "pastel-green": "hsl(141, 77%, 50%)",
+        "dark1": "hsl(0, 5%, 30%)",
+        "slightly-brigther": "hsl(69,7.5%,18.2%)",
+        "unobtrusive": "hsl(70, 80%, 15%)",
+        "bg_shaded": "color(var(dark1) a(0.6))",
+
+    },
+    "rules":
+    [
+        {
+            "scope": "meta_key.urtext",
+            "font_style": "bold",
+            "foreground": "var(blue-grey)"
+        },
+        {
+            "scope": "meta_value.urtext",
+            "foreground": "var(blue-brighter)"
+        },
+        {
+            "scope": "entity.name.value_separator.urtext",
+            "foreground": "var(grey)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "meta_separator.urtext",
+            "foreground": "var(grey)"
+        },
+        {
+            "scope": "tag_self.urtext",
+            "foreground": "var(blue-brighter)"
+        },
+        {
+            "scope": "tag_descendants.urtext",
+            "foreground": "var(yellow)"
+        },
+        {
+            "scope": "entity.name.struct.timestamp.urtext",
+            "foreground": "var(pastel-green)",
+            "background": "var(bg_shaded)"
+        },
+        {
+            "scope": "link_id.urtext",
+            "foreground": "var(bright-green)"
+        },
+        {
+            "scope": "link.urtext",
+            "foreground": "var(bright-green)"
+        },
+        {
+            "scope": "link_opening_wrapper.urtext",
+            "foreground": "var(reg-text-white)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "link_closing_wrapper.urtext",
+            "foreground": "var(reg-text-white)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "link.other-project.urtext",
+            "font_style": "bold",
+            "foreground": "var(reg-text-white)"
+        },
+        {
+            "scope": "file_link.urtext",
+            "foreground": "var(blue-grey)"
+        },
+        {
+            "scope": "embed_marker.urtext",
+            "foreground": "var(red)",
+            "font_style": "italic bold"
+        },
+        {
+            "scope": "escape_marker.urtext",
+            "foreground": "var(red)",
+            "font_style": "italic bold"
+        },
+        {
+            "scope": "punctuation.section.braces.begin.frame.urtext",
+            "foreground": "var(blue-grey)",
+            "font_style": "bold italic"
+        },
+        {
+            "scope": "punctuation.section.braces.end.frame.urtext",
+            "foreground": "var(blue-grey)",
+            "font_style": "bold italic"
+        },
+        {
+            "scope": "call-name.urtext",
+            "foreground": "var(blue-grey)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "call-key.urtext",
+            "foreground": "var(blue-brighter)"
+        },
+        {
+            "scope": "call-keyword.urtext",
+            "foreground": "var(blue-brighter)",
+            "font_style": "italic"
+        },
+        {
+            "scope": "frame-node_id.urtext",
+            "foreground": "var(blue-brighter)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "call-parens",
+            "foreground": "var(blue-grey)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "format-string-opener.urtext",
+            "foreground": "var(yellow)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "format-string.urtext",
+            "foreground": "var(yellow)",
+            "font_style": "regular"
+        },
+        {
+            "scope": "format-string-separator.urtext",
+            "foreground": "var(white)",
+            "font_style": "bold"
+        },
+        {   
+            "scope": "call-name",
+            "foreground": "var(white)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "call-flag.urtext",
+            "foreground": "var(blue)",
+            "font_style": "italic"
+        },
+        {
+            "scope": "punctuation.section.braces.begin.inline_node_1.urtext",
+            "foreground": "var(bright-green2)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.begin.dynamic_inline_node_1.urtext",
+            "foreground": "var(bright-green2)",
+            "font_style": "bold"
+        },        
+        {
+            "scope": "dynamic_indicator.urtext",
+            "foreground": "var(yellow)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "section.dynamic_node.urtext",
+            "background": "var(slightly-brigther)",
+        },
+        {
+            "scope": "punctuation.section.braces.begin.inline_node_2.urtext",
+            "foreground": "var(bright-green2)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.begin.inline_node_3.urtext",
+            "foreground": "var(wrapper3)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.begin.inline_node_4.urtext",
+            "foreground": "var(bright-green2)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.begin.inline_node_5.urtext",
+            "foreground": "var(bright-green2)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.end.inline_node_1.urtext",
+            "foreground": "var(bright-green2)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.end.inline_node_2.urtext",
+            "foreground": "var(bright-green2)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.end.inline_node_3.urtext",
+            "foreground": "var(bright-green2)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.end.inline_node_4.urtext",
+            "foreground": "var(bright-green2))",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.end.inline_node_5.urtext",
+            "foreground": "var(bright-green2)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "raw.urtext",
+            "background": "var(dark1)"
+        },
+        {
+            "scope": "node_title.urtext",
+            "font_style": "bold"
+        },
+        {
+            "scope": "pointer_id.urtext",
+            "foreground": "var(bright-green)"
+        },
+        {
+            "scope": "hash_meta.urtext",
+            "font_style": "bold"
+        },
+        {
+            "scope": "bold.urtext",
+            "font_style": "bold"
+        },
+        {
+            "scope": "italic.urtext",
+            "font_style": "italic"
+        },
+        {
+            "scope": "url_link.urtext",
+            "foreground": "var(blue-bright)"
+        },
+        {
+            "scope": "missing_node.urtext",
+            "foreground": "var(yellow)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "missing_node.urtext",
+            "foreground": "var(yellow)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "action_node.urtext",
+            "foreground": "var(lime2)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "call_key.urtext",
+            "foreground": "var(lime2)",
+            "font_style": "italic"
+        },
+        {
+            "scope": "call_operator.urtext",
+            "foreground": "var(lime2)",
+            "font_style": "bold italic"
+        },            
+        {
+            "scope": "call_value.urtext",
+            "foreground": "var(lime2)"
+        },
+        {
+            "scope": "call_arg_separator.urtext",
+            "foreground": "var(blue-grey)",
+        },
+
+        {
+            "scope": "virtual_target_indicator.urtext",
+            "foreground": "var(blue-bright)",
+            "font_style": "bold italic"
+        },
+        {
+            "scope": "virtual_target_name.urtext",
+            "foreground": "var(lime2)"
+        },
+        {
+            "scope": "link_uniquifier_marker.urtext",
+            "foreground": "var(lime2)"
+        },
+        {
+            "scope": "link_uniquifier.urtext",
+            "foreground": "var(lime2)",
+            "font_style": "italic"
+        },
+        {
+            "scope": "metadata_assigner.urtext",
+            "foreground": "var(grey)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "link_destination.urtext",
+            "foreground": "var(bright-green2)"
+        },
+        {
+            "scope": "http_link.urtext",
+            "foreground": "var(blue)"
+        },
+        {
+            "scope": "entity.name.struct.system-message.urtext",
+            "foreground": "var(yellow)"
+        },
+        {
+            "scope": "entity.name.struct.error-message.urtext",
+            "foreground": "var(error-message)"
+        },
+        {
+            "scope": "file_link_modifier.urtext",
+            "foreground": "var(lime2)"
+        },
+        {
+            "scope": "file_link_missing.urtext",
+            "foreground": "var(yellow)"
+        },
+        {
+            "scope": "file_link_path.urtext",
+            "foreground": "var(lime2)"
+        },
+        {   "scope" :"metadata_end.urtext",
+            "foreground": "var(lime2)"   
+        },
+        {   "scope" :"whitespace-anchor.urtext",
+            "foreground": "var(unobtrusive)"   
+        }
+    ]
+}

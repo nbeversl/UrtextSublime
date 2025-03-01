@@ -1,0 +1,22 @@
+LOG() _ #call
+
+Outputs all project logging information to the specified node.
+A few errors have been placed in this starter project so LOG() outputs some example messages.
+
+Example:
+[[
+>(| Example use of LOG >)
+LOG() ]]
+
+	{~ Example use of LOG _
+	  in file |/ /Users/natebeversluis/Library/Application Support/Sublime Text/Packages/Urtext/urtext/starter_project/Urtext Starter Project.urtext > Dropping node ID "Node Browser", no title or timestamp in parent, no timestamp in node
+
+	  in file |/ /Users/natebeversluis/Library/Application Support/Sublime Text/Packages/Urtext/urtext/starter_project/Set Sublime Text Keybindings.urtext > Dynamic node definition in | Set Sublime Text Keybindings >
+	  points to nonexistent node |? output >
+
+	  in file |/ /Users/natebeversluis/Library/Application Support/Sublime Text/Packages/Urtext/urtext/starter_project/Sublime Text Keybindings.urtext > Dynamic node definition in | Sublime Text Keybindings >
+	  points to nonexistent node |? output >
+
+	}
+
+See next: | EXEC() >

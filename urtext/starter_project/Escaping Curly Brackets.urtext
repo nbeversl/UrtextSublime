@@ -1,0 +1,5 @@
+Escaping Curly Brackets _
+
+If you need to use Urtext brackets in text, precede them a backward slash (`\`); this will prevent them from being parsed.
+
+To ignore syntax elements more globally, and/or to embed other syntaxes that use Urtext characters, such as JSON, PHP, and JavaScript, see | Escaping and Embedding >

@@ -1,0 +1,24 @@
+Go To Frame _
+
+%%Python
+class GoToFrame:
+
+	name = "Go to Frame"
+	thread_safe = True
+
+	def run(self):
+		filename = self.project_list.run_editor_method('get_current_filename')
+		position = self.project_list.run_editor_method('get_position')
+		target_node = self.project_list.current_project.get_node_from_position(filename, position)
+		if target_node:
+			return self.project_list.current_project.go_to_frame(target_node.id)
+		self.project_list.handle_message('No node here')
+
+ThisProject.add_selector(GoToFrame)
+
+%%
+
+	{ Documentation _
+
+	  From any node with dynamic output, navigations to its frame.
+	}

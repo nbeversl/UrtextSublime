@@ -1,0 +1,30 @@
+Move File To Other Project _
+%%Python
+
+class MoveFileToAnotherProjectCommand:
+
+	name = 'Move the current file to another project'
+
+	def run(self):
+		selections = [t for t in self.project_list.project_titles() if t != self.current_project().title()]
+		if len(selections) == 0:
+			return self.project_list.handle_message('No other available projects')
+		filename = self.project_list.run_editor_method('get_current_filename')
+
+		def move_file(selected_index):
+			self.project_list.move_file(
+				filename, 
+				self.project_list.current_project.title(),
+				selections[selected_index])
+			self.project_list.run_editor_method('close_file', filename)
+
+		if filename:
+			self.project_list.run_editor_method('show_panel', selections, move_file)
+
+ThisProject.add_selector(MoveFileToAnotherProjectCommand)
+%%
+
+	{ Documentation _
+
+	  Opens a panel or buffer to select another active project to which to move the current file.
+	}

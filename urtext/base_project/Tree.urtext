@@ -1,0 +1,122 @@
+Tree _
+
+Outputs an "anytree" tree of the included nodes. (https://anytree.readthedocs.io/en/latest/)
+
+%%Python 
+
+class TreeCall:
+
+    name = ['TREE', 'LIST']
+    
+    def dynamic_output(self, text_contents):
+        self.depth = 1
+        if self.have_flags('*'):
+            self.depth = float('inf')
+        else:
+            try:
+                self.depth = int(self.argument_string)
+            except:
+                self.depth = 1
+
+        tree_render = ''
+        start_points = self.frame.included_nodes
+
+        for start_point in start_points:
+            start_point_tree_node = self._duplicate_tree(self.Node(start_point.id))            
+            level = 0
+            for pre, _, this_node in self.RenderTree(
+                    start_point_tree_node, 
+                    maxlevel=self.depth):
+
+                if self._tree_node_is_excluded(this_node):
+                    this_node.children = []
+                    continue
+
+                if this_node.name not in self.project.nodes:
+                    tree_render += "%s%s" % (
+                        indented_pre, 
+                        ''.join([
+                            self.syntax.missing_node_link_opening_wrapper,
+                            this_node.name,
+                            self.syntax.link_closing_wrapper,
+                            '\n']
+                            ))
+                    continue
+                else:
+                    if this_node.name[:11] == '! RECURSION':
+                        tree_render += "%s%s" % (pre, this_node.name + '\n')    
+                        continue
+
+                    urtext_node = self.project.nodes[this_node.name]
+                
+                this_node.children = sorted(
+                    this_node.children,
+                    key=lambda n: n.position)
+
+                indented_pre = '  ' + pre
+
+                next_content = urtext_node.dynamic_output(self.frame.show)
+                
+                if level == 0:
+                    prefix = pre
+                else:
+                    prefix = indented_pre
+
+                tree_render += "%s%s" % (prefix, next_content)
+
+                level += 1
+
+        return ''.join([text_contents, tree_render])
+    
+    def _tree_node_is_excluded(self, tree_node):
+
+        node_id = tree_node.name
+        if node_id in self.frame.target_ids():
+            return True
+
+        if self.frame.excluded_nodes:
+
+            if node_id in self.frame.excluded_nodes:
+                return True
+
+            if node_id not in self.project.nodes:
+                return True
+
+        return False
+
+    def _duplicate_tree(self, from_tree_node, ancestors=None):
+
+        if ancestors is None:
+            ancestors = [from_tree_node.name]
+        if from_tree_node.name in self.project.nodes:
+            urtext_node = self.project.nodes[from_tree_node.name]
+            node_children = urtext_node.children
+            for pointer in urtext_node.pointers:
+                if pointer['id'] not in ancestors:
+                    alias_node = self.Node(pointer['id'])
+                    alias_node.parent = from_tree_node
+                    alias_node.position = pointer['position']
+                    ancestors.append(pointer['id'])
+                    new_pointer_tree_node = self._duplicate_tree(alias_node, ancestors=ancestors)
+                    new_pointer_tree_node.parent = from_tree_node
+
+            for child in node_children:
+                if child.id not in ancestors:          
+                    new_tree_node = self.Node(child.id)
+                    new_tree_node.parent = from_tree_node
+                    new_tree_node.position = child.start_position
+                    ancestors.append(child.id)
+                    next_childen_node = self._duplicate_tree(new_tree_node, ancestors=ancestors)
+                    next_childen_node.parent = from_tree_node
+                else:
+                    new_tree_node = self.Node('! RECURSION (from tree duplication) : '+ child.id + ' >')
+                    new_tree_node.parent = from_tree_node
+                    new_tree_node.position = child.start_position
+        else:
+            from_tree_node = self.Node('! MISSING NODE: '+from_tree_node.name)
+            from_tree_node.position = 0
+        return from_tree_node
+
+ThisProject.add_call(TreeCall)
+
+%%

@@ -1,0 +1,151 @@
+Navigation _
+
+Provides the global navigation features (next node, previous node) and tracks visited nodes.
+
+%%Python
+
+class Navigation:
+
+	name = ["NAVIGATION"]
+	project_list_instance = True
+	import threading
+	thread_safe = True
+
+	def __init__(self, project_list):
+		super().__init__(project_list)
+		self.navigation = []
+		self.nav_index = -1
+		self.triggered_node_visit = False
+
+	def run(self, arg):
+		if arg == 'forward':
+			return self.forward()
+		if arg == 'reverse':
+			return self.reverse()
+
+	def forward(self):
+		if self.nav_index + 1 > (len(self.navigation) - 1):
+			return self.project_list.handle_message('index is already at the end')
+
+		self.nav_index += 1
+		project, next_node = self.navigation[self.nav_index]
+		self.project_list.set_current_project(project)
+		self.triggered_node_visit = True
+		self.project_list.current_project.open_node(next_node)
+
+	def reverse(self):
+		if not self.navigation:
+			return self.project_list.handle_message('no nav history')
+		if self.nav_index > -1:
+			self.nav_index -= 1
+		if self.nav_index == -1:
+			return self.project_list.handle_message('index is already at the beginning.')
+		project, previous_node = self.navigation[self.nav_index]
+		self.project_list.set_current_project(project)
+		self.triggered_node_visit = True
+		self.project_list.current_project.open_node(previous_node)
+
+	def on_node_visited(self, project, node_id):
+		if self.triggered_node_visit:
+			self.triggered_node_visit = False
+			return
+	
+		if self.navigation:
+			last_project, last_id = self.navigation[self.nav_index]
+			# don't re-remember consecutive duplicate links
+			if (-1 < self.nav_index < len(self.navigation) - 1 and node_id == last_id): 
+				return
+
+		# add the newly opened file as the new "HEAD"
+		self.nav_index += 1
+		del self.navigation[self.nav_index:]
+		self.navigation.append((project, node_id))
+
+	def before_file_deleted(self, project, filename):
+		for item in list(self.navigation):
+			project, node_id = item
+			if filename in project.files and node_id in project.files[filename].node_ids():				
+				if self.navigation.index(item) <= self.nav_index:
+					self.nav_index -= 1
+				self.navigation.remove(item)
+
+	def on_node_id_changed(self, project, old_id, new_node_id):
+		for index, item in enumerate(self.navigation):
+			nav_project = item[0]
+			old_nav_id = item[1]
+			if project == nav_project and (old_nav_id == old_id):
+				self.navigation[index] = (project, new_node_id)
+
+	def on_selected(self, project):
+		on_selected_setting = project.get_setting_as_text('on_selected')
+		if on_selected_setting:
+			for action in on_selected_setting:
+				if action == 'open_last_nav' and self.navigation:
+					reversed_navs = list(reversed(self.navigation))
+					for index, item in enumerate(reversed_navs):
+						nav_project, node_id = item
+						if nav_project == project:
+							return project.open_node(node_id)
+
+				if action == 'open_home' and project.get_home():
+					if project.open_home():
+						return
+					elif not project.compiled:
+						timer = self.threading.Timer(.5, self.on_selected, project)
+						timer.start()
+
+				if action == 'open_any':
+					filename = list(project.files.keys())[0]
+					project.run_editor_method('open_file_to_position', filename)
+
+class NavigateForward:
+
+	name = "Nav Forward"
+
+	def run(self):
+		self.project_list.run_call('NAVIGATION', 'forward')
+
+class NavigateBackward:
+
+	name = "Nav Back"
+
+	def run(self):
+		self.project_list.run_call('NAVIGATION', 'reverse')
+
+class NavigateToNextNode:
+
+	name = "Next Node"
+	thread_safe = True
+	
+	def run(self):
+		position = self.run_editor_method('get_position')
+		filename = self.run_editor_method('get_current_filename')
+		self.current_project()._parse_file(filename, try_buffer=True)
+		current_node = self.current_project().get_node_from_position(filename, position)
+		if current_node:
+			for node in sorted(self.current_project().files[filename].nodes, key=lambda node: node.start_position):
+				if node.start_position > current_node.start_position:
+					return self.current_project().open_node(node.id)
+
+class NavigateToPreviousNode:
+
+	name = "Previous Node"
+	thread_safe = True
+	
+	def run(self):
+		position = self.run_editor_method('get_position')
+		filename = self.run_editor_method('get_current_filename')
+		self.current_project()._parse_file(filename, try_buffer=True)
+		current_node = self.current_project().get_node_from_position(filename, position)
+		if current_node:
+			for node in sorted(self.current_project().files[filename].nodes, key=lambda node: node.start_position, reverse=True):
+				if node.start_position < current_node.start_position:
+					return self.current_project().open_node(node.id)
+
+ProjectList.add_call(Navigation)
+ThisProject.add_selector(NavigateForward)
+ThisProject.add_selector(NavigateBackward)
+ThisProject.add_selector(NavigateToNextNode)
+ThisProject.add_selector(NavigateToPreviousNode)
+
+%%

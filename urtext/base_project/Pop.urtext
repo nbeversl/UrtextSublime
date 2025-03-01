@@ -1,0 +1,103 @@
+Pop  _
+
+Pops a node from a file and leaves a pointer in its place.
+See also | Pull >
+
+<Fri., Nov. 08, 2024, 02:34 PM CET> Bug is that on_modified is now running due to use of retarget_file triggering save and the new node is not yet there.
+
+%%Python
+
+class PopNode:
+
+    name = "Pop"
+    is_running = False
+    import os
+    
+    def run(self, from_project=None):
+
+        if not self.current_project().compiled:
+            return self.current_project().handle_info_message(
+                'Project not yet compiled.')
+
+        source_filename = self.run_editor_method('get_current_filename')
+        if source_filename not in self.current_project().files:
+            return self.current_project().handle_info_message(
+                '%s not in project' % source_filename)
+        file_pos = self.run_editor_method('get_position')
+
+        if self.project_list.selectors['pull'].is_running or self.project_list.selectors['pop'].is_running:
+            return
+
+        self.project_list.selectors['pop'].is_running = True
+        self.run_editor_method('save_file', source_filename)
+        return self._pop_node_from_editor(source_filename, file_pos, from_project=from_project)
+
+    def _pop_node_from_editor(self, source_filename, file_pos, from_project=None):
+
+        self.current_project()._parse_file(source_filename)
+
+        popped_node = self.current_project().get_node_from_position(source_filename, file_pos) 
+        if not popped_node:
+            self.project_list.selectors['pop'].is_running = False
+            return self.current_project().handle_info_message('No node ID or duplicate Node ID')        
+
+        if popped_node.is_root_node:
+            self.project_list.selectors['pop'].is_running = False
+            return self.current_project().handle_info_message('Node "%s" is already a root node.' % popped_node.id)
+
+        return self._pop_node(popped_node, from_project=from_project)
+
+    def _pop_node(self, popped_node, from_project=None, leave_link=False, leave_pointer=True, include_project=False):
+        
+        source_filename = popped_node.filename
+        start = popped_node.start_position
+        end = popped_node.end_position
+        source_file_contents = self.current_project().files[source_filename]._get_contents()
+        popped_node_contents = source_file_contents[start:end].strip()
+        pre_offset =  1
+        post_offset = 1
+        parent_id = popped_node.parent.id
+        
+        breadcrumb_key = self.current_project().get_single_setting('pop_breadcrumb_key')
+        if breadcrumb_key:
+            breadcrumb_key = breadcrumb_key.text
+        else:
+            breadcrumb_key = ''
+        if from_project:
+            popped_node_contents += ''.join([
+            '\n',
+            breadcrumb_key,
+            self.syntax.metadata_assignment_operator,
+            popped_node.link(include_project=True),
+            ' ',
+            self.current_project().timestamp().wrapped_string if breadcrumb_key else '']);
+        else:
+            popped_node_contents += ''.join([
+                '\n',
+                breadcrumb_key,
+                self.syntax.metadata_assignment_operator,
+                popped_node.parent.link(),
+                ' ',
+                self.current_project().timestamp().wrapped_string if breadcrumb_key else '']);
+
+        insertion = ''
+        if leave_pointer:
+            insertion = popped_node.pointer()
+        elif leave_link:
+            # is it easier to leave a link to another project here than go back and rewrite them
+            # from MOVE_TO_PROJECT?
+            insertion = popped_node.link()
+        remaining_node_contents = ''.join([
+            source_file_contents[:start - pre_offset],
+            insertion,
+            source_file_contents[end + post_offset:]
+            ])
+        self.current_project().files[source_filename].set_buffer_contents(remaining_node_contents)
+        self.current_project().files[source_filename].write_buffer_contents()
+
+        new_file_node = self.current_project().new_file_node(contents=popped_node_contents, open_file=False)
+        self.project_list.selectors['pop'].is_running = False
+
+ThisProject.add_selector(PopNode)
+        
+%%

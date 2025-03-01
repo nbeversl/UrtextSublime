@@ -1,0 +1,15 @@
+Random Node _
+
+%%Python
+class RandomNode:
+
+	name = 'Random Node'
+	import random
+
+	def run(self):
+		if self.current_project() and self.current_project().nodes:
+			node_id = self.random.choice(list(self.current_project().nodes))
+			self.current_project().open_node(node_id)
+
+ThisProject.add_selector(RandomNode)
+%%

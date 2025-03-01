@@ -1,0 +1,60 @@
+SORT() _ #call
+
+By default, included nodes are sorted alphabetically by ID.
+SORT enables sorting by any other metadata key, including | System Keys >
+
+Arguments are keynames with optional flags.
+
+Example:
+[[
++(*)
+SORT(title -r)
+LIMIT(15)
+TREE()
+>(| Example Use of SORT() >) ]]
+
+Includes all nodes in the project, sorts them in reverse order by title, and limits the results to 15.
+
+Output:
+
+	{~ Example Use of SORT() _
+	  | self >
+	  | project_settings >
+	  | popup _ >
+	  | oldest_timestamp >
+	  | newest_timestamp >
+	  | log _ >
+	  | lint should not move the closing bracket down a lint bove >
+	  | links_to >
+	  | links_from >
+	  | link character location is not right. >
+	  | italic >
+	  | inline_timestamp >
+	  | example node >
+	  | etc. >
+	  | debugging output >
+	}
+
+	{ Arguments _
+
+	  Accepts any metadata key in the project, including | System Keys >
+
+	  For multi-dimensional (inner-to-outer) sort, specify multiple keys. Multiple keys are separated by semicolon or newline.
+
+	}
+
+	{ Flags _
+
+	  `-num` or `-n`
+	  Sorts the results numerically if the metadata key permits this.
+	  See the `numerical_settings` key in | project_settings > for more information.
+
+	  `-timestamp` or `-t`
+	  Sorts the results using the timestamp in the value of the metadata entry, if any.
+
+	  `-reverse` or `-r`
+	  Reverses the sort order. Applicable to any of the above.
+
+	}
+
+See next: | SHOW() >

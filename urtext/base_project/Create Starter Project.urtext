@@ -1,0 +1,17 @@
+Create Starter Project _
+
+%%Python
+
+class CreateStarterProject:
+
+	name = 'Create Starter Project'
+	 
+	def run(self):
+			def create_starter_project(path):
+				print(path)
+				self.project_list.make_starter_project(path)
+				self.project_list.init_project(path, make_current=True, selector='urtext_home')
+			self.project_list.run_editor_method('select_file_or_folder', create_starter_project)
+
+ThisProject.add_selector(CreateStarterProject)
+%%

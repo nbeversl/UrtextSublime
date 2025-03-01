@@ -1,0 +1,46 @@
+Nodes as Metadata _
+
+Metadata keys may contain nodes as their values.
+
+Example:
+
+	{ type::book
+	  title::The Beautiful and Damned
+	  author::| Scott Fitzgerald >
+	}
+
+	{ Scott Fitzgerald _
+
+	  Inside this node may be more metadata, including more nodes as metadata:
+
+	  birthday::<1900>
+	  nationality::United States
+	  short_description::{ Short description here	asdfasd	 }
+
+		{ Accessing Nested Metadata in Frames _
+
+		  To access nested metadata in dynamic output, string several metadata keys together using the dot (period) `.` in the SHOW call. (See | SHOW() >)
+
+		  [[ >(| Example of Nested Metadata Output >) +(| The Beautiful and Damned >) ]]
+
+			{~ Example of Nested Metadata Output _
+			  | The Beautiful and Damned >
+			}
+
+		}
+
+		{ Nested Metadata as Link _
+
+		  The examples above can be replicated by linking to the node rather than providing it directly as the value.
+
+		  Example:
+
+		  example2_metadata_key::|? This node is the value of the metadata key. >
+		  [[ >(| Example of Linked Node as Metadata Output >)	]]
+
+			{~ Example of Linked Node as Metadata Output _
+			  No call has text output}
+
+		}
+
+	}

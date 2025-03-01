@@ -1,0 +1,8 @@
+[
+    /* Starter Project */
+    { "caption": "Urtext: Create Starter Project", "command": "urtext_starter_project"},
+      
+    /* Development and Debugging */
+    { "caption": "Urtext: Debug", "command" :"urtext_debug"},
+    { "caption": "Urtext: Turn Off Async (debugginh)", "command" :"no_async"},  
+] 

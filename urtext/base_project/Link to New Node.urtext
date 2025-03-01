@@ -1,0 +1,27 @@
+#Insert Link to New Node _
+
+%%Python
+class InsertLinkToNewNodeCommand:
+
+	name = 'Insert Link to New Node'
+	import os
+	thread_safe = True
+
+	def run(self):
+		filename = self.project_list.run_editor_method('get_current_filename')
+		new_node = self.project_list.current_project.new_file_node(
+			path=self.os.path.dirname(filename),
+			open_file=False)
+		self.project_list.run_editor_method('insert_text', '| ' + new_node['id'] + ' >')
+		# TODO insert notification
+
+
+ThisProject.add_selector(InsertLinkToNewNodeCommand)
+%%
+
+	{ Documentation _
+
+	  Creates a link to a new node and simulatenously creates that node in another buffer.
+	  The link will be initially untitled but will update when then node is changed.
+	  (see |? Dynamic IDs >)
+	}

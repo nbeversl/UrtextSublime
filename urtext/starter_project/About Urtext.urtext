@@ -1,0 +1,76 @@
+About Urtext _
+
+	{ Features and Philosophy _
+
+		{ Plain Text _
+
+		  Plaintext is fast, human-readable, flexible, cross-platform, device-portable, and future-proof. It can be easily diffed and version-controlled (using Git, for example). Using theming and syntax highlighting, Urtext forms a user interface out of its own syntax, without relying on graphic elements.
+
+		  Urtext can also incorporate (embed) other plaintext syntaxes, including other markup languages and programming language syntaxes.
+
+		}
+
+		{ Freeform, Flexible Syntax _
+
+		  Urtext is like an inverse programming language. Whereas most programming languages provide a "comment" syntax to insert freeform text around the code, Urtext works the opposite way: all content is text unless it matches syntax for structural or instructional code.
+
+		  Text can be supplemented with user-defined metadata independent of the file system's metadata (datetime stamps, comments, etc.). It can even be used as a flat-file database.
+
+		  Similar to code projects, an Urtext project can be spread across dozens or thousands of files, with individual files providing "routes", or connections, to other other files or parts of files (nodes) via their titles. Text elements can be linked in tree-like, recursive (tangled), and other non-hierarchical ways.
+
+		  However, the basics are very simple, and you can use only the parts you need.
+
+		}
+
+		{ Open source _
+
+		  - Usable across multiple platforms and devices.
+
+		  - Decoupled from any particular text editor or interface ; it can be incorporated into any environment that runs Python, including any scriptable text editor or Python-scriptable environment capable of displaying a text editing view.
+
+		}
+
+		{ Extensible _
+
+		  Urtext Actions, Calls, and Extensions all inherit from base classes that can be extended to add or modify functionality, limited only by the power of the Python language.
+
+		  At present these features are undocumented, but can be understood, with a little Python knowledge, by reading the code.
+
+		}
+
+		{ Future Proof _
+
+		  No reliance on anything that may not exist in 5 or 1000 years.
+
+		  The interpreter/compiler could be implemented in any sufficiently capable language, current, past or future.
+
+		}
+
+		{ Local _
+
+		  The Urtext parser is made primarily to operate on files present locally on the device. It is not dependent on a cloud or other subscription service.
+
+		  Cloud services can be used to sync project files among devices if desired.
+
+		}
+
+	}
+
+	{ Features _
+
+	  - Connect text among dozens, hundreds or thousands of files
+
+	  - Metadata
+
+	  - Dynamic content that aggregates from the contents from elsewhere in the project(s).
+
+	  - Manage, edit and cross-connect multiple projects within a single Urtext instance
+
+	  - Creating, naming and opening files is handled for you .
+
+	  - Urtext is designed to make direct interaction with file system mostly unnecessary. Creating, naming, saving, and organizing files is handled for you.
+
+	  - Package for Sublime Text 3/4 and an implementation for iOS using Pythonista
+
+	}
+

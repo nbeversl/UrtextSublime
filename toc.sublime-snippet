@@ -1,0 +1,8 @@
+ <snippet>
+    <content><![CDATA[{ [[>(@self) +(@parent) TREE(*)]] }]]></content>
+    <tabTrigger>TOC</tabTrigger>
+    <!-- Optional: Scope the tab trigger will be active in -->
+    <scope>.urtext</scope>
+    <!-- Optional: Description to show in the menu -->
+    <description>Urtext: Table of Contents</description>
+</snippet>

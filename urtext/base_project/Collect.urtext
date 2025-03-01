@@ -1,0 +1,121 @@
+Collect _
+
+	{ Documentation _
+
+	  Collects occurrences of metadata from included nodes.
+	  Returns a seperate item for each __metadata__ occurence.
+	  Note that COLLECT requires |: doc INCLUDE() > to have any effect.
+
+		{ Parameters _
+
+		  Accepts a single key/operator/value combination.
+
+		  To collect multiple outputs, use multiple COLLECT() calls.
+
+		  COLLECT() accepts no flags.
+		}
+
+	}
+
+%%Python
+
+class Collect:
+
+	name = ["COLLECT"]
+
+	def dynamic_output(self, text_contents):
+		keys = {}
+		for entry in self.params:
+			k, v, operator = entry
+			if operator == '!=' and k in keys:
+				keys[k].remove(v)
+				continue
+			if k =='*':
+				for k in self.project.get_all_keys():
+					keys[k] = [v.lower()]
+			else:
+				keys[k] = [v.lower()]
+
+		found_entries = []
+		for node in self.frame.included_nodes:
+			for k in keys:
+				use_timestamp = k in self.project.get_setting('use_timestamp')
+				for v in keys[k]:
+					entries = node.metadata.get_matching_entries(k, v)
+					for entry in entries:
+						for meta_value in entry.meta_values:
+							found_item = { 'entry' : entry }
+							if v == '*':
+								if use_timestamp:
+									value = meta_value.timestamp.datetime
+								else:
+									value = meta_value.text
+							else:
+								if use_timestamp and meta_value.timestamp.datetime == v:
+									value = meta_value.timestamp.datetime
+								else:
+									value = meta_value
+							if use_timestamp:
+								found_item['meta_value'] = meta_value.timestamp.unwrapped_string
+								found_item['sort_value'] = meta_value.timestamp.datetime	   
+							else:
+								sort_value = value
+								if self.have_flags('-sort_numeric'):
+									try:
+										sort_value = float(value)
+									except ValueError: 
+										sort_value = float('inf')
+								else:
+									sort_value = str(sort_value)			
+								found_item['sort_value'] = sort_value
+								found_item['meta_value'] = meta_value
+							found_entries.append(found_item)
+		if not found_entries:
+			 return text_contents
+
+		if '-tree' not in self.flags:
+			sorted_stuff = sorted(
+				found_entries, 
+				key=lambda x: ( x['sort_value'] ),
+				reverse=self.have_flags('-sort_reverse'))
+			return text_contents + ''.join([item['entry'].dynamic_output(self.frame.show) for item in sorted_stuff])
+
+		# TODO be able to pass an m_format for Dynamic Output here.
+		contents = []
+		for k in sorted(keys.keys()):
+			root = self.Node(k)
+			if not self.contains_different_types(keys[k]):
+			   keys[k] = sorted(keys[k], key=self.meta_value_sort_criteria)
+			
+			for v in keys[k]:
+				f = None
+				if isinstance(v, UrtextTimestamp):
+					t=self.Node(v.unwrapped_string)
+				else:
+					t = self.Node(v) 
+				for node in self.frame.included_nodes:
+					for n in node.metadata.get_matching_entries(k,value):
+						f = self.Node(node.id + ' >' + node.id) #?
+						f.parent = t
+					if f:                        
+						t.parent = root
+			for pre, _, node in self.RenderTree(root):
+				contents.append("%s%s\n" % (pre, node.name))
+		return text_contents + ''.join(contents)
+
+	def meta_value_sort_criteria(self, v):
+		if isinstance(v,UrtextTimestamp):
+			return v.datetime
+		return v
+
+	def contains_different_types(self, list_to_check):
+		if len(list_to_check) < 2:
+			return False
+		i = type(list_to_check[0])
+		for y in list_to_check:
+			if type(y) != i:
+				return True
+		return False
+
+ThisProject.add_call(Collect)
+%%

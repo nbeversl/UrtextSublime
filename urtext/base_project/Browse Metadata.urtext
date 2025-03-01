@@ -1,0 +1,39 @@
+Browse Metadata _
+	
+%%Python
+class BrowseMetadata:
+
+	name = 'Browse Metadata'
+	thread_safe = True
+
+	def run(self):
+		if not self.project_list.current_project.get_single_setting('meta_browser_key'):
+			self.tagnames = self.project_list.current_project.get_all_keys()
+			self.project_list.run_editor_method('show_panel', self.tagnames, self.list_values)
+		else:
+			self.tagnames = [self.project_list.current_project.get_single_setting('meta_browser_key').text]
+			self.list_values(0)
+
+	def list_values(self, index):
+		self.selected_tag = self.tagnames[index]
+		self.values = self.project_list.current_project.get_all_values_for_key(self.selected_tag)
+		if not self.values:
+			return self.project_list.current_project.handle_info_message('No metadata available')
+		self.project_list.run_editor_method('show_panel', self.values, self.display_files)
+
+	def display_files(self, index):
+		selected_value = self.values[index]
+		nodes = self.project_list.current_project.get_by_meta(self.selected_tag, selected_value, '=')
+		self.selections = self.project_list.current_project.sort_for_meta_browser(nodes)
+		self.project_list.run_editor_method('show_panel', [[n.id, n.display_detail] for n in self.selections], self.open_the_node)
+
+	
+ThisProject.add_selector(BrowseMetadata)
+%%
+
+{ Documentation _
+
+Shows a panel or buffer with all metadata keys in the project, then all values for the selector key, then all nodes matching the selected key and value.
+If your project is simpler and you want this selector to show values for only one key, set that key as the `meta_browser_key` in | project_settings >
+
+}

@@ -1,0 +1,20 @@
+Copy Link To Here With Project _
+%%Python
+class CopyLinkToHereWithProject:
+
+	name = 'Copy Link to Here With Project'
+	thread_safe = True
+	
+	def run(self):
+		filename = self.project_list.run_editor_method('get_current_filename')
+		position = self.project_list.run_editor_method('get_position')
+		self.project_list.editor_copy_link_to_node(position, filename, include_project=True)
+
+ThisProject.add_selector(CopyLinkToHereWithProject)
+%%
+
+	{ Documentation _
+
+	  Copies a link to the node currently containing the cursor, including the project, to the clipboard.
+
+	}

@@ -1,6 +1,0 @@
-[
-    { "caption": "Urtext: Show Timeline", "command": "generate_timeline", },
-    { "caption": "Urtext: Show Files With Preview", "command" :"show_files_with_preview"},
-    { "caption": "Urtext: Show Reverse Filename", "command" :"show_reverse_date_filename"},
-    { "caption": "Urtext: Add Meta to Existing File", "command": "add_meta_to_existing_file"},
-] 

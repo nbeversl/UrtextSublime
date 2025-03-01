@@ -1,0 +1,16 @@
+Backlinks Browser _
+
+%%Python
+class BacklinksBrowser:
+
+	name = 'Backlinks Browser'
+	thread_safe = True
+
+	def run(self):
+		node = self.current_project().get_node_from_editor()
+		self.selections = self.current_project().get_links_to(node.id)
+		options = [[n.id, n.display_detail] for n in self.selections]
+		self.project_list.run_editor_method('show_panel', options, self.open_the_node)
+
+ThisProject.add_selector(BacklinksBrowser)
+%%

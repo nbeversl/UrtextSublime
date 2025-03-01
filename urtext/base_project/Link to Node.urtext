@@ -1,0 +1,20 @@
+Link To Node _
+%%Python
+class LinkToNode:
+
+	name = 'Link To Node ..'
+	thread_safe = True
+
+	def run(self):
+		self.selections = [[n.id, n.display_detail] for n in self.project_list.current_project.sort_for_node_browser()]
+
+		def callback(index):
+			node_id = self.selections[index][0]
+			self.project_list.editor_insert_link_to_node(
+				self.current_project().nodes[node_id],
+				project_title=self.current_project().nodes[node_id].project.title())
+
+		self.project_list.run_editor_method('show_panel', self.selections, callback)
+
+ThisProject.add_selector(LinkToNode)
+%%

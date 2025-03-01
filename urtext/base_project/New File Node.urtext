@@ -1,0 +1,20 @@
+New File Node _
+%%Python
+class NewFileNode:
+	selector_string = 'new_file_node'
+	name = 'New File Node'
+	thread_safe = True
+
+	import os
+	def run(self):
+		path = None
+		filename = self.project_list.run_editor_method('get_current_filename')
+		if filename:
+			path = self.os.path.dirname(filename)
+		if path:
+			self.project_list.set_current_project(path)
+			new_urtext_file = self.project_list.current_project.new_file_node(path=path)
+			self.project_list.run_editor_method('open_file_to_position', new_urtext_file['filename'], 
+				character=new_urtext_file['cursor_pos'])
+ThisProject.add_selector(NewFileNode)
+%%

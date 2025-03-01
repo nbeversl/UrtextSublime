@@ -1,0 +1,13 @@
+ <snippet>
+    <content><![CDATA[{ 
+%%Python
+$1
+%%
+
+[[ >(@self) EXEC(@self) ]] }]]></content>
+    <tabTrigger>execself</tabTrigger>
+    <!-- Optional: Scope the tab trigger will be active in -->
+    <scope>.urtext</scope>
+    <!-- Optional: Description to show in the menu -->
+    <description>Urtext: @self</description>
+</snippet>

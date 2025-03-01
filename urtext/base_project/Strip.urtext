@@ -1,0 +1,31 @@
+Strip _ 
+
+%%Python
+
+class Strip:
+
+	name = ["STRIP"]
+
+	def dynamic_output(self, contents):
+		max_inner_lines = self.get_param('max_inner')
+		if max_inner_lines is not None:
+			try:
+				max_inner_lines = int(max_inner_lines)
+			except:
+				pass
+		if max_inner_lines is not None:
+			contents = self.strip_internal_whitespace(max_inner_lines, contents)
+		if self.have_flags('-outer'):
+			contents = contents.strip()
+		return contents
+
+	def strip_internal_whitespace(self, max_number, contents):
+		contents = '\n'.join([l.strip() for l in contents.split('\n')])
+		max_whitespace = '\n' * max_number
+		too_much_whitespace = max_whitespace + '\n'
+		while too_much_whitespace in contents:
+			contents = contents.replace(too_much_whitespace, max_whitespace)
+		return contents
+
+ThisProject.add_call(Strip)
+%%

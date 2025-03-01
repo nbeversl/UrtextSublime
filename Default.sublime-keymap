@@ -1,6 +1,290 @@
 [
-	{ "keys": ["ctrl+shift+."], "command": "modified" },
-	{ "keys": ["ctrl+shift+l"], "command": "update_file" },
-	{ "keys": ["ctrl+shift+;"], "command": "new_undatified_file" },
-	{ "keys": ["ctrl+shift+t"], "command": "generate_timeline" },
+    {
+        "args": {
+            "urtext_call": "nav_back"
+        }, 
+        "keys": [
+            "ctrl+shift+,"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "all_projects_node_browser"
+        }, 
+        "keys": [
+            "ctrl+shift+8"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "all_selectors"
+        }, 
+        "keys": [
+            "ctrl+shift+z"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "backlinks_browser"
+        }, 
+        "keys": [
+            "ctrl+shift+left"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "compact_node"
+        }, 
+        "keys": [
+            "ctrl+shift+6"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "copy_link_to_here"
+        }, 
+        "keys": [
+            "ctrl+shift+c"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "copy_link_to_here_with_project"
+        }, 
+        "keys": [
+            "ctrl+shift+super+c"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "file_outline_dropdown"
+        }, 
+        "keys": [
+            "ctrl+shift+j"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "find_by_meta"
+        }, 
+        "keys": [
+            "ctrl+shift+m"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "forwardlinks_browser"
+        }, 
+        "keys": [
+            "ctrl+shift+right"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "go_to_frame"
+        }, 
+        "keys": [
+            "ctrl+shift+f"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "insert_link_to_file"
+        }, 
+        "keys": [
+            "ctrl+shift+j"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "insert_link_to_new_node"
+        }, 
+        "keys": [
+            "ctrl+shift+'"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "insert_timestamp"
+        }, 
+        "keys": [
+            "ctrl+shift+t"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "link_to_node"
+        }, 
+        "keys": [
+            "ctrl+shift+l"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "nav_back"
+        }, 
+        "keys": [
+            "ctrl+shift+,"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "nav_forward"
+        }, 
+        "keys": [
+            "ctrl+shift+."
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "new_file_node"
+        }, 
+        "keys": [
+            "ctrl+shift+-"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "next_node"
+        }, 
+        "keys": [
+            "ctrl+shift+n"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "node_browser"
+        }, 
+        "keys": [
+            "ctrl+shift+e"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "open_home"
+        }, 
+        "keys": [
+            "ctrl+shift+h"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "open_urtext_link"
+        }, 
+        "keys": [
+            "ctrl+shift+/"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "pop_node"
+        }, 
+        "keys": [
+            "ctrl+shift+alt+right"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "previous_node"
+        }, 
+        "keys": [
+            "ctrl+shift+b"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "pull_node"
+        }, 
+        "keys": [
+            "ctrl+shift+alt+left"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "random_node"
+        }, 
+        "keys": [
+            "ctrl+shift+i"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "rename_single_file"
+        }, 
+        "keys": [
+            "ctrl+shift+s"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "select_project"
+        }, 
+        "keys": [
+            "ctrl+shift+o"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "toggle_fold_all"
+        }, 
+        "keys": [
+            "ctrl+shift+9"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "toggle_fold_single"
+        }, 
+        "keys": [
+            "ctrl+shift+0"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "toggle_traverse"
+        }, 
+        "keys": [
+            "ctrl+shift+r"
+        ], 
+        "command": "run_urtext_call"
+    }, 
+    {
+        "args": {
+            "urtext_call": "wrap_selection"
+        }, 
+        "keys": [
+            "ctrl+shift+["
+        ], 
+        "command": "run_urtext_call"
+    }
 ]

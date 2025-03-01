@@ -1,0 +1,133 @@
+Rename Files _
+
+Renames files individually or all at once, by the parameters provided.
+
+%%Python
+
+class RenameFiles:
+
+    name = "Rename All Files"
+    import os
+    
+    def run(self):
+        return self._rename_file_nodes(self.current_project().files)
+
+    def _rename_file_nodes(self, filenames):
+        """ Rename a file or list of files by metadata """
+        if isinstance(filenames, str):
+            filenames = [filenames]
+
+        used_names = []
+        renamed_files = {}
+        for old_filename in filenames:
+
+            if old_filename not in self.current_project().files:
+                print('%s not found in project files' % old_filename)
+                continue
+            if not self.current_project().files[old_filename].root_node:
+                print('%s is an empty file, nothing to use for filenaming' % old_filename)
+                continue
+
+            self.project_list.run_editor_method('save_file', old_filename)
+
+            root_node = self.current_project().files[old_filename].root_node
+            filename_template = list(self.current_project().get_setting_as_text('filenames'))
+            for i in range(0,len(filename_template)):
+                
+                if filename_template[i].lower() == 'title':
+                    filename_title_length_setting = self.current_project().get_single_setting('filename_title_length')
+                    if filename_title_length_setting:
+                        try:
+                            filename_length = int(filename_title_length_setting.text)
+                        except:
+                            filename_length = 255
+                    if filename_length > 255:
+                        filename_length = 255
+                    title = root_node.title
+                    filename_template[i] = title[:filename_length]
+                
+                elif filename_template[i].lower() in self.current_project().get_setting_as_text('use_timestamp'):
+                    timestamp_value = root_node.metadata.get_first_value(
+                        filename_template[i])
+                    if timestamp_value:
+                        timestamp = timestamp_value.timestamp
+                        if timestamp:
+                            filename_template[i] = timestamp.datetime.strftime(
+                                self.current_project().get_single_setting('filename_datestamp_format').text)
+                    else:
+                        filename_template[i] = ''                
+                else:
+                    filename_template[i] = ' '.join([
+                        v.text for v in root_node.metadata.get_values(
+                            filename_template[i])])
+
+            if filename_template in [ [], [''] ]:
+                return print('New filename(s) could not be made. Check project_settings')
+
+            filename_template = [p.strip() for p in filename_template if p.strip()]
+            new_basename = ' - '.join(filename_template)     
+            new_basename = new_basename.replace('’', "'")
+            new_basename = new_basename.strip().strip('-').strip();
+            new_basename = self.utils.strip_illegal_file_characters(new_basename)
+            new_basename = new_basename[:248].strip()
+
+            test_filename = self.os.path.join(
+                self.os.path.dirname(old_filename), 
+                new_basename + '.urtext')
+
+            if test_filename == old_filename:
+                continue
+
+            # avoid overwriting existing files
+            unique_file_suffix = 1
+            while test_filename in used_names or self.os.path.exists(test_filename):
+                unique_file_suffix += 1
+                test_filename = self.os.path.join(
+                    self.os.path.dirname(old_filename), 
+                    new_basename + ' ' + str(unique_file_suffix) + '.urtext')
+                if test_filename == old_filename:
+                    break
+
+            if test_filename == old_filename:
+                continue
+
+            new_filename = test_filename
+            renamed_files[old_filename] = new_filename
+            used_names.append(new_filename)
+            
+        for old_filename in renamed_files:
+            new_filename = renamed_files[old_filename]
+            self.current_project().drop_file(old_filename)
+            self.os.rename(old_filename, new_filename)
+            self.current_project()._parse_file(new_filename)
+            self.run_editor_method('retarget_view', old_filename, new_filename)
+
+        return renamed_files
+
+    def dynamic_output(self, text_contents):
+        self.run()
+        return text_contents
+
+class RenameSingleFile(RenameFiles):
+
+    name = "Rename Single File"
+
+    def _should_run(self):
+        if self.current_project() and self.current_project().setting_is_true('rename_on_save'):
+            return self.current_project().get_single_setting('rename_on_save')
+
+    def after_on_file_modified(self, filename):
+        if self._should_run():
+            self.run(filename=filename)
+
+    def run(self, filename=None):
+        if filename is None:
+            filename = self.run_editor_method('get_current_filename')
+        renamed_files = self._rename_file_nodes(filename)
+        if renamed_files:
+            self.current_project().run_editor_method('close_file', filename)
+            self.current_project().run_editor_method('open_file_to_position', renamed_files[filename])
+
+ThisProject.add_selector(RenameSingleFile)
+ThisProject.add_selector(RenameFiles)
+%%

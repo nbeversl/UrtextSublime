@@ -1,0 +1,18 @@
+Target Call _
+%%Python
+class Target:
+ 
+	name = ['TARGET', '>']
+   
+	def dynamic_output(self, text_contents):
+		return text_contents
+
+	def on_added(self):
+		targets = self.utils.get_all_targets_from_string(
+			self.argument_string,
+			self.frame.source_node,
+			self.frame.project.project_list)
+		self.frame.targets.extend(targets)
+
+ThisProject.add_call(Target)
+%%

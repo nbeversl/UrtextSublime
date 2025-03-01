@@ -1,0 +1,254 @@
+Selectors _
+
+Selectors are units of functionality that can be called on demand.
+They can be accessed three ways:
+
+- from the Selector List, `Ctrl + Shift + z` (default)
+- from Keybindings (| Sublime Text Keybindings >)
+- from | Selector Links > (below)
+
+The Selector links in the node below trigger the selector associated with the selector string inside the link. Clicking them is equivalent to selecting from the Selector list or using their keybindings. As such, not all selectors are equally useful as links.
+
+	{~ All Selectors Documentation _
+
+		{ Rename Single File _
+
+		  |: rename_single_file >
+
+		  current keybinding: ctrl+shift+s
+		}
+
+		{ Open Home _
+
+		  |: open_home >
+
+		  current keybinding: ctrl+shift+h
+		}
+
+		{ Wrap Selectino _
+
+		  |: wrap_selectino >
+
+		}
+
+		{ All Selectors _
+
+		  |: all_selectors >
+
+		  Shows a panel or buffer with all selectors.
+
+		  current keybinding: ctrl+shift+z
+		}
+
+		{ Forward Links Browser _
+
+		  |: forward_links_browser >
+
+		  current keybinding: ctrl+shift+right
+		}
+
+		{ Copy Link to Here With Project _
+
+		  |: copy_link_to_here_with_project >
+
+		  Copies a link to the node currently containing the cursor, including the project, to the clipboard.
+
+		  current keybinding: ctrl+shift+super+c
+		}
+
+		{ Go to Frame _
+
+		  |: go_to_frame >
+
+		  From any node with dynamic output, navigations to its frame.
+
+		  current keybinding: ctrl+shift+f
+		}
+
+		{ Nav Back _
+
+		  |: nav_back >
+
+		  current keybinding: ctrl+shift+,
+		}
+
+		{ Pull _
+
+		  |: pull >
+
+		}
+
+		{ Show Base Project _
+
+		  |: show_base_project >
+
+		}
+
+		{ Browse Metadata _
+
+		  |: browse_metadata >
+
+		  Shows a panel or buffer with all metadata keys in the project, then all values for the selector key, then all nodes matching the selected key and value.
+		  If your project is simpler and you want this selector to show values for only one key, set that key as the                    in | project_settings >
+
+		}
+
+		{ Insert Timestamp _
+
+		  |: insert_timestamp >
+
+		  current keybinding: ctrl+shift+t
+		}
+
+		{ Next Node _
+
+		  |: next_node >
+
+		  current keybinding: ctrl+shift+n
+		}
+
+		{ Insert Link to New Node _
+
+		  |: insert_link_to_new_node >
+
+		  Creates a link to a new node and simulatenously creates that node in another buffer.
+		  The link will be initially untitled but will update when then node is changed.
+		  (see | Dynamic IDs >)
+
+		  current keybinding: ctrl+shift+'
+		}
+
+		{ Move the current file to another project _
+
+		  |: move_the_current_file_to_another_project >
+
+		  Opens a panel or buffer to select another active project to which to move the current file.
+
+		}
+
+		{ Rename All Files _
+
+		  |: rename_all_files >
+
+		}
+
+		{ Previous Node _
+
+		  |: previous_node >
+
+		  current keybinding: ctrl+shift+b
+		}
+
+		{ Compact Node _
+
+		  |: compact_node >
+
+		  current keybinding: ctrl+shift+6
+		}
+
+		{ Delete this Node _
+
+		  |: delete_this_node >
+
+		  Deletes the current buffer (file) entirely, including all contained nodes.
+
+		}
+
+		{ New File Node _
+
+		  |: new_file_node >
+
+		  current keybinding: ctrl+shift+-
+		}
+
+		{ Node Browser _
+
+		  |: node_browser >
+
+		  The "Node Browser" utilizes Sublime Text's dropdown to browse all nodes in the project. Type part of a node's title to locate and open it with Enter.
+
+		  By default nodes are sorted by their time of creation, most recent first.
+		  This can be modified with the `node_browser_sort` key in | project_settings >.
+
+		  current keybinding: ctrl+shift+e
+		}
+
+		{ Pop _
+
+		  |: pop >
+
+		}
+
+		{ Link Preview On Hover _
+
+		  |: link_preview_on_hover >
+
+		}
+
+		{ Backlinks Browser _
+
+		  |: backlinks_browser >
+
+		  current keybinding: ctrl+shift+left
+		}
+
+		{ Copy Link to Here _
+
+		  |: copy_link_to_here >
+
+		  Copies a link to the node containing the cursor to the clipboard.
+
+		  current keybinding: ctrl+shift+c
+		}
+
+		{ Node Browser All Projects _
+
+		  |: node_browser_all_projects >
+
+		  Shows a selection panel or buffer of all nodes in all active projects
+
+		}
+
+		{ Link To Node .. _
+
+		  |: link_to_node_.. >
+
+		}
+
+		{ File Outline _
+
+		  |: file_outline >
+
+		  Shows an outline of the current buffer
+
+		}
+
+		{ Random Node _
+
+		  |: random_node >
+
+		  current keybinding: ctrl+shift+i
+		}
+
+		{ Select Project _
+
+		  |: select_project >
+
+		  current keybinding: ctrl+shift+o
+		}
+
+		{ All Selectors in Scratch Buffer _
+
+		  |: all_selectors_in_scratch_buffer >
+
+		  Shows a list of all selectors in a scratch buffer, as a selector links. Alternative to using a menu.
+
+		}
+
+		{ Nav Forward _
+
+		  |: nav_forward >
+
+		  current keybinding: ctrl+shift+.
+		}
+	}

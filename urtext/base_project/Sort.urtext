@@ -1,0 +1,77 @@
+Sort _
+
+Sorts included nodes by the parameters provided.
+
+%%Python
+
+class Sort:
+
+	name = ["SORT","S"]
+
+	def strip_reverse(self, flags):
+			flags=list(flags)
+			while '-r' in flags:
+				flags.remove('-r')
+			while '-reverse' in flags:
+				flags.remove('-reverse')
+			return flags
+		
+	def dynamic_output(self, text_contents):
+		sorted_nodes = []
+		nodes = self.frame.included_nodes
+		if self.keys_with_flags:
+			for key_with_flags in self.keys_with_flags:
+				key, flags = key_with_flags
+				reverse = '-r' in flags or '-reverse' in flags
+				flags = self.strip_reverse(flags)
+				group_to_sort = [n for n in nodes if n.metadata.get_values(key)]
+				sorted_nodes.extend(
+					sorted(
+						group_to_sort,
+						key=lambda node: self.sort_values(
+							node, 
+							key,
+							flags,
+							),
+						reverse=reverse)
+					)
+				nodes = [n for n in nodes if n not in group_to_sort]
+			sorted_nodes.extend(nodes)
+			self.frame.included_nodes = sorted_nodes
+
+	def sort_values(self, 
+		node, 
+		key,
+		flags):
+
+		t = []
+		k, ext = key, ''
+		if '.' in k:
+			k, ext = k.split('.')
+
+		order_by=None
+		if flags:
+			order_by = flags[0]
+		use_timestamp = False
+		if ext == 'timestamp':
+			use_timestamp = True
+		if key in self.project.get_setting_as_text('use_timestamp'):
+			use_timestamp = True
+		value = node.metadata.get_first_value(k, order_by=order_by)
+		if use_timestamp:
+			value = value.timestamp
+		if isinstance(value, str):
+			value = value.lower()			
+		t.append(value)
+		numerical_keys_setting = self.project.get_setting_as_text('numerical_keys')
+		if self.have_flags('-num') or key in numerical_keys_setting:
+			try:
+				nt = [n.num() for n in t]
+			except ValueError:
+				return tuple([])
+			return tuple(nt)
+		return tuple(t)
+
+
+ThisProject.add_call(Sort)
+%%

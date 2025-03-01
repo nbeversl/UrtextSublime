@@ -1,0 +1,35 @@
+Log _ 
+
+Outputs messages from Urtext, dynamically updated as contents changes. Should be used once in every project.
+The base project log is | Project Log >
+
+%%Python
+
+class Log:
+
+	name = ["LOG"]    
+
+	def dynamic_output(self, text_contents):
+		output = []
+		for filename in self.project.messages:
+			if filename:
+				file_link = ''.join([
+					self.syntax.file_link_opening_wrapper,
+					filename, 
+					self.syntax.link_closing_wrapper
+					])
+			else:
+				file_link = '(no file)'
+			for message in self.project.messages[filename]:
+				output.append(''.join([
+	                'in file ',
+	                file_link,
+	                ' ',
+	                message['top_message'],
+	                '\n'
+	                ]))
+		return text_contents + '\n'.join(output) + '\n'
+
+ThisProject.add_call(Log)
+
+%%

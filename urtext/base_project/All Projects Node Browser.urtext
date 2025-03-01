@@ -1,0 +1,36 @@
+All Projects Node Browser _
+%%Python
+class AllProjectsNodeBrowser:
+ 
+	name = 'Node Browser All Projects'
+	 
+	def run(self):
+		selections = []
+		nodes = []
+		for p in self.project_list.projects:
+			if p.visible == False:
+				continue
+			selections.extend([[n.id, n.display_detail] for n in p.sort_for_node_browser() ])
+			nodes.extend(p.sort_for_node_browser())
+		self.selections = selections
+
+		def on_highlight(index):
+			if self.selection_has_changed:
+				nodes[index].project.run_editor_method('preview_urtext_node', self.selections[index][0])
+			else:
+				self.selection_has_changed = True
+
+		def callback(index):
+			if index > -1 :
+				nodes[index].project.open_node(self.selections[index][0])
+
+		self.project_list.run_editor_method('show_panel', self.selections, callback, on_highlight=on_highlight)
+
+ThisProject.add_selector(AllProjectsNodeBrowser)
+%%
+
+	{ Documentation _
+
+	  Shows a selection panel or buffer of all nodes in all active projects
+
+	}

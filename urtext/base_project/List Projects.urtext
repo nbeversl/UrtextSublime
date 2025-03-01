@@ -1,0 +1,18 @@
+#List Projects _
+%%Python
+
+class ProjectSelector:
+
+	name = 'Select Project'
+	thread_safe = True
+
+	def run(self):
+		
+		selections = self.project_list.project_titles()
+		def callback(selection):
+			if selection > -1:
+				self.project_list.set_current_project(selections[selection], run_hook=True)
+		self.run_editor_method('show_panel', selections, callback)
+		
+ThisProject.add_selector(ProjectSelector)
+%%

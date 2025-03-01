@@ -1,0 +1,18 @@
+Link Preview _
+
+%%Python
+class LinkPreviewOnHover:
+
+	name = "Link Preview On Hover"
+	thread_safe = True
+
+	def on_hover(self, string, filename, file_pos, col_pos=0, identifier=None):
+		node = self.current_project().get_node_from_position(filename, file_pos)
+		link = self.utils.get_link_from_position_in_string(string, col_pos, node, self.project_list)
+		if link and link.position_in_string < col_pos < link.position_in_string + 3:
+			dest_node = link.get_node()
+			if dest_node:
+				self.current_project().run_editor_method('hover_popup', dest_node.contents_with_contained_nodes(), file_pos)
+
+ThisProject.add_selector(LinkPreviewOnHover)
+%%

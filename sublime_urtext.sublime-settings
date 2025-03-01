@@ -1,0 +1,6 @@
+{
+	"extensions": [ "urtext" ],
+	"save_on_focus_lost": true,
+	"reload_file_on_change": false,
+	"always_prompt_for_file_reload": false,
+}

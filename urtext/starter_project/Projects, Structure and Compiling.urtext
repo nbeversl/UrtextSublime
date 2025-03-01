@@ -1,0 +1,9 @@
+Projects, Structure and Compiling _
+
+A project is a collection of files in a folder containing Urtext nodes. An Urtext project is a single folder.
+
+Urtext does not depend on organization of files at the filesystem level and has no subfolder organization scheme. All project files are kept in a single folder. Organization of files, file groups, and file relationships is done entirely within the system. This makes it easy to sync and use across devices and platforms where file and folder paths may not always resolve uniformly, and it avoids broken file paths from moved/renamed/reorganized files.
+
+To make an new empty project, select "Urtext : New Project" from the Sublime Command Palette. Sublime will ask for a folder location and a new project will be created in the specified location.
+
+Filenaming is arbitrary but can be automated.

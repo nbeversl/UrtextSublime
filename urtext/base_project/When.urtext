@@ -1,0 +1,22 @@
+When _
+
+Provides logic to determine whether an execution should continue, using flags.
+
+%%Python
+class When:
+
+	name = ["WHEN"]    
+	
+	def should_continue(self):
+		if self.have_flags('-never'):
+			return False
+		for flag in self.flags:
+			if flag in self.frame.flags:
+				return True
+		return False
+
+	def dynamic_output(self, existing_text):
+		return None
+
+ThisProject.add_call(When)
+%%

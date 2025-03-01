@@ -1,0 +1,13 @@
+Show Base Project _
+%%Python
+class ShowBaseProject:
+ 
+	name = 'Show Base Project'
+	 
+	def run(self):
+		if self.project_list.base_project_path:
+			base_project = self.project_list.get_project(self.project_list.base_project_path)
+			base_project.visible = True
+
+ThisProject.add_selector(ShowBaseProject)
+%%

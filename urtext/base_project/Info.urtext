@@ -1,0 +1,38 @@
+Info _
+
+%%Python
+
+class UrtextInfo:
+
+	name = ["INFO"]
+	import sys
+
+	def dynamic_output(self, text_contents):
+
+		contents = []
+		contents.append('Project Title : %s' % self.project.get_single_setting('project_title').text)
+		contents.append('project size in memory (bytes): %s ' % str(self.sys.getsizeof(self.project)))
+
+		n_memory = 0
+		for node in self.project.nodes.values():
+			n_memory += self.sys.getsizeof(node)
+		contents.append('compile time : %s' % str(self.project.last_compile_time))
+		contents.append('nodes size in memory (kB): %s' % str(n_memory / 1000))
+		contents.append('number of files : %s' % str(len(self.project.files)))
+		contents.append('number of nodes : %s' % str(len(self.project.nodes)))
+		contents.append('number of frames : %s' % str(len(self.project._get_all_frames())))
+		contents.append('----')
+		contents.append('Calls defined in this project:')
+		contents.extend(['/'.join(c.name) for c in self.project.calls.values()])
+		contents.append('----')
+		contents.append('Propagated calls:')
+		contents.extend(['/'.join(c.name) for c in self.project_list.calls.values()])
+		contents.append('----')		
+		contents.append('Available selectors')
+		contents.extend([s.name for s in self.project_list.selectors.values()])
+		contents.extend([s.name for s in self.project.selectors.values()])
+		return text_contents + '\n'.join(contents)
+
+ThisProject.add_call(UrtextInfo)
+
+%%

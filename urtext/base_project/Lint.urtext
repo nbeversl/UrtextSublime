@@ -1,0 +1,270 @@
+Lint _ A linter/formatter for the Urtext syntax
+
+[[
+>(| debugging output >)
+EXEC(| Lint Code >)
+]]
+
+	{~ debugging output _
+No call has text output}
+
+	{ Lint Code
+
+%%Python
+class UrtextLint:
+	import re
+	name = ["LINT"]
+	project_instance = True
+	
+	def _get_settings(self):
+		self.settings = None
+		lint_settings = None
+		if self.project.project_list.current_project:
+			lint_settings = self.project.project_list.current_project.get_single_setting('_lint')
+		if lint_settings and lint_settings.node():
+			self.settings = lint_settings.node().metadata		
+
+	def _should_run(self):
+		if self.project.project_list.current_project and not self.project.project_list.current_project.compiled:
+			return False
+		self._get_settings()
+		if self.settings:
+			lint_on_file_modified = self.settings.get_first_value(
+				'run_when_file_modified')
+			if lint_on_file_modified != None:
+				if lint_on_file_modified.true():
+					return True
+
+	def on_write_file_contents(self, file_obj):
+		if self._should_run():
+			self._get_settings() # in case buffer is a project_settings node
+			linted_contents = self.lint(file_obj)
+			file_obj.set_buffer_contents(linted_contents)
+
+	def run(self, filename):
+		self._run_manual(filename)
+
+	def _run_manual(self, filename): # run manually
+		self._get_settings()
+		self.project.on_modified(filename)
+		self._get_settings() # in case buffer is a project_settings node
+		buffer = self.project.files[filename]
+		linted_contents = self.lint(buffer)
+		buffer.set_buffer_contents(linted_contents)
+	
+	def lint(self, urtext_buffer):
+		lines_between_nodes = 2
+		strip_blank_lines = True
+		separate_opening_braces = False
+		left_padding = 1
+		if self.settings:
+			lines_between_nodes_setting = self.settings.get_first_value('lines_between_nodes')
+			if lines_between_nodes_setting:
+				lines_between_nodes = int(lines_between_nodes_setting.num())
+			separate_opening_braces_setting = self.settings.get_first_value('seprated_opening_braces')
+			if separate_opening_braces_setting:
+				separate_opening_braces = separate_opening_braces_setting.true()
+			left_padding_setting = self.settings.get_first_value('left_padding')
+			if left_padding_setting:
+				left_padding = left_padding_setting.num()
+
+		separated_lines = []
+		do_not_concat = []
+		contents = urtext_buffer.contents
+		lines = self.re.split(''.join([
+			'(\n|\})|(',
+			'(?:'+self.syntax.metadata_key+ '\:\:)?\{~?\??)']), contents)
+		length = 0
+		skip_lines = []
+		blank_lines = 0
+		lines_between_nodes += 1
+		for index, l in enumerate(lines):
+			if l is None:
+				continue
+			if index in skip_lines:
+				length += len(lines[index])
+				continue
+			if l.strip() == '':
+				node = urtext_buffer.get_node_from_position(length)
+				if self.is_embedded_syntax(node, length):
+					separated_lines.append({
+						'contents': l,
+						'embedded' : True,
+						})
+				elif '\n' in l:
+					separated_lines.append({'contents': '\n' })
+					blank_lines += 1
+				length += len(l)
+				continue
+			elif l.strip()[0] == '{':
+				margin = len(l) - len(l.lstrip())
+				node = urtext_buffer.get_node_from_position(length+margin+1)
+				if node is None or self.is_embedded_syntax(node, length+1):
+					separated_lines.append({
+						'contents': l,
+						'embedded' : True,
+					})
+					length += len(l)
+					continue
+				if index < len(lines) - 2 and lines[index+1].strip() and lines[index+1].strip()[0] != '{':
+					contents = (l.strip() + (' ' * left_padding) + lines[index+1].strip()) if not node.is_dynamic else (l + lines[index+1])
+					skip_lines.append(index+1)
+				else:
+					contents = l.strip() if not node.is_dynamic else l
+				if blank_lines > lines_between_nodes:
+					for back in range(len(separated_lines) - 2, 0, -1):
+						line = separated_lines[back]
+						if 'embedded' not in line and line['contents'].strip():
+							do_not_concat.append(back)
+						else: 
+							break
+				elif blank_lines < lines_between_nodes:
+					for i in range(blank_lines, lines_between_nodes):
+						separated_lines.append({'contents': '\n' })
+				elif len(separated_lines) and '\n' not in separated_lines[-1]['contents']:
+					separated_lines.append({'contents': '\n' })
+				separated_lines.append({
+					'contents': contents,
+					'nested': node.nested,
+					})
+				length += len(l)
+				blank_lines = 0
+				continue
+
+			elif len(l) > 2 and "::{" in l:
+				blank_lines = 0
+				node = urtext_buffer.get_node_from_position(length + len(l.split('::{')[0]) + 4)
+				if node is None or self.is_embedded_syntax(node, length):
+					separated_lines.append({
+					'contents': l,
+					'embedded' : True,
+					})
+					length += len(l)
+					continue
+				if index < len(lines) - 2 and lines[index+1] and lines[index+1] != '{':
+					contents = l.lstrip() + lines[index+1]
+					skip_lines.append(index+1)
+					if index < len(lines) - 3 and lines[index+2] and '}' in lines[index+2]:
+						contents += lines[index+2]
+						skip_lines.append(index+2)
+				else:
+					contents = l.lstrip()
+				if not node.is_meta:
+					nested = node.nested
+				else:
+					 if node.parent:
+					 	nested = node.parent.nested
+					 else:
+					 	nested = 0
+				separated_lines.append({
+					'contents': contents,
+					'nested': nested,
+					'padding': (left_padding + 1) if nested > 0 else 0,
+					})
+				length += len(l)
+				continue
+
+			elif l == '}':
+				blank_lines = 0
+				node = urtext_buffer.get_node_from_position(length + (len(l)) - 1)
+				if node is None or self.is_embedded_syntax(node, length):
+					separated_lines.append({
+						'contents': l,
+						'embedded' : True,
+					})
+					length += len(l)
+					continue
+				# future:
+				# add whitespace optionally at end of nodes
+				# separated_lines.append({
+				# 	'contents': '\n',
+				# 	'nested' : 0,
+				# 	'length':length,
+				# 	'embedded' : False,
+				# 	})
+				if not node.is_meta:
+					nested = node.nested
+				else:
+					 if node.parent:
+					 	nested = node.parent.nested
+					 else:
+					 	nested = 0
+				separated_lines.append({
+					'contents': l.strip(),
+					'nested': nested,
+					})
+				length += len(l)
+				continue
+			
+			else: # any other line
+				blank_lines = 0
+				node = urtext_buffer.get_node_from_position(length+1)
+				if not node: # compact
+					node = urtext_buffer.get_node_from_position(length+len(l))
+				if not node:
+					separated_lines.append({'contents': l})
+					length += len(l)
+					continue
+				if self.is_embedded_syntax(node, length):
+					separated_lines.append({
+						'contents': l,
+						'embedded' : True,
+					})
+					length += len(l)
+					continue
+				if not node.is_meta:
+					nested = node.nested
+				else:
+					if node.parent:
+					 	nested = node.parent.nested
+					else:
+					 	nested = 0
+				added_text = l.strip()
+				if not node.is_dynamic:
+					if index < (len(lines) - 2) and '}' in lines[index+1]:
+						added_text = l.lstrip() + lines[index+1]
+						skip_lines.append(index+1)
+				else:
+					added_text = l
+				separated_lines.append({
+					'contents': added_text,
+					'nested': nested,
+					'padding': (left_padding + 1) if node.nested > 0 else 0,
+					})
+				length += len(l)
+
+		linted_lines = []
+		blank_lines = 0
+
+		for index, s in enumerate(separated_lines):
+			if index in do_not_concat:
+				continue
+			contents = s['contents']
+			linted_line = ''
+			if 'nested' in s:
+				linted_line += ('\t' * s['nested'])
+			if 'padding' in s:
+				linted_line += ' ' * s['padding']
+			linted_line += contents
+			if linted_line.strip() or ('embedded' in s and s['embedded'] == True):
+				linted_lines.append(linted_line)
+				blank_lines = 0
+			else:
+				if blank_lines < lines_between_nodes:
+					linted_lines.append(linted_line)
+					blank_lines += 1
+		return ''.join(linted_lines)
+
+	def is_embedded_syntax(self, node, file_position):
+		if not node: return False
+		for r in node.embedded_syntax_ranges:
+			pos0 = node.get_file_position(r[0])
+			pos1 = node.get_file_position(r[1])
+			if file_position in range(pos0, pos1):
+				return True
+		return False
+
+ThisProject.add_call(UrtextLint)
+%%
+	}
+

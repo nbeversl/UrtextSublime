@@ -1,0 +1,17 @@
+Wrap Selection _
+
+%%Python
+
+class WrapSelection:
+   
+	name = 'Wrap Selection'
+
+	def run(self):
+		selection, position = self.current_project().run_editor_method('get_selection')
+		self.current_project().run_editor_method('replace',
+			start=position,
+			end=position+len(selection),
+			replacement_text=''.join(['{ ',selection, ' }']))
+
+ThisProject.add_selector(WrapSelection)
+%%

@@ -1,0 +1,38 @@
+project_settings _
+
+Default Settings
+atomic_rename::False
+pop_breadcrumb_key::popped_from
+case_sensitive_keys::title - project_title - timestamp_format - filenames - timestamp
+console_log::False
+exclude_from_star::title - _newest_timestamp - _oldest_timestamp - _inline_timestamp
+filenames::title
+file_extensions::.urtext
+filename_datestamp_format::%m-%d-%Y %I-%M %p
+filename_title_length::100
+hash_key::keyword
+home::| Home >
+_lint::{ 
+  run_when_file_modified::no
+  lines_between_nodes::1
+}
+meta_browser_sort_keys_by::alpha
+meta_browser_sort_values_by::alpha
+meta_browser_key::
+meta_browser_sort_nodes_by::_oldest_timestamp
+new_file_node_format::$timestamp\n$cursor
+new_filenames_template::$device_keyname $timestamp
+node_browser_detail::_newest_timestamp
+node_browser_sort::_oldest_timestamp - title
+numerical_settings::_index - index - title_length - filename_title_length
+on_loaded::open_home
+on_selected::open_last_nav - open_home - open_any
+on_activated::open_last_nav - open_home - open_any
+open_in_editor::urtext - txt
+project_title::Urtext Base Project & Documentation
+propagate_settings::_all
+propagate_calls::_all
+propagate_selectors::_all
+timestamp_format::%a., %b. %d, %Y, %I:%M %p %Z
+title_length::255
+use_timestamp::timestamp - _inline_timestamp - _oldest_timestamp - _newest_timestamp

@@ -1,0 +1,20 @@
+Limit _
+
+Limits the output to the specified numbers of nodes.
+
+%%Python
+
+class Limit:
+
+	name = ["LIMIT"]
+
+	def dynamic_output(self, text_contents):
+		if self.argument_string:
+			number = int(self.argument_string)
+			if number:
+				self.frame.included_nodes = self.frame.included_nodes[:number]
+
+
+ThisProject.add_call(Limit)
+
+%%

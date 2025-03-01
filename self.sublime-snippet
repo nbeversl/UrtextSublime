@@ -1,0 +1,8 @@
+ <snippet>
+    <content><![CDATA[{ [[ >(@self) +($1) ]] }]]></content>
+    <tabTrigger>self</tabTrigger>
+    <!-- Optional: Scope the tab trigger will be active in -->
+    <scope>.urtext</scope>
+    <!-- Optional: Description to show in the menu -->
+    <description>Urtext: @self</description>
+</snippet>

@@ -1,0 +1,27 @@
+Max Length _ 
+
+Specifies a maximum length for the output as a fixed number of lines.
+To limit the output by nodes instead, see | Limit >
+
+%%Python
+
+class MaxLength:
+
+	name = ["MAX_LENGTH"]
+
+	def dynamic_output(self, contents):
+		if self.argument_string:
+			length = self.argument_string
+			try:
+				length = int(length)
+			except:
+				self.project._log_item(					
+					self.project.nodes[self.frame.source_node.id].filename,
+					'MAX_LENGTH call does not contain a number')
+				return contents
+			contents = contents.split('\n')			
+			return '\n'.join(contents[:length])
+		return contents
+
+ThisProject.add_call(MaxLength)
+%%

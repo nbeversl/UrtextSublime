@@ -1,0 +1,63 @@
+WHEN() _ #call
+
+Specifies when a frame should be run. (See | Default Execution Times > for the default times.)
+WHEN can limit unwanted execution or trigger execution times other than the defaults.
+
+	{ Parameters _
+
+	  Accepts any number of flags.
+	}
+
+	{ Flags _
+
+	  Note that using any flag overrides the defaults (see | Default Execution Times >),
+
+	  `-file_visited`
+	  Execute when the target node is visited.
+	  If not overridden, it is a default for all frames.
+
+	  `-project_compiled`
+	  Overrides the defaults and runs only once, when the project is compiled.
+	  If not overridden, it is a default for all frames.
+
+	  `-target_link_clicked`
+	  The frame will run when an action link to one of its target nodes is clicked
+	  see | Action Links ^ Links >
+
+	  `-source_link_clicked`
+	  The frame will run when an action link to its containing node is clicked.
+	  see | Action Links ^ Links >
+
+	  `-link_hovered`
+	  The frame will run when its action link is clicked
+
+	  `-never`
+	  Disables the definition
+
+	}
+
+	{ Action Links _
+
+	  [[
+	  >(| Open Urtext Website >)
+	  WHEN(-target_link_clicked)
+	  TEXT(Link was clicked! -- delete this text from the target node and click again.)
+	  EXEC(| Code to exec >)
+	  ]]
+
+	  |! Open Urtext Website >
+
+		{ Code to exec _
+
+%%Python
+
+import webbrowser
+webbrowser.get().open('https://urtext.co')
+
+%%
+		}
+
+		{~ Open Urtext Website _
+
+		}
+	}

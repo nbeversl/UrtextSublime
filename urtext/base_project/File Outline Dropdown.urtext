@@ -1,0 +1,35 @@
+File Outline Dropdown _
+
+%%Python
+class FileOutlineDropdown:
+
+	name = 'File Outline'
+	thread_safe = True
+
+	def run(self):
+		if self.project_list.current_project:
+			filename = self.project_list.run_editor_method('get_current_filename')
+			if filename and filename in self.project_list.current_project.files:
+
+				ordered_file_nodes = self.project_list.current_project.files[filename].get_ordered_nodes()
+				selections = ['  ' * n.nested + n.id for n in ordered_file_nodes]
+
+				def on_highlight(index):
+					if self.selection_has_changed:
+						self.project_list.current_project.run_editor_method('preview_urtext_node', selections[index][0])
+					else:
+						self.selection_has_changed = True
+
+				def callback(index):
+					if index > -1 :
+						self.project_list.current_project.open_node(selections[index].strip())
+
+				self.project_list.run_editor_method('show_panel', selections, callback, on_highlight=on_highlight)
+
+ThisProject.add_selector(FileOutlineDropdown)
+%%
+
+	{ Documentation _
+
+	  Shows an outline of the current buffer
+	}

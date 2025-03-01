@@ -1,0 +1,14 @@
+Anchor _
+
+%%Python
+
+class Anchor:
+
+	name = ['ANCHOR']
+
+	def dynamic_output(self, current_text):
+		return '\n.'.join(current_text.split('\n'))
+
+ThisProject.add_call(Anchor)
+
+%%

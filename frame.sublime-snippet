@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+[[ 	>(| $1 >) 
+	+($2) +($3)
+	-($4) -($5)
+]]
+{ $1 }
+
+	]]></content>
+    <!-- Optional: Tab trigger to activate the snippet -->
+    <tabTrigger>frame</tabTrigger>
+    <!-- Optional: Scope the tab trigger will be active in -->
+    <scope>urtext</scope>
+    <!-- Optional: Description to show in the menu -->
+    <description>Urtext Frame</description>
+</snippet>

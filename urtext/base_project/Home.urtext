@@ -1,0 +1,141 @@
+Home _
+
+The base project includes all the core Urtext calls as nodes that can be executed.
+The dynamic definition below executes them in order. Each node will include documentation on the feature it adds.
+
+[[
+EXEC(| Target Call >)
+EXEC(| Document All Selectors >)
+EXEC(| Tree >)
+EXEC(| Yes Or No >)
+EXEC(| Sort >)
+EXEC(| Text >)
+EXEC(| Max Length >)
+EXEC(| Include and Exclude >)
+EXEC(| Limit >)
+EXEC(| Rename Files >)
+EXEC(| Files >)
+EXEC(| Navigation >)
+EXEC(| Log >)
+EXEC(| Collect >)
+EXEC(| Pull >)
+EXEC(| Info >)
+EXEC(| Pop >)
+EXEC(| Anchor >)
+EXEC(| Files >)
+EXEC(| When >)
+EXEC(| Show >)
+EXEC(| Wrap Selection >)
+EXEC(| Lint Code >)
+EXEC(| Projects >)
+EXEC(| File Link >)
+EXEC(| Node Browser >)
+EXEC(| Random Node >)
+EXEC(| Go To Frame >)
+EXEC(| Wrap Line >)
+EXEC(| Show Base Project >)
+EXEC(| File Outline Dropdown >)
+EXEC(| Move File To Other Project >)
+EXEC(| Link to New Node >)
+EXEC(| Delete This Node >)
+EXEC(| Insert Timestamp >)
+EXEC(| Browse Metadata >)
+EXEC(| Copy Link To Here >)
+EXEC(| Link Preview >)
+EXEC(| Link To Node >)
+EXEC(| Open Home >)
+EXEC(| Copy Link To Here With Project >)
+EXEC(| New File Node >)
+EXEC(| Keybindings to Sublime Text JSON >)
+EXEC(| All Selectors >)
+EXEC(| Strip >)
+EXEC(| Yes Or No >)
+EXEC(| Backlinks Browser >)
+EXEC(| Forward Links Browser >)
+EXEC(| All Selectors Scratch Buffer >)
+EXEC(| All Projects Node Browser >)
+EXEC(| Create Starter Project >)
++(*)
+TREE()
+>(| results >)
+
+]]
+
+	{~ results _
+| All Projects Node Browser >
+| All Selectors >
+| All Selectors Scratch Buffer >
+| Anchor >
+| Backlinks Browser >
+| Browse Metadata >
+| Collect >
+| Copy Link To Here >
+| Copy Link To Here With Project >
+| Create Starter Project >
+| Delete This Node >
+| Document All Selectors >
+| Documentation ^ All Projects Node Browser >
+| Documentation ^ All Selectors >
+| Documentation ^ All Selectors Scratch Buffer >
+| Documentation ^ Browse Metadata >
+| Documentation ^ Collect >
+| Documentation ^ Copy Link To Here >
+| Documentation ^ Copy Link To Here With Project >
+| Documentation ^ Delete This Node >
+| Documentation ^ File Outline Dropdown >
+| Documentation ^ Go To Frame >
+| Documentation ^ Link to New Node >
+| Documentation ^ Move File To Other Project >
+| Export >
+| File Link >
+| File Outline Dropdown >
+| Files >
+| Format >
+| Forward Links Browser >
+| Go To Frame >
+| Home >
+| Include and Exclude >
+| Info >
+| Insert Timestamp >
+| Interlinks >
+| Keybindings to Sublime Text JSON >
+| Limit >
+| Link Preview >
+| Link To Node >
+| Link to New Node >
+| Lint >
+| Lint Code >
+| Log >
+| Max Length >
+| Move File To Other Project >
+| Navigation >
+| New File Node >
+| Node Browser >
+| Open Home >
+| Parameters >
+| Pop >
+| Project Log >
+| Projects >
+| Pull >
+| Random Node >
+| Rename Files >
+| Request >
+| Selectors >
+| Show >
+| Show Base Project >
+| Sort >
+| Strip >
+| Target Call >
+| Text >
+| To Next Node >
+| To Previous Node >
+| Tree >
+| Urtext Starter Project >
+| When >
+| Wrap Selection >
+| Yes Or No >
+| _lint ^ project_settings >
+| debugging output >
+| dropped nodes should not drop the whole file >
+| project_settings >
+}

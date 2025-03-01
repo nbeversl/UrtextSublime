@@ -1,0 +1,282 @@
+{
+    "name": "Urtext Sixteen",
+    "variables":
+    {
+        "paper": "hsl(9, 4%, 90%)",
+        "background": "var(paper)",
+        "foreground": "var(grey5)",
+        "raw": "var(white2)",
+        "highlight-yellow": "hsl(54, 95%, 67%)",
+        "yellow": "hsl(54, 95%, 67%)",
+        "meta-key": "var(foreground)",
+        "value-separator": "var(foreground)",
+        "meta-value": "var(foreground)",
+        "meta-separator": "var(foreground)",
+        "hash_meta": "var(grey5)",
+        "meta-value-issue": "var(red)",
+        "link": "var(blue)",
+        "file-link": "var(foreground)",
+        "link-prefix": "var(foreground)",
+        "other-project-link": "var(blue)",
+        "timestamp": "var(grey3)",
+        "embed-marker": "var(red)",
+        "trigger": "var(red)",
+        "wrapper1": "var(blue-lighter2)",
+        "wrapper2": "var(aqua-green2)",
+        "wrapper3": "var(lime2)",
+        "wrapper4": "var(bright-green2)",
+        "wrapper5": "var(deep_blue2)",
+        "open-frame": "var(grey6)",
+        "close-frame": "var(grey6)",
+        "call-key": "var(foreground)",
+        "call-value": "var(foreground)",
+        "call-name": "var(grey)",
+        "call-flag": "var(pink)",
+        "frame-node-id": "var(foreground)",
+        "call-parens": "var(white2)",
+        "format-variable": "var(foreground)",
+        "format-string": "var(foreground)",
+        "system-message": "var(red)",
+        "unobtrusive": "hsl(20, 5%, 84%)",
+        "red": "hsl(0, 100%, 50%)",
+        "blue-lighter2": "hsl(225, 40%, 85%)",
+        "bright-green2": "hsl(113, 40%, 70%)",
+        "aqua-green2": "hsl(161, 20%, 77%)",
+        "lime2": "hsl(164, 40%, 46%)",
+        "deep_blue2": "hsl(285, 40%, 85%)",
+        "grey3": "hsl(0, 0%, 5%)",
+        "white2": "hsl(0, 0%, 97%)"
+    },
+    "globals":
+    {
+        "foreground": "var(grey5)",
+        "background": "var(paper)",
+        "line_highlight": "var(white4)",
+        "selection": "var(white4)",
+        "selection_border": "var(white6)"
+    },
+    "rules":
+    [
+        {
+            "scope": "urtext",
+            "background": "var(background)"
+        },
+        {
+            "scope": "meta_key.urtext",
+            "font_style": "bold",
+            "foreground": "var(meta-key)"
+        },
+        {
+            "scope": "meta_value.urtext",
+            "foreground": "var(meta-value)"
+        },
+        {
+            "scope": "meta_value_issue.urtext",
+            "foreground": "var(meta-value-issue)"
+        },
+        {
+            "scope": "entity.name.value_separator.urtext",
+            "foreground": "var(value-separator)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "entity.name.struct.timestamp.urtext",
+            "foreground": "var(timestamp)"
+        },
+        {
+            "scope": "link_id.urtext",
+            "foreground": "var(link)"
+        },
+        {
+            "scope": "link_char.urtext",
+            "foreground": "var(link)"
+        },
+        {
+            "scope": "link_prefix.urtext",
+            "foreground": "var(link-prefix)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "link.other-project.urtext",
+            "font_style": "bold",
+            "foreground": "var(other-project-link)"
+        },
+        {
+            "scope": "file_link.urtext",
+            "foreground": "var(file-link)"
+        },
+        {
+            "scope": "punctuation.section.braces.begin.frame.urtext",
+            "foreground": "var(open-frame)",
+            "font_style": "bold italic"
+        },
+        {
+            "scope": "punctuation.section.braces.end.frame.urtext",
+            "foreground": "var(close-frame)",
+            "font_style": "bold italic"
+        },
+        {
+            "scope": "call-name.urtext",
+            "foreground": "var(call-name)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "call-key.urtext",
+            "foreground": "var(call-key)"
+        },
+        {
+            "scope": "call-value.urtext",
+            "foreground": "var(call-value)"
+        },
+        {
+            "scope": "call-flag.urtext",
+            "foreground": "var(call-flag)",
+            "font_style": "italic"
+        },
+        {
+            "scope": "format-string.urtext",
+            "foreground": "var(format-string)"
+        },
+        {
+            "scope": "frame-node_id.urtext",
+            "foreground": "var(frame-node-id)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "frame-parens",
+            "foreground": "var(frame-parens)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "frame-format-var.urtext",
+            "foreground": "var(format-variable)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.begin.inline_node_1.urtext",
+            "foreground": "var(wrapper1)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.begin.inline_node_2.urtext",
+            "foreground": "var(wrapper2)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.begin.inline_node_3.urtext",
+            "foreground": "var(wrapper3)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.begin.inline_node_4.urtext",
+            "foreground": "var(wrapper4)",
+            "font_style": "bold "
+        },
+        {
+            "scope": "punctuation.section.braces.begin.inline_node_5.urtext",
+            "foreground": "var(wrapper5)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "missing_node.urtext",
+            "foreground": "var(red)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.end.inline_node_1.urtext",
+            "foreground": "var(wrapper1)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.end.inline_node_2.urtext",
+            "foreground": "var(wrapper2)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.end.inline_node_3.urtext",
+            "foreground": "var(wrapper3)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.end.inline_node_4.urtext",
+            "foreground": "var(wrapper4)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "punctuation.section.braces.end.inline_node_5.urtext",
+            "foreground": "var(wrapper5)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "embed_marker.urtext",
+            "foreground": "var(embed-marker)",
+            "font_style": "italic bold"
+        },
+        {
+            "scope": "file_link.urtext",
+            "foreground": "var(file-link)",
+            "font_style": "italic bold"
+        },
+        {
+            "scope": "raw.urtext",
+            "background": "var(raw)"
+        },
+        {
+            "scope": "node_title.urtext",
+            "font_style": "bold"
+        },
+        {
+            "scope": "pointer_prefix.urtext",
+            "font_style": "bold"
+        },
+        {
+            "scope": "pointer_id.urtext",
+            "foreground": "var(link)"
+        },
+        {
+            "scope": "hash_meta.urtext",
+            "foreground": "var(hash_meta)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "trigger_name.urtext.",
+            "foreground": "var(trigger)",
+            "font_style": "bold"
+        },
+        {
+            "scope": "frame-reference.urtext.",
+            "foreground": "var(unobtrusive)"
+        },
+        {
+            "scope": "urtext.frame-reference",
+            "foreground": "var(unobtrusive)"
+        },
+        {
+            "scope": "bold.urtext",
+            "font_style": "bold"
+        },
+        {
+            "scope": "url_link.urtext",
+            "foreground": "var(blue)"
+        },
+        {
+            "scope": "title_marker.urtext",
+            "foreground": "var(unobtrusive)"
+        },
+        {
+            "scope": "entity.name.struct.system-message.urtext",
+            "foreground": "var(system-message)"
+        },
+        {
+            "scope": "entity.name.struct.error-message.urtext",
+            "foreground": "var(error-message)"
+        },
+        {
+            "scope": "http_link.urtext",
+            "foreground": "var(blue)"
+        },
+        {   "scope" :"metadata_end.urtext",
+            "foreground": "var(lime2)"   
+        }        
+    ]
+}

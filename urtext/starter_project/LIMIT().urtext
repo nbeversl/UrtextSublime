@@ -1,0 +1,24 @@
+LIMIT() _ #call
+
+Limits INCLUDE to the specified number of results.
+
+Example:
+[[  >(| Example Use of LIMIT() >) +(*) LIMIT(10) LIST() ]]
+Includes all nodes in the project, up to a limit of 10.
+
+Output:
+
+	{~ Example Use of LIMIT() _
+	  | AND/OR >
+	  | About Urtext >
+	  | Accessing Nested Metadata in Frames >
+	  | Action Links ^ Links >
+	  | Action Links ^ WHEN() >
+	  | All Available Calls >
+	  | Arguments >
+	  | Asterisk >
+	  | Auto-Completions >
+	  | Bold Text >
+	}
+
+See next: | SORT() >

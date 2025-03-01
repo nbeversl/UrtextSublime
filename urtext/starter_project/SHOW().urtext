@@ -1,0 +1,90 @@
+SHOW() _ #call
+
+By default, and use of INCLUDE() outputs a link for every node included.
+SHOW() modifies the output to a custom template.
+
+Supplies a template to customize output of each result.
+Accepts keynames, denoted with `$`, arbitrary t
+
+Words preceded by `$` are are evaluated as metadata keys, replaced in the output by their value(s).
+Note that key names themselves are not displayed in the output. Add keynames manually if you want them included.
+
+	{ Parameters _
+
+	  SHOW accepts format strings, which are metadata keys, including | System Keys >, preceded by the dollar sign `$`. SORT will also accept arbitrary text or Unicode, such as newlines, tabs, and so on. The following format strings are also available:
+
+	  `$title`
+	  Displays the node title, default or via the `title` meta key
+
+	  `$_link`
+	  Displays a link to the node
+
+	  `$_pointer`
+	  Displays a link to the node
+
+	  `$_meta`
+	  Shorthand to show all metadata for every node, formatted as by "consolidate metadata"
+
+	  `$_contents`
+	  Displays the contents of the node.
+
+	  `$_lines:[number]`
+	  Displays the first [number] lines of the node.
+
+	  `$_lines:[number],[number]`
+	  Displays the range lines of the node with the first number as starting line and the second number as ending line.
+
+	  `$[any_other_metadata_key]`
+	  The `$` sign may be followed by any other metadata key in the project and its value or values will be shown.
+	  Note in this case the leading underscore is not present, unless it is used in your project.
+
+	}
+
+Example:
+
+[[
+>(| Example Use of SHOW() >)
+
++(_inline_timestamp=*)
+includes all nodes in the project that have an inline timestamp
+
+LIMIT(10)
+limits the results to 10 as an example
+
+SHOW(---\nLink: $_link\n$_meta\nLast updated: $_newest_timestamp\nExcerpt:\n$_lines:1\n\n\n)
+Provides an output template for each included node
+
+]]
+
+	{~ Example Use of SHOW() _
+	  ---
+	  Link: | Bugs >
+
+	  Last updated: Mon., Nov. 25, 2024, 11:43 AM CET
+	  Excerpt:
+
+	  ---
+	  Link: | Inserting link to new node does not rename the link fast enough if the filename changes >
+
+	  Last updated: Tue., Dec. 03, 2024, 02:34 PM CET
+	  Excerpt:
+	  <Tue., Dec. 03, 2024, 02:34 PM CET>
+	  Inserting link to new node does not rename the link fast enough if the filename changes #bug
+
+	  ---
+	  Link: | Timestamps ^ 1066 >
+
+	  Last updated: Fri., Oct. 09, 2020, 09:59 AM
+	  Excerpt:
+	  Timestamps _
+
+	}
+
+	{ See also:
+
+	  | Accessing Nested Metadata in Frames >
+	  | Nodes as Metadata >
+
+	}
+
+See next: | TREE() >
