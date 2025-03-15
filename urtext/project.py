@@ -133,13 +133,12 @@ class UrtextProject:
             for file in included_files:
                 self._parse_file(file)
         if not self.files:
-            return False
+            if self.new_file_node_created is False:
+                return False
+            self.entry_path = os.path.abspath(self.entry_point)
+            self.new_file_node()
 
-        self._add_paths_from_settings()                        
-        
-        if len(self.nodes) == 0 and not self.new_file_node_created:
-            return False
-
+        self._add_paths_from_settings()
         for node in self.nodes.values():
             node.metadata.convert_hash_keys()
         self._add_all_sub_tags()
@@ -233,22 +232,25 @@ class UrtextProject:
             buffer_contents = self.run_editor_method('get_buffer', filename)
             if buffer_contents:
                 buffer = self._make_buffer(filename, buffer_contents)
+            else:
+                buffer = self.urtext_file(filename, self)
         else:
             buffer = self.urtext_file(filename, self)
         if buffer:
             return self._parse_buffer(buffer, existing_buffer_ids=existing_buffer_ids)
 
     def _parse_buffer(self, buffer, existing_buffer_ids=None):
-        for n in buffer.nodes:
-            resolution = self._resolve_duplicate_ids(n)
-            if not resolution:
-                return False
 
         if existing_buffer_ids is None:
             if buffer.filename and buffer.filename in self.files:
                 existing_buffer_ids = [n.id for n in self.files[buffer.filename].get_ordered_nodes()]     
 
-        self.drop_buffer(buffer)        
+        for n in buffer.nodes:
+            if not self._resolve_duplicate_ids(n):
+                self.drop_buffer(buffer)
+                return False
+
+        self.drop_buffer(buffer)     
         changed_ids = {}
         if existing_buffer_ids:
             new_node_ids = [n.id for n in buffer.get_ordered_nodes()]
@@ -401,18 +403,19 @@ class UrtextProject:
         return True      
 
     def _resolve_duplicate_ids(self, node):
-        duplicate_titled_nodes = self._find_duplicate_ids(node)
+        duplicate_titled_nodes = self._find_duplicate_titles(node)
         if duplicate_titled_nodes:
             for d in duplicate_titled_nodes:
                 old_id = d.id
-                resolution = d.resolve_id(existing_nodes=self.nodes.values())
-                if not resolution:
+                resolution = d.resolve_id(existing_nodes=[f for f in self.nodes.values() if d.id != f.id ])
+                if resolution is False:
                     return False
+                del self.nodes[old_id]
                 self.nodes[resolution] = d
                 if old_id in self.project_settings_nodes:
-                    del self.nodes[old_id]
                     self.project_settings_nodes.remove(old_id)
                     self.project_settings_nodes.append(resolution)
+
                 self.run_hook('on_node_id_changed', self, old_id, resolution)
             if not node.resolve_id(existing_nodes=self.nodes.values()):
                 return False
@@ -513,6 +516,9 @@ class UrtextProject:
         self.run_hook('on_buffer_dropped', buffer.filename)
         if buffer.identifier and buffer.identifier in self.buffers:
             del self.buffers[buffer.identifier]
+        for n in buffer.nodes:
+            if n.id in self.nodes:
+                self._drop_node(self.nodes[n.id])
         file_nodes = [n for n in self.nodes.values() if n.filename == buffer.filename]
         for node in file_nodes:
             self._drop_node(node)
@@ -527,6 +533,7 @@ class UrtextProject:
             self._remove_sub_tags(node.id)
             if node.id in self.frames:
                 del self.frames[node.id]
+            self.run_hook('on_node_dropped', node)
             del self.nodes[node.id]
             del node
 
@@ -840,8 +847,8 @@ class UrtextProject:
             links[node.filename].extend(node.links)
         return links
 
-    def _find_duplicate_ids(self, node):
-        return [n for n in self.nodes.values() if n.id == node.id]
+    def _find_duplicate_titles(self, node):
+        return [n for n in self.nodes.values() if n.title == node.title]
 
     def log_item(self, filename, message):
         self.messages.setdefault(filename, [])
@@ -1369,7 +1376,7 @@ class UrtextProject:
                                  filename,
                                  include_project=False):
 
-        self._parse_file(filename, try_buffer=True)
+        self._parse_file(filename)
         if filename in self.files:
             node_id = None
             for node in self.files[filename].nodes:

@@ -15,7 +15,7 @@ def check_urtext_project_list():
     if not _UrtextProjectList:
         _UrtextProjectList = initialize_project_list(window)
     if _UrtextProjectList:
-        folder = get_current_folder(window)
+        folder = get_current_folder()
         if folder and not _UrtextProjectList.set_current_project(folder):
             _UrtextProjectList.init_project(folder, make_current=True)
 
@@ -319,7 +319,25 @@ def position_file(position, focus=True, view=None):
             view.sel().add(sublime.Region(position, position))
         r = view.text_to_layout(position)
         view.show_at_center(position, animate=True)
-        
+
+def get_current_folder():
+    window = sublime.active_window()
+    view = window.active_view()
+    folder = None
+
+    if view and view.file_name():
+        folder = os.path.dirname(view.file_name())
+
+    if not folder:
+        folders = window.folders()
+        if folders:
+            folder = folders[0]
+    if not folder:
+        project_data = window.project_data()
+        if project_data and "folders" in project_data and project_data["folders"]:
+            folder = project_data["folders"][0]["path"]
+    return folder
+
 editor_methods = {
     'open_file_to_position' : open_file_to_position,
     'error_message' : sublime.error_message,
@@ -333,6 +351,7 @@ editor_methods = {
     'popup' : show_popup,
     'close_current': close_current,
     'write_to_console' : print,
+    'get_current_folder': get_current_folder,
     'status_message' : show_status,
     'close_file': close_file,
     'save_file': save_file,
@@ -354,43 +373,21 @@ editor_methods = {
     'get_selection': get_selection
 }
 
-def initialize_project_list(window, 
-    add_project=True,
-    reload_projects=False,
-    new_file_node_created=False):
+def initialize_project_list(window, add_project=True):
 
     global _UrtextProjectList
 
-    if reload_projects: 
-        _UrtextProjectList = None
     if window:
-        folder = get_current_folder(window)
+        folder = get_current_folder()
         if _UrtextProjectList and _UrtextProjectList.current_project:
             if _UrtextProjectList.current_project.has_folder(folder):
                 return _UrtextProjectList
         if _UrtextProjectList and folder:
             if not _UrtextProjectList.set_current_project(folder) and add_project:
-                return _UrtextProjectList.initialize_project(folder, new_file_node_created=new_file_node_created)
+                return _UrtextProjectList.initialize_project(folder)
         elif folder and add_project:
             _UrtextProjectList = ProjectList(folder, editor_methods=editor_methods)
         return _UrtextProjectList
-
-def get_current_folder(window):
-    view = window.active_view()
-    folder = None
-
-    if view and view.file_name():
-        folder = os.path.dirname(view.file_name())
-
-    if not folder:
-        folders = window.folders()
-        if folders:
-            folder = folders[0]
-    if not folder:
-        project_data = window.project_data()
-        if project_data and "folders" in project_data and project_data["folders"]:
-            folder = project_data["folders"][0]["path"]
-    return folder
 
 class RunUrtextCallCommand(sublime_plugin.TextCommand):
 
@@ -487,8 +484,6 @@ class UrtextViewEventListener(ViewEventListener):
             if self.view and ( self.view.file_name() and self.view.is_dirty()
                 and self.view.file_name() in _UrtextProjectList.current_project.files):
                     self.view.run_command('save')
-
-
                             
 class MouseOpenUrtextLinkCommand(sublime_plugin.TextCommand):
 

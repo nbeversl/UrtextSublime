@@ -48,5 +48,6 @@ class UrtextFile(UrtextBuffer):
                 self.project.run_editor_method('refresh_files', self.filename)
         elif self.identifier:
             self.project.run_editor_method('set_buffer', None, self.contents, identifier=self.identifier)
+        self.project.drop_buffer(self)
         self.project._parse_file(self.filename)
         return True

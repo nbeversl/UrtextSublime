@@ -21,8 +21,9 @@ class UrtextBuffer:
         self.nodes = []
         self.root_node = None
         self.meta_to_node = []
-        symbols = self._lex(self._get_contents())
-        self._parse(self._get_contents(), symbols)
+        contents = self._get_contents()
+        symbols = self._lex(contents)
+        self._parse(contents, symbols)
         for node in self.nodes:
             node.buffer = self
             node.filename = self.filename
@@ -59,7 +60,7 @@ class UrtextBuffer:
         symbols[len(contents) + start_position] = { 'type': 'EOB' }
         return symbols
 
-    def _parse(self, contents,symbols, nested_levels={},nested=0,child_group={}, start_position=0):
+    def _parse(self, contents, symbols, nested_levels={}, nested=0, child_group={}, start_position=0):
  
         ranges, unstripped_contents = strip_backtick_escape(contents)
         last_position = start_position
@@ -205,9 +206,7 @@ class UrtextBuffer:
     def resolve_nodes(self, messages=None):
         unresolved_nodes = [n for n in self.nodes if n.needs_resolution]
         for n in unresolved_nodes:
-            resolution = n.resolve_id(existing_nodes=self.nodes)
-            if not resolution:
-                self.write_buffer_contents()
+            if not n.resolve_id(existing_nodes=self.nodes):
                 return False
 
     def _check_untitled_nodes(self):        
@@ -216,8 +215,8 @@ class UrtextBuffer:
 
     def _check_duplicate_ids(self):
         allocated_ids = [n.id for n in self.nodes]
-        for n in [n for n in self.nodes if allocated_ids.count(n.id) > 1]:
-            n.needs_resolution = True
+        for node in [n for n in self.nodes if allocated_ids.count(n.id) > 1]:
+            node.needs_resolution = True
 
     def get_ordered_nodes(self):
         return sorted( 

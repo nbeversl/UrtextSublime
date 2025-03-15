@@ -7,9 +7,7 @@ class NodeBrowser:
 	thread_safe = True
 
 	def run(self):
-		if self.project_list.current_project:
-			selections = [[n.id, n.display_detail] for n in self.project_list.current_project.sort_for_node_browser()]
-
+	
 		def on_highlight(index):
 			if self.selection_has_changed:
 				self.project_list.current_project.run_editor_method('preview_urtext_node', selections[index][0])
@@ -20,7 +18,9 @@ class NodeBrowser:
 			if index > -1 :
 				self.project_list.current_project.open_node(selections[index][0])
 
-		self.project_list.run_editor_method('show_panel', selections, callback, on_highlight=on_highlight)
+		if self.project_list.current_project:
+			selections = [[n.id, n.display_detail] for n in self.project_list.current_project.sort_for_node_browser()]
+			self.project_list.run_editor_method('show_panel', selections, callback, on_highlight=on_highlight)
 		
 ThisProject.add_selector(NodeBrowser)
 

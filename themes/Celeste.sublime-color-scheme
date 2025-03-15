@@ -82,7 +82,7 @@
         {
             "scope": "link.other-project.urtext",
             "font_style": "bold",
-            "foreground": "var(reg-text-white)"
+            "foreground": "var(blue-brighter)"
         },
         {
             "scope": "file_link.urtext",

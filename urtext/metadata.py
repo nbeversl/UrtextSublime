@@ -210,7 +210,7 @@ class NodeMetadata:
                 start_position=inline_timestamps[-1].start_position,
                 end_position=inline_timestamps[-1].end_position)
 
-    def get_first_value(self, keyname,order_by='default'):
+    def get_first_value(self, keyname, order_by='default'):
         values = self.get_values(
             keyname,
             order_by=order_by)

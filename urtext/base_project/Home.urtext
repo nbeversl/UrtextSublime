@@ -7,7 +7,6 @@ The dynamic definition below executes them in order. Each node will include docu
 EXEC(| Target Call >)
 EXEC(| Document All Selectors >)
 EXEC(| Tree >)
-EXEC(| Yes Or No >)
 EXEC(| Sort >)
 EXEC(| Text >)
 EXEC(| Max Length >)
@@ -21,6 +20,7 @@ EXEC(| Collect >)
 EXEC(| Pull >)
 EXEC(| Info >)
 EXEC(| Pop >)
+EXEC(| Patterns >)
 EXEC(| Anchor >)
 EXEC(| Files >)
 EXEC(| When >)
@@ -49,7 +49,6 @@ EXEC(| New File Node >)
 EXEC(| Keybindings to Sublime Text JSON >)
 EXEC(| All Selectors >)
 EXEC(| Strip >)
-EXEC(| Yes Or No >)
 EXEC(| Backlinks Browser >)
 EXEC(| Forward Links Browser >)
 EXEC(| All Selectors Scratch Buffer >)
@@ -62,6 +61,7 @@ TREE()
 ]]
 
 	{~ results _
+| (untitled) ^ project_settings >
 | All Projects Node Browser >
 | All Selectors >
 | All Selectors Scratch Buffer >
@@ -113,6 +113,7 @@ TREE()
 | Node Browser >
 | Open Home >
 | Parameters >
+| Patterns >
 | Pop >
 | Project Log >
 | Projects >
@@ -132,9 +133,8 @@ TREE()
 | Tree >
 | Urtext Starter Project >
 | When >
+| Wrap Line >
 | Wrap Selection >
-| Yes Or No >
-| _lint ^ project_settings >
 | debugging output >
 | dropped nodes should not drop the whole file >
 | project_settings >

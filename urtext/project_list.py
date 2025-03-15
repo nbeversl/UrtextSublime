@@ -51,7 +51,7 @@ class ProjectList:
         visible=True,
         make_current=False,
         selector=None):
-        self.execute(self._init_project, entry_point, new_file_node_created=False, initial=initial, make_current=make_current, visible=visible, selector=selector)
+        self.execute(self._init_project, entry_point, new_file_node_created=new_file_node_created, initial=initial, make_current=make_current, visible=visible, selector=selector)
 
     def _init_project(self,
         entry_point,
@@ -70,13 +70,13 @@ class ProjectList:
                                 initial=initial,
                                 new_file_node_created=new_file_node_created)
 
-        self.projects.append(project)
-        self.entry_points.append(project.entry_point)
-        if initial or make_current:
-            self.current_project = project
-        project.initialize(visible=visible, make_current=make_current, selector=selector)
-        if selector:
-            self.run_selector(selector)
+        if project.initialize(visible=visible, make_current=make_current, selector=selector):
+            if initial or make_current:
+                self.current_project = project
+            self.projects.append(project)
+            self.entry_points.append(project.entry_point)
+            if selector:
+                self.run_selector(selector)
 
     def execute(self, function, *args, **kwargs):
         if self.is_async:
@@ -386,8 +386,7 @@ class ProjectList:
         return self.node_opened
 
     def selector_menu(self):
-        selections = list(self.selectors.keys())
-
+        
         def callback(selection):
             selections = list(self.selectors.keys())
             if selection > -1 :
@@ -395,6 +394,7 @@ class ProjectList:
                     return self.selectors[selections[selection]].run()
                 return self.handle_message('No selection for %s' % selections[selection])
 
+        selections = list(self.selectors.keys())
         self.run_editor_method('show_panel', selections, callback)
 
     def run_selector(self, selection):
