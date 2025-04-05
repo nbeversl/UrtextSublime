@@ -1,0 +1,9 @@
+Rename All Files _ #action
+
+Renames all files in the project. The filename template can be set in `filenames` key in | project_settings >. The default is the title of the root node.
+
+|: Rename All Files >
+
+See also: | Rename Single File >
+Default Sublime Text Keybinding: `Ctrl + Shift + S`
+All actions can be called three ways. See | Actions >

@@ -205,8 +205,8 @@ class UrtextBuffer:
 
     def resolve_nodes(self, messages=None):
         unresolved_nodes = [n for n in self.nodes if n.needs_resolution]
-        for n in unresolved_nodes:
-            if not n.resolve_id(existing_nodes=self.nodes):
+        for node in unresolved_nodes:
+            if not node.resolve_id(existing_nodes=[n for n in self.nodes if n != node]):
                 return False
 
     def _check_untitled_nodes(self):        

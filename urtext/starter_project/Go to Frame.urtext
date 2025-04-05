@@ -1,0 +1,8 @@
+Go to Frame _ #action
+
+With the cursor in any node targeted by a frame (see | Frames >), navigates to the frame.
+
+|: Go To Frame >
+
+Default Sublime Text Keybinding: `Ctrl+Shift+F`
+All actions can be called three ways. See | Actions >

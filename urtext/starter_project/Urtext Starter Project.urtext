@@ -1,138 +1,177 @@
 
 Urtext Starter Project _
 
-!--------------------------------------------------------------------------------------------------------------------------------------------!
-IF YOU ARE SEEING THIS TEXT, YOU ARE VIEWING THE STARTER PROJECT IN THE URTEXT LIBRARY.
-Do not modify it here; instead, copy it to a new project using either "Urtext: Create Starter Project" in the
-Sublime Command palette or the "Create Starter Project" selector from within Urtext.
-!--------------------------------------------------------------------------------------------------------------------------------------------!
+!---------------------------------------------------
+IF YOU ARE SEEING THIS TEXT, YOU ARE VIEWING THE STARTER PROJECT IN THE URTEXT LIBRARY. Do not modify it here; instead, copy it to a new project using either "Urtext: Create Starter Project" in the Sublime Command palette or the "Create Starter Project" action from within Urtext.
+!-----------------------------------------------------
 
 Urtext /ˈʊrtekst/ is an open-source plaintext library for writing, research, documentation, knowledge bases, journaling, Zettelkasten, project/personal organization, note taking, a lightweight database substitute, or any other writing or information management that can be done in text format.
 
 This starter project demonstrates Urtext with examples to get you going. Add, delete or modify any parts to make the system you need.
 
-Before starting, see also | Sublime Text Settings Tips >
+To **open a link**, hold Ctrl-Shift and click it, or put the cursor on it and press `Ctrl-Shift-/`
+
+To optimize Sublime Text for Urtext see | Sublime Text Settings and Tips >
+You can look up features and terms in the | Index >
+
+	{ Navigating the Starter Project _
+
+		{ Browsing Nodes _
+
+		  Sublime Text's dropdown will browse all nodes in the project.
+
+		  Press `Control - Shift - E`. Type part of a node's title to locate, and Enter to open it.
+
+		  Nodes sort by title.
+		  This can be modified using the `node_browser_sort` key in | project_settings >.
+
+		  Key bindings for Sublime Text are listed when helpful. These can be modified using the Sublime Text keymap files (see https://www.sublimetext.com/docs/key_bindings.html ) or from Urtext using the| KEY_BINDINGS_TO_JSON() > call.
+
+		}
+
+		{ Navigation _
+
+		  To return to this home node at any time, press the Home Key, `Ctrl + Shift + H`.
+		  Your navigation path can be recalled with `Ctrl + Shift + <` (back) and `Ctrl + Shift + >` (forward).
+
+		}
+	}
+
+	{ Basics _
+	  | Files >>
+	  | Projects >>
+	  | Nodes >>
+	  | Urtext Syntax >>
+	}
 
 	{~ Table of Contents _
 	  | Urtext Starter Project >
-	  ├── | Browsing Nodes >
-	  ├── | Navigation >
-	  ├── | Files >
-	  ├── | Projects >
-	  ├── | Nodes >
-	  │   ├── | File Nodes >
-	  │   └── | Bracket Nodes >
-	  │       ├── | One node >
-	  │       │   └── | another node >
-	  │       │       └── | another node ... >
-	  │       │           └── | etc. >
-	  │       ├── | Bullet Nodes >
-	  │       ├── | Node Titles >
-	  │       └── | Node IDs >
-	  └── | Urtext Syntax >
-	  ├── | Bracket Node Wrappers >
-	  ├── | Bullet >
-	  ├── | Space-Underscore >
-	  ├── | Node Link >
-	  ├── | Pointer >
-	  ├── | Timestamp Wrappers >
-	  ├── | Metadata >
-	  ├── | Bold Text >
-	  ├── | Italic Text >
-	  └── | Whitespace Anchor >
+	  .├── | Navigating the Starter Project >
+	  .│   ├── | Browsing Nodes >
+	  .│   └── | Navigation >
+	  .├── | Basics >
+	  .│   ├── | Files >
+	  .│   ├── | Projects >
+	  .│   ├── | Nodes >
+	  .│   │   ├── | File Nodes >
+	  .│   │   └── | Bracket Nodes >
+	  .│   │       ├── | One node >
+	  .│   │       │   └── | another node >
+	  .│   │       │       └── | another node ... >
+	  .│   │       │           └── | etc. >
+	  .│   │       ├── | Node Titles >
+	  .│   │       └── | Node IDs >
+	  .│   └── | Urtext Syntax >
+	  .│       ├── | Bracket Node Wrappers >
+	  .│       ├── | Space-Underscore >
+	  .│       ├── | Node Link ^ Urtext Syntax >
+	  .│       ├── | Pointer >
+	  .│       ├── | Timestamp Wrappers >
+	  .│       ├── | Metadata >
+	  .│       ├── | Bold Text >
+	  .│       ├── | Italic Text >
+	  .│       └── | Whitespace Anchor >
+	  .├── | Links >
+	  .│   ├── | Node Link ^ Links >
+	  .│   │   └── | Urtext Action List for Linking >
+	  .│   ├── | How to Open Links >
+	  .│   ├── | Dynamic IDs >
+	  .│   ├── | Link to Character Location >
+	  .│   ├── | File Link >
+	  .│   │   └── | Making a File Link With a Dialog in Sublime Text >
+	  .│   ├── | Web/HTTP(S) Link >
+	  .│   ├── | Missing Link >
+	  .│   ├── | Trigger Link >
+	  .│   ├── | Action Link >
+	  .│   └── | Cross-Project Link >
+	  .├── | Metadata Syntax >
+	  .│   ├── | Keys >
+	  .│   ├── | Assigner >
+	  .│   ├── | Values >
+	  .│   │   └── | Value Timestamps >
+	  .│   ├── | Value Separator >
+	  .│   ├── | Entry Terminator >
+	  .│   ├── | Hash >
+	  .│   ├── | Propagating metadata to descendents >
+	  .│   ├── | Case-sensitivity >
+	  .│   ├── | System Keys >
+	  .│   │   ├── | inline_timestamp >
+	  .│   │   ├── | oldest_timestamp >
+	  .│   │   ├── | newest_timestamp >
+	  .│   │   ├── | links_from >
+	  .│   │   ├── | links_to >
+	  .│   │   ├── | bold >
+	  .│   │   └── | italic >
+	  .│   ├── | Title Key >
+	  .│   ├── | Auto-Completions >
+	  .│   └── | See also: ^ Metadata Syntax >
+	  .│       ├── | Nodes as Metadata >
+	  .│       │   ├── | The Beautiful and Damned >
+	  .│       │   └── | Scott Fitzgerald >
+	  .│       │       ├── | Short description here	asdfasd >
+	  .│       │       ├── | Accessing Nested Metadata in Frames >
+	  .│       │       │   └── | Example of Nested Metadata Output >
+	  .│       │       └── | Nested Metadata as Link >
+	  .│       │           └── | Example of Linked Node as Metadata Output >
+	  .│       ├── | Extended Metadata >
+	  .│       └── | Theming Metadata >
+	  .├── | Frames >
+	  .│   ├── | Calls >
+	  .│   ├── | Syntax >
+	  .│   ├── | Default Execution Times >
+	  .│   ├── | Snippet ^ Frames >
+	  .│   ├── | Index >
+	  .│   ├── | INCLUDE() >
+	  .│   │   ├── | Operators >
+	  .│   │   ├── | AND/OR >
+	  .│   │   ├── | EXCLUDE() >
+	  .│   │   ├── | Evaluation Order >
+	  .│   │   ├── | Example Use of INCLUDE and EXCLUDE >
+	  .│   │   │   └── | All Available Calls >
+	  .│   │   ├── | Shorthand ^ INCLUDE() >
+	  .│   │   ├── | Asterisk >
+	  .│   │   └── | Flags ^ INCLUDE() >
+	  .│   ├── | LIMIT() >
+	  .│   │   └── | Example Use of LIMIT() >
+	  .│   ├── | SORT() >
+	  .│   │   ├── | Example Use of SORT() >
+	  .│   │   ├── | Arguments >
+	  .│   │   └── | Flags ^ SORT() >
+	  .│   ├── | SHOW() >
+	  .│   │   ├── | Parameters ^ SHOW() >
+	  .│   │   ├── | Example Use of SHOW() >
+	  .│   │   └── | See also: ^ SHOW() >
+	  .│   ├── | TREE() >
+	  .│   │   ├── | Parameters ^ TREE() >
+	  .│   │   └── | Example Use of TREE() >
+	  .│   ├── | COLLECT() >
+	  .│   │   └── | Example Use of COLLECT() >
+	  .│   ├── | TEXT() >
+	  .│   │   └── | Example Use of TEXT() >
+	  .│   ├── | MAX_LENGTH() >
+	  .│   │   ├── | Parameters ^ MAX_LENGTH() >
+	  .│   │   └── | Example Use of MAX_LENGTH >
+	  .│   ├── | LOG() >
+	  .│   │   └── | Example use of LOG >
+	  .│   ├── | EXEC() >
+	  .│   │   ├── | Example Python Code >
+	  .│   │   ├── | Example EXEC() output >
+	  .│   │   └── | Nested EXEC()s >
+	  .│   │       ├── | example node >
+	  .│   │       └── | Snippet ^ Nested EXEC()s >
+	  .│   └── | WHEN() >
+	  .│       ├── | Parameters ^ WHEN() >
+	  .│       ├── | Flags ^ WHEN() >
+	  .│       └── | Action Links Example >
+	  .│           ├── | Code to exec >
+	  .│           └── | Open Urtext Website >
+	  .└── | project_settings >
+	  .    └── | Lint Settings >
 
 	  [[>(@self) +(| Urtext Starter Project >) TREE(*)]]}
 
-	{ Browsing Nodes _
-
-	  Sublime Text's dropdown will browse all nodes in the project.
-
-	  Press `Control - Shift - E` or select "Urtext: Node List" from the command palette (Shift-Super-P). Type part of a node's title to locate, and Enter to open it.
-
-	  Nodes sort by default by title.
-	  This can be modified using the `node_browser_sort` key in | project_settings >.
-
-	  See also | Traverse Mode >
-
-	  Key bindings for Sublime Text are listed, and can be modified, in | Sublime Text Keybindings >
-
-	}
-
-	{ Navigation _
-
-	  To return to this home node at any time, press the Home Key, `Ctrl + Shift + H`.
-
-	  Your navigation path can be recalled with `Ctrl + Shift + <` (back) and `Ctrl + Shift + >` (forward).
-
-	}
-
-	{ Files _
-
-	  Urtext looks for all files with the extension `.urtext` in the folder from which it is started.
-	  Functionality is otherwise independent of filenames. Files will parse and function no matter their name.
-
-	  Create a new Urtext file in an existing folder by pressing `Ctrl–Shift–;`  Urtext creates, names and opens new files automatically when you make a new file node. Using links and the Node Browser, you need never open a file manually or know its name or location, unless you want to.
-
-	  Using Urtext, think about files as little as possible. Think of a file as the saved state of text buffer.
-
-	  To include extensions other than `.urtext`, see the `file_extensions` key in | project_settings >
-	}
-
-	{ Projects _
-
-	  A project is a collection of Urtext files.
-
-	  Urtext does not depend on organization at the filesystem level and looks for no subfolder scheme. To use files organized in folders, specify which folders to include using the `paths` key in | project_settings >. Moving files among included folders has no effect on their function or behavior in Urtext.
-
-	  A useful and user-friendly project title can be set with the `project_title` key in | project_settings >. Otherwise, the title of the project is the path to its entry point.
-
-	}
-
-	{ Nodes _
-
-	  Urtext’s basic unit is a node, which is a range or set of ranges of text, up to and including an entire file.
-
-		{ File Nodes _
-
-		  The most basic node is a single file. To create a new file node, press `Ctrl–Shift–;`
-		}
-
-		{ Bracket Nodes _
-
-		  Curly braces wrap nodes nested inside files, as this node is. For all purposes in Urtext, nodes’ identities are unique from their containing files, parent nodes, and child nodes. Nodes can be nested arbitrarily deep:
-
-			{ One node
-
-				{ another node
-
-					{ another node ...
-
-						{ etc.
-
-						}
-					}
-				}
-			}
-
-		  Every opening curly bracket must be closed in the same file.
-
-		  Urtext is self-correcting. If you do not close every opening bracket, or leave an extra one, Urtext corrects this on every file save.
-
-		  • Bullet Nodes _ Bullet nodes, like this node, begin with a bullet character and terminate at the end of the line. To make a new bullet node, press `Ctrl+Shift+6`. With the cursor on existing text, the same key will insert a bullet at the beginning of the line.
-
-			{ Node Titles _
-
-			  By default, a node's title is its first non-whitespace line. This can be overridden by following any line of text with one space and a single whitespace underscore character. The underscore character also bolds the title.
-
-			}
-
-			{ Node IDs _
-
-			  Every node must be uniquely identifiable in the project. When duplicate titles exist, Urtext will resolve them using their parent title, the oldest timestamp in the node, or the oldest timestamp in any ancestor node. For more information, see https://urtext.co/documentation/nodes/ (HTTP(S) links open with the same key binding as Urtext links)
-			}
-
-		}
-
-	}
-
-See next: | Urtext Syntax >>
+See also:
+| Links >>
+| Metadata Syntax >>
+| Frames >>
+| project_settings >>

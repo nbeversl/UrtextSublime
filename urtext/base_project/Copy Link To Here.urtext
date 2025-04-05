@@ -11,7 +11,7 @@ class CopyLinkToHere:
 		self.project_list.editor_copy_link_to_node(position, filename)
 
 
-ThisProject.add_selector(CopyLinkToHere)
+ThisProject.add_action(CopyLinkToHere)
 %%
 
 { Documentation _

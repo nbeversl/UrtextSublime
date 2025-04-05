@@ -1,0 +1,8 @@
+Insert Link to File _ #action
+
+Opens an editor dialog to select and existing file and inserts a | File Link > at the cursor position.
+
+|: Insert Link to File >
+
+No default keybinding in Sublime Text; available in the | Show All Actions > Action
+All actions can be called three ways. See | Actions >

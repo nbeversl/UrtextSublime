@@ -10,14 +10,6 @@ Square brackets in this syntax documentation (`[`, `]`) indicate the enclosed te
 	  More information: | Bracket Nodes >
 	}
 
-	{ `•`
-
-	  Bullet _
-
-	  Must be the first non-whitespace character on a line.
-	  More information: | Bullet Nodes >
-	}
-
 	{ ` _`
 
 	  Space-Underscore _
@@ -35,8 +27,8 @@ Square brackets in this syntax documentation (`[`, `]`) indicate the enclosed te
 	  Links to the specified node by ID, like a hyperlink, and can be opened with `Ctrl + Shift + /` or `Ctrl + Shift + mouseclick`.
 	  More information: | Links >
 	  Links updated dynamically if their destination title changes. See | Dynamic IDs >
-	  You can also link to files: | File Links >
-	  and to HTTP(S)/web links: | Web/HTTP(S) Links >
+	  You can also link to files: | File Link >
+	  and to HTTP(S)/web links: | Web/HTTP(S) Link >
 	}
 
 	{ `| [ node id ] >>`
@@ -46,8 +38,8 @@ Square brackets in this syntax documentation (`[`, `]`) indicate the enclosed te
 	  An alias to the specified node, as though the node were included in full at the position of the pointer.
 	  More Information:
 	  | TREE() >
-	  | PULL >
-	  | POP >
+	  | Pull >
+	  | Pop >
 
 	}
 

@@ -22,11 +22,11 @@ WHEN can limit unwanted execution or trigger execution times other than the defa
 
 	  `-target_link_clicked`
 	  The frame will run when an action link to one of its target nodes is clicked
-	  see | Action Links ^ Links >
+	  see | Trigger Link >
 
 	  `-source_link_clicked`
 	  The frame will run when an action link to its containing node is clicked.
-	  see | Action Links ^ Links >
+	  see | Trigger Link >
 
 	  `-link_hovered`
 	  The frame will run when its action link is clicked
@@ -36,7 +36,7 @@ WHEN can limit unwanted execution or trigger execution times other than the defa
 
 	}
 
-	{ Action Links _
+	{ Action Links Example _
 
 	  [[
 	  >(| Open Urtext Website >)

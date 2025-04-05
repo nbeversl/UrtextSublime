@@ -154,7 +154,7 @@ def open_external_file(filepath):
     if sublime.platform() == "osx":
         process = subprocess.Popen(('open', filepath))
         if process.returncode != 0:
-            print("Error opening file: probably file permissinos")
+            print("Error opening file: probably file permissions ")
     elif sublime.platform() == "windows":
         os.startfile(filepath)
     elif sublime.platform() == "linux":
@@ -406,7 +406,7 @@ class RunUrtextCallCommand(sublime_plugin.TextCommand):
             if urtext_call == 'open_urtext_link':
                 line, cursor, file_pos, line_range = get_line_and_cursor()
                 return _UrtextProjectList.handle_link(line, self.view.file_name(), get_position(), col_pos=cursor, identifier=self.view.id())
-            _UrtextProjectList.run_selector(urtext_call)
+            _UrtextProjectList.run_action(urtext_call)
  
 class UrtextReplace(sublime_plugin.TextCommand):
     def run(self, edit, start=0, end=0, replacement_text=''):
@@ -515,7 +515,7 @@ class UrtextStarterProjectCommand(sublime_plugin.TextCommand):
             if not _UrtextProjectList:
                 _UrtextProjectList = ProjectList(path, editor_methods=editor_methods)
             else:
-                _UrtextProjectList.init_project(path, make_current=True, selector='urtext_home')
+                _UrtextProjectList.init_project(path, make_current=True, action='urtext_home')
         sublime.select_folder_dialog(create_project)
 
 class UrtextDebugCommand(sublime_plugin.TextCommand):

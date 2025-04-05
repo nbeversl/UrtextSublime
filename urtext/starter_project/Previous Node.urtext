@@ -1,0 +1,9 @@
+Previous Node _ #action
+
+Within a buffer, moves the cursor to and centers the previous node (if any).
+
+|: Previous Node >
+
+Default Sublime Text Keybinding: `ctrl+shift+b`
+See also | Next Node >
+All actions can be called three ways. See | Actions >

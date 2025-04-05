@@ -1,4 +1,4 @@
-Sublime Text Settings Tips _
+Sublime Text Settings and Tips _
 
 	{ Syntax Highlighting _
 
@@ -38,13 +38,14 @@ Sublime Text Settings Tips _
 	{ Disable Prompts for File Reload _
 
 	  Urtext does a lot of writing to files on the fly, often when they are already open. To avoid seeing a dialog every time, add add the following to your Sublime project settings or User Preferences file:
+
 	  %%JSON
 				 
 				 "settings" : {
 					"always_prompt_for_file_reload": false,
 				},
 				
-				%%		
+		%%		
 
 	}
 
@@ -56,7 +57,7 @@ Sublime Text Settings Tips _
 			 "settings" : { 
 				"draw_indent _guides": false,
 			}
-			%%
+		%%
 	}
 
 	{ Save on Focus Lost _
@@ -77,4 +78,4 @@ Sublime Text Settings Tips _
 
 	  You don't need to define a Sublime Project for the Urtext Project, but if you intend to do more than one thing at a time in Sublime, it's convenient to have one; you can then use Select Project -> Quick Switch Project (Ctrl-Super-P) to switch among them.
 
-	}Tue., Dec. 12, 2023, 04:19 AM
+	}

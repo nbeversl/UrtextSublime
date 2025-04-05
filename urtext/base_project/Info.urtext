@@ -28,9 +28,9 @@ class UrtextInfo:
 		contents.append('Propagated calls:')
 		contents.extend(['/'.join(c.name) for c in self.project_list.calls.values()])
 		contents.append('----')		
-		contents.append('Available selectors')
-		contents.extend([s.name for s in self.project_list.selectors.values()])
-		contents.extend([s.name for s in self.project.selectors.values()])
+		contents.append('Available actions')
+		contents.extend([s.name for s in self.project_list.actions.values()])
+		contents.extend([s.name for s in self.project.actions.values()])
 		return text_contents + '\n'.join(contents)
 
 ThisProject.add_call(UrtextInfo)

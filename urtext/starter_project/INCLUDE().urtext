@@ -96,8 +96,6 @@ Includes all nodes that have a metadata like: keyword::example value
 		  | LIMIT() >
 		  | LOG() >
 		  | MAX_LENGTH() >
-		  | POP and PULL >
-		  | RENAME_FILES() >
 		  | SHOW() >
 		  | SORT() >
 		  | TARGET() >
@@ -153,7 +151,7 @@ Includes all nodes that have a metadata like: keyword::example value
 
 	  `-is_meta`
 	  Limits the INCLUDE to nodes that are metadata values
-	  See | Nodes as Metadata Values >
+	  See | Nodes as Metadata >
 
 	}
 

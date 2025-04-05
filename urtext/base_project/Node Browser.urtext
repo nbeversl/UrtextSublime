@@ -22,6 +22,6 @@ class NodeBrowser:
 			selections = [[n.id, n.display_detail] for n in self.project_list.current_project.sort_for_node_browser()]
 			self.project_list.run_editor_method('show_panel', selections, callback, on_highlight=on_highlight)
 		
-ThisProject.add_selector(NodeBrowser)
+ThisProject.add_action(NodeBrowser)
 
 %%

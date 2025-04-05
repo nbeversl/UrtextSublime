@@ -3,7 +3,6 @@ import datetime
 import platform
 import os
 import time
-import concurrent.futures
 import threading
 from urtext.file import UrtextFile, UrtextBuffer
 from urtext.node import UrtextNode
@@ -12,7 +11,7 @@ from urtext.call import UrtextCall
 import urtext.syntax as syntax
 import urtext.utils as utils
 from urtext.exec import Exec
-from urtext.selector import UrtextSelector
+from urtext.action import UrtextAction
 from itertools import chain
 
 class UrtextProject:
@@ -44,7 +43,7 @@ class UrtextProject:
         self.last_exec_node = None
         self.paths = []
         self.frames = {}
-        self.selectors = {}
+        self.actions = {}
         self.messages = {}
         self.virtual_outputs = {}
         self.dynamic_metadata_entries = []
@@ -58,10 +57,7 @@ class UrtextProject:
         self.initial_project = initial
         self.visible = None
 
-    def get_setting(self,
-            setting,
-            _called_from_project_list=False,
-            use_project_list=True):
+    def get_setting(self, setting, _called_from_project_list=False, use_project_list=True):
 
         values = []
         for node_id in self.project_settings_nodes:
@@ -76,10 +72,7 @@ class UrtextProject:
             values = [v.num() for v in values]
         return values
 
-    def get_single_setting(self, 
-            setting,
-            _called_from_project_list=False,
-            use_project_list=True):
+    def get_single_setting(self, setting, _called_from_project_list=False, use_project_list=True):
         values = self.get_setting(
             setting, 
             _called_from_project_list=_called_from_project_list,
@@ -93,10 +86,7 @@ class UrtextProject:
             return True
         return False
 
-    def get_setting_as_text(self, 
-            setting,
-            _called_from_project_list=False,
-            use_project_list=True):
+    def get_setting_as_text(self, setting, _called_from_project_list=False):
         setting = self.get_setting(setting, _called_from_project_list=_called_from_project_list)
         return [v.text for v in setting]
 
@@ -112,7 +102,7 @@ class UrtextProject:
             return self.get_settings_keys()
         return propagated_settings
 
-    def initialize(self, callback=None, visible=True, make_current=False, selector=None):
+    def initialize(self, visible=True, make_current=False, action=None):
         self.visible = visible
         self.add_call(Exec)
         for call in self.project_list.calls.values():
@@ -222,12 +212,11 @@ class UrtextProject:
 
         existing_buffer_ids = None
         if filename in self.files:
-            existing_buffer_ids = [n.id for n in self.files[filename].get_ordered_nodes()]     
+            existing_buffer_ids = [n.id for n in self.nodes.values() if n.filename == filename]
 
         if filename in self.files:
             self.drop_buffer(self.files[filename])
 
-        buffer = None
         if self.compiled and try_buffer:
             buffer_contents = self.run_editor_method('get_buffer', filename)
             if buffer_contents:
@@ -243,7 +232,7 @@ class UrtextProject:
 
         if existing_buffer_ids is None:
             if buffer.filename and buffer.filename in self.files:
-                existing_buffer_ids = [n.id for n in self.files[buffer.filename].get_ordered_nodes()]     
+                existing_buffer_ids = [n.id for n in self.nodes.values() if n.filename == buffer.filename]
 
         for n in buffer.nodes:
             if not self._resolve_duplicate_ids(n):
@@ -253,21 +242,16 @@ class UrtextProject:
         self.drop_buffer(buffer)     
         changed_ids = {}
         if existing_buffer_ids:
-            new_node_ids = [n.id for n in buffer.get_ordered_nodes()]
-            if len(existing_buffer_ids) == len(new_node_ids):
-                for index in range(0, len(existing_buffer_ids)):  # existing links are all we care about
-                    if existing_buffer_ids[index] == new_node_ids[index]:
+            new_nodes = buffer.get_ordered_nodes()
+            if len(existing_buffer_ids) == len(new_nodes):
+                for index, existing_buffer_id in enumerate(existing_buffer_ids):  # existing links are all we care about
+                    if existing_buffer_id == new_nodes[index].id:
                         continue  # id stayed the same
-                    else:
-                        if new_node_ids[index] in existing_buffer_ids:
-                            # proably only the order changed.
-                            # don't have to do anything
-                            continue
-                        else:
-                            # check each new id for similarity to the old one
-                            changed_ids[existing_buffer_ids[index]] = new_node_ids[index]
-                            # else:
-                            # TODO try to map old to new.
+                    if new_nodes[index].id in existing_buffer_ids: # proably only the order changed.
+                        continue
+                    changed_ids[existing_buffer_id] = new_nodes[index].id
+                    # TODO: check each new id for similarity to the old one
+                    # TODO try to map old to new.
 
         for node in buffer.nodes:
             self._add_node(node)
@@ -333,37 +317,8 @@ class UrtextProject:
             buffer = self.files[filename]
         contents = buffer._get_contents()
         for node in [n for n in buffer.nodes if not n.is_dynamic]:
-            rewrites = {}
             for link in node.links:
-                if link.is_file:
-                    if link.is_missing and link.exists():
-                        rewrites[link] = ''.join([
-                            syntax.file_link_opening_wrapper,
-                            link.path,
-                            syntax.link_closing_wrapper])
-                    if not link.exists():
-                        rewrites[link] = ''.join([
-                            syntax.missing_file_link_opening_wrapper,
-                            link.path,
-                            syntax.link_closing_wrapper,
-                            link.suffix])
-                    continue
-                if not link.node_id or link.project_name or link.bound:
-                    continue
-                suffix = ' >>' if link.is_pointer else ' >'
-                if link.node_id not in self.nodes:
-                    rewrites[link] = ''.join([
-                        syntax.missing_node_link_opening_wrapper,
-                        link.node_id,
-                        suffix])
-                elif link.is_missing and link.node_id in self.nodes:  
-                    rewrites[link] = ''.join([
-                        syntax.link_opening_wrapper,
-                        link.node_id,
-                        suffix])
-            if rewrites:
-                for old_link in rewrites:
-                    contents = contents.replace(old_link.matching_string, rewrites[old_link])
+                contents = link.verify(contents)
         return contents
 
     def _add_all_sub_tags(self):
@@ -398,7 +353,7 @@ class UrtextProject:
         if node and node.marked_dynamic and not node.is_dynamic:
             dynamic_contents = node.contents_with_contained_nodes().strip()
             if len(dynamic_contents) > 1 and dynamic_contents[:2] != "~?":
-                self._set_node_contents(node_id, dynamic_contents.replace('~', '~?', 1), buffer=buffer)
+                self._set_node_contents(node_id, dynamic_contents.replace(syntax.dynamic_marker, '~?', 1), buffer=buffer)
                 return False
         return True      
 
@@ -407,7 +362,7 @@ class UrtextProject:
         if duplicate_titled_nodes:
             for d in duplicate_titled_nodes:
                 old_id = d.id
-                resolution = d.resolve_id(existing_nodes=[f for f in self.nodes.values() if d.id != f.id ])
+                resolution = d.resolve_id(existing_nodes=[f for f in self.nodes.values() if d != f])
                 if resolution is False:
                     return False
                 del self.nodes[old_id]
@@ -415,15 +370,15 @@ class UrtextProject:
                 if old_id in self.project_settings_nodes:
                     self.project_settings_nodes.remove(old_id)
                     self.project_settings_nodes.append(resolution)
-
                 self.run_hook('on_node_id_changed', self, old_id, resolution)
-            if not node.resolve_id(existing_nodes=self.nodes.values()):
+            resolution = node.resolve_id(existing_nodes=self.nodes.values())            
+            if resolution is False or node.id in self.nodes:
                 return False
         return True
 
     def _check_conflicting_frames(self, new_frame):
         all_frames = self._get_all_frames()
-        target_ids, _ = self._get_all_targets()
+        target_ids, target_files = self._get_all_targets()
         for good_frame in all_frames:
             for target_id in new_frame.target_ids():
                 if target_id in target_ids:
@@ -634,7 +589,7 @@ class UrtextProject:
             contents = ''
 
         if contents_format:
-            new_node_contents = self._fill_template(contents_format, ensure_timestamp_unique=True)
+            new_node_contents = self._fill_template(contents_format, ensure_timestamp_unique=ensure_timestamp_unique)
             if '$cursor' in new_node_contents:
                 cursor_pos = len(new_node_contents.split('$cursor')[0])
                 new_node_contents = new_node_contents.replace('$cursor','')
@@ -679,16 +634,17 @@ class UrtextProject:
 
     def _get_frames(self, target_node=None, source_node=None, flags=None):        
         frames = []
-        for frame in self._get_all_frames():
-            if target_node and (target_node.id in frame.target_ids()):
+        all_frames = self._get_all_frames()
+        for frame in all_frames:
+            if target_node and (target_node.id in frame.target_ids()) and frame not in frames:
                 frames.append(frame)
             if source_node:
-                if frame.source_node.id == source_node.id:
+                if frame.source_node.id == source_node.id and frame not in frames:
                     frames.append(frame)
             for target in self.virtual_outputs:
-                if source_node and frame.source_node.id == source_node.id:
+                if source_node and frame.source_node.id == source_node.id and frame not in frames:
                     frames.append(frame)
-                elif not source_node:
+                elif not source_node and frame not in frames:
                     frames.append(frame)
             if flags:
                 if not isinstance(flags, list):
@@ -857,10 +813,12 @@ class UrtextProject:
         if self.setting_is_true('console_log'):
             print(str(filename) + ' : ' + message['top_message'])
 
-    def timestamp(self, date=None, as_string=False, existing_resolutions=[], ensure_unique=False):
+    def timestamp(self, date=None, as_string=False, existing_resolutions=None, ensure_unique=False):
         """ 
         Returns a timestamp in the format set in project_settings, or the default 
         """
+        if existing_resolutions is None:
+            existing_resolutions = []
         if date is None:
             date = datetime.datetime.now(datetime.timezone.utc).astimezone()
         ts_format_setting = self.get_single_setting('timestamp_format')
@@ -906,7 +864,7 @@ class UrtextProject:
                 for v in values:
                     node_as_value = v.node()
                     if node_as_value:
-                        pairs.append(utils.make_node_link(node_as_value.id))
+                        pairs.append(node_as_value.link())
                     else:
                         pairs.append(''.join([
                             k,
@@ -922,17 +880,22 @@ class UrtextProject:
             extensions = [e.lstrip('.') for e in extensions]
             self.run_editor_method('close_inactive', extensions=extensions)
 
-    def on_modified(self, filename, flags=[]):
-        if self.compiled and filename in self._get_included_files():
+    def on_modified(self, filename, flags=None):
+        if flags is None:
+            flags = []
+        included_files = self._get_included_files()
+        if self.compiled and filename in  included_files:
             self._compile_file(filename, flags=['-on_modified'] + flags)    
         self.close_inactive()
         self._sync_file_list()
 
     def visit_node(self, node_id):
-        self.run_hook('on_node_visited', self, node_id)
-        if self.compiled:
-            self.run_editor_method('status_message', ''.join([self.title(),' (compiled)']))
-            return self.visit_file(self.nodes[node_id].filename)
+        node = self.get_node(node_id)
+        if node: 
+            self.run_hook('on_node_visited', self, node)
+            if self.compiled:
+                self.run_editor_method('status_message', ''.join([self.title(),' (compiled)']))
+                return self.visit_file(node.filename)
 
     def visit_file(self, filename):
         return self.on_modified(filename, flags=['-file_visited'])
@@ -940,7 +903,6 @@ class UrtextProject:
     def _sync_file_list(self):
         self._add_paths_from_settings()
         self._verify_paths_from_settings()
-        # self._add_other_entry_points()
         self._drop_missing_files()
 
     def _drop_missing_files(self):
@@ -1022,7 +984,7 @@ class UrtextProject:
     def title_completions(self):
         return [
             (self.nodes[n].id,
-             ''.join(utils.make_node_link(self.nodes[n].id)))
+             ''.join(self.nodes[n].link()))
             for n in list(self.nodes)]
 
     def get_keys_with_frequency(self):
@@ -1181,8 +1143,8 @@ class UrtextProject:
             hook = getattr(call, hook_name, None)
             if hook and callable(hook):
                 hook(*args, **kwargs)
-        for selector in self.selectors.values():
-            hook = getattr(selector, hook_name, None)
+        for action in self.actions.values():
+            hook = getattr(action, hook_name, None)
             if hook and callable(hook):
                 hook(*args, **kwargs)
 
@@ -1202,13 +1164,16 @@ class UrtextProject:
         self._add_all_sub_tags()
         self._verify_links_globally()
 
-    def _compile_file(self, filename, flags=[]):
+    def _compile_file(self, filename, flags=None):
+        if flags is None:
+            flags = []
         modified_buffers = set()
         dynamic_nodes = set()
         buffer = self._parse_file(filename)
-        if buffer:
+        if buffer is not None:
             for node in buffer.nodes:
-                for frame in list(self._get_frames(target_node=node, source_node=node)):
+                frames = self._get_frames(target_node=node)
+                for frame in frames:
                     m_buffers, d_nodes = self._run_frame(frame, flags=flags, buffer=buffer)
                     modified_buffers.update(m_buffers)
                     dynamic_nodes.update(d_nodes)
@@ -1237,7 +1202,8 @@ class UrtextProject:
         output = frame.process(flags=flags)
         for target in frame.targets:
             if output not in [False, None]:
-                if target.is_node and not self.get_node(target.node_id):
+                if target.is_node and not self.get_node(target.node_id) or (
+                        buffer is not None and target.node_id not in [n.id for n in buffer.nodes]):
                     self.log_item(frame.source_node.filename, {
                         'top_message': ''.join([
                             'Dynamic node definition in ',
@@ -1340,7 +1306,7 @@ class UrtextProject:
             entry)
 
     def title(self):
-        title_setting = self.get_single_setting('project_title', use_project_list=False)
+        title_setting = self.get_single_setting('project_title')
         if title_setting:
             return title_setting.text
         return self.entry_point
@@ -1371,10 +1337,7 @@ class UrtextProject:
     def editor_insert_timestamp(self):
         self.run_editor_method('insert_text', self.timestamp(as_string=True))
 
-    def editor_copy_link_to_node(self,
-                                 position,
-                                 filename,
-                                 include_project=False):
+    def editor_copy_link_to_node(self, position, filename, include_project=False):
 
         self._parse_file(filename)
         if filename in self.files:
@@ -1429,12 +1392,12 @@ class UrtextProject:
 
         return call
 
-    def run_selector(self, selector_string):
-        selector_string = selector_string.replace(' ','_').lower()
-        if selector_string in self.selectors:
-            return self.selectors[selector_string].run()
-        if selector_string in self.project_list.selectors:
-            return self.project_list.selectors[selector_string].run()
+    def run_action(self, action_string):
+        action_string = action_string.replace(' ','_').lower()
+        if action_string in self.actions:
+            return self.actions[action_string].run()
+        if action_string in self.project_list.actions:
+            return self.project_list.actions[action_string].run()
 
     def run_call(self, call_name, *args, **kwargs):
         call = self.get_call(call_name)
@@ -1444,14 +1407,14 @@ class UrtextProject:
         op = call(self)
         return self.project_list.execute(op.run, *args, **kwargs)
 
-    def add_selector(self, selector):
-        propagated_selectors = self.get_setting_as_text('propagate_selectors')
-        propagate_all_selectors = '_all' in propagated_selectors
-        class selector(selector, UrtextSelector):
+    def add_action(self, action):
+        propagated_actions = self.get_setting_as_text('propagate_actions')
+        propagate_all_actions = '_all' in propagated_actions
+        class action(action, UrtextAction):
             pass
-        selector_instance = selector(self.project_list)
-        selector_instance.source_node = self.last_exec_node
-        self.selectors[selector_instance.selector_string] = selector_instance
-        if selector_instance.selector_string in propagated_selectors or propagate_all_selectors:
-            self.project_list.selectors[selector_instance.selector_string] = selector_instance
+        action_instance = action(self.project_list)
+        action_instance.source_node = self.last_exec_node
+        self.actions[action_instance.action_string] = action_instance
+        if action_instance.action_string in propagated_actions or propagate_all_actions:
+            self.project_list.actions[action_instance.action_string] = action_instance
         self.last_exec_node = None

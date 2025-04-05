@@ -26,7 +26,7 @@ class FileOutlineDropdown:
 
 				self.project_list.run_editor_method('show_panel', selections, callback, on_highlight=on_highlight)
 
-ThisProject.add_selector(FileOutlineDropdown)
+ThisProject.add_action(FileOutlineDropdown)
 %%
 
 	{ Documentation _

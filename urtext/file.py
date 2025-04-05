@@ -33,7 +33,7 @@ class UrtextFile(UrtextBuffer):
             return print('Cannot read file from storage %s' % self.filename)
         return full_file_contents
 
-    def write_buffer_contents(self, run_hook=False):
+    def write_buffer_contents(self, run_hook=False, re_parse=True):
         if run_hook: # for last modification only
             self.project.run_hook('on_write_file_contents', self)
         existing_contents = self._read_contents()
@@ -48,6 +48,6 @@ class UrtextFile(UrtextBuffer):
                 self.project.run_editor_method('refresh_files', self.filename)
         elif self.identifier:
             self.project.run_editor_method('set_buffer', None, self.contents, identifier=self.identifier)
-        self.project.drop_buffer(self)
-        self.project._parse_file(self.filename)
+        if re_parse:
+            self.project._parse_file(self.filename)
         return True

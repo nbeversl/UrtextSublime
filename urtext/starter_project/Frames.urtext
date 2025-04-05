@@ -43,7 +43,7 @@ The most basic frame includes:
 This example frame populates the node immediately below it, which lists all nodes in this starter project.
 
 [[
-.   TARGET(| Example Use of TARGET() and INCLUDE() >)
+.   TARGET(| Index >)
 .	Specifies the target output node for the resulting text.
 .	see | TARGET() > for more information
 
@@ -58,231 +58,18 @@ Nodes with dynamic output begin with the tilde character `~`. The tilde pushes a
 
 Without any other calls, the default output is a list of links to the included nodes, in alphabetical order by ID:
 
-	{~ Example Use of TARGET() and INCLUDE() _
-	  | (untitled) ^ Base Project Info: >
-	  | AND/OR >
-	  | About Urtext >
-	  | Accessing Nested Metadata in Frames >
-	  | Action Links ^ Links >
-	  | Action Links ^ WHEN() >
-	  | All Available Calls >
-	  | All Selectors >
-	  | All Selectors Documentation >
-	  | All Selectors in Scratch Buffer >
-	  | Arguments >
-	  | Asterisk >
-	  | Auto-Completions >
-	  | Base Project Info: >
-	  | Bold Text >
-	  | Bracket Node Wrappers >
-	  | Bracket Nodes >
-	  | Browse Metadata >
-	  | Bug list >
-	  | Bugs >
-	  | Bullet >
-	  | Bullet Nodes >
-	  | COLLECT() >
-	  | Calls >
-	  | Case-sensitivity >
-	  | Code to exec >
-	  | Compact Node >
-	  | Copy Link to Here >
-	  | Copy Link to Here With Project >
-	  | Cross-Project Linking >
-	  | Custom Themes >
-	  | Default Execution Times >
-	  | Delete this Node >
-	  | Disable Prompts for File Reload >
-	  | Dynamic IDs >
-	  | EXCLUDE() >
-	  | EXEC() >
-	  | Escaping Curly Brackets >
-	  | Escaping and Embedding >
-	  | Evaluation Order >
-	  | Example EXEC() output >
-	  | Example Python Code >
-	  | Example Timstamps >
-	  | Example Use of COLLECT() >
-	  | Example Use of INCLUDE and EXCLUDE >
-	  | Example Use of LIMIT() >
-	  | Example Use of MAX_LENGTH >
-	  | Example Use of SHOW() >
-	  | Example Use of SORT() >
-	  | Example Use of TEXT() >
-	  | Example Use of TREE() >
-	  | Example Use of self >
-	  | Example def >
-	  | Example of Linked Node as Metadata Output >
-	  | Example of Nested Metadata Output >
-	  | Example use of LOG >
-	  | Extended Metadata >
-	  | Extensible >
-	  | Features >
-	  | Features and Philosophy >
-	  | File Links >
-	  | File Naming >
-	  | File Nodes >
-	  | File Output >
-	  | Files >
-	  | Flags ^ INCLUDE() >
-	  | Flags ^ SORT() >
-	  | Flags ^ WHEN() >
-	  | Forward Links Browser >
-	  | Frames >
-	  | Freeform, Flexible Syntax >
-	  | From a Frame >
-	  | From the Urtext Selector List >
-	  | Full Screen / Distraction Free Mode >
-	  | Full Text Search >
-	  | Future Proof >
-	  | Generic >
-	  | Go to Frame >
-	  | HTML >
-	  | Hash >
-	  | Hiding Line Numbers >
-	  | Hiding Tabs >
-	  | Hovering the opening of a node could bring up a menu of selectors rather than needing a keypress >
-	  | INCLUDE() >
-	  | Insert Link to New Node >
-	  | Insert Timestamp >
-	  | Italic Text >
-	  | JSON >
-	  | LIMIT() >
-	  | LOG() >
-	  | Link Preview On Hover >
-	  | Link To Node .. >
-	  | Link to Character Location >
-	  | Links >
-	  | Lint Settings >
-	  | Local >
-	  | MAX_LENGTH() >
-	  | Making a File Link With a Dialog in Sublime Text >
-	  | Metadata >
-	  | Metadata Syntax >
-	  | Metadata dropdown should show timestamp if there is no value >
-	  | Missing Links >
-	  | Move the current file to another project >
-	  | Nates-MacBook-Pro.local >
-	  | Nav Back >
-	  | Nav Forward >
-	  | Navigation >
-	  | Nested EXEC()s >
-	  | Nested Metadata as Link >
-	  | New File Node >
-	  | Node Browser >
-	  | Node Browser All Projects >
-	  | Node IDs >
-	  | Node Link ^ Links >
-	  | Node Link ^ Urtext Syntax >
-	  | Node Output >
-	  | Node Titles >
-	  | Nodes >
-	  | Nodes as Metadata >
-	  | Nodes as Metadata Values >
-	  | On Link Hovered >
-	  | One node >
-	  | Open Home >
-	  | Open Urtext Website >
-	  | Open source >
-	  | Operators >
-	  | POP >
-	  | POP and PULL >
-	  | PULL >
-	  | Parameters ^ MAX_LENGTH() >
-	  | Parameters ^ SHOW() >
-	  | Parameters ^ TREE() >
-	  | Parameters ^ WHEN() >
-	  | Plain Text >
-	  | Plaintext >
-	  | Pointer >
-	  | Pop >
-	  | Possibly there should be a doc hover for each feature? idk >
-	  | Project Naming (Identification) >
-	  | Projects >
-	  | Projects, Structure and Compiling >
-	  | Propagating metadata to descendents >
-	  | Pull >
-	  | Python >
-	  | Pythonista : Use the "?" Urtext Button. Results will be updated in real time in the view behind the search field. To exit, tap outside the search field. >
-	  | RENAME_FILES() >
-	  | Random Node >
-	  | Remove Indent Guides >
-	  | Rename All Files >
-	  | Rename Single File >
-	  | SHOW() >
-	  | SORT() >
-	  | Save on Focus Lost >
-	  | Scott Fitzgerald >
-	  | Search >
-	  | Searching >
-	  | See also: ^ Metadata Syntax >
-	  | See also: ^ SHOW() >
-	  | Select Project >
-	  | Selector Links >
-	  | Selectors >
-	  | Short description here	asdfasd >
-	  | Shorthand ^ INCLUDE() >
-	  | Shorthand ^ TARGET() >
-	  | Shows an outline of the current file >
-	  | Snippet ^ Frames >
-	  | Snippet ^ Nested EXEC()s >
-	  | Space-Underscore >
-	  | Sublime : select                  from the command pallete. This provides an input panel on the lower edge of the screen. Dynamically search results will be shown in a scratch view as you enter search terms. Press ESC to cancel.  Results include links to >
-	  | Sublime Text Interface Tips >
-	  | Sublime Text Keybindings >
-	  | Syntax >
-	  | Syntax Highlighting >
-	  | System Keys >
-	  | TARGET() >
-	  | TEXT() >
-	  | TREE() >
-	  | Table of Contents >
-	  | Test output for RENAME_FILES >
-	  | The Beautiful and Damned >
-	  | Theming Metadata >
-	  | Things to do >
-	  | Time Zones ^ 1066 >
-	  | Time Zones ^ Timestamps >
-	  | Timestamp Wrappers >
-	  | Timestamps >
-	  | Title Key >
-	  | Tracking Node Dates and Times ^ 1066 >
-	  | Tracking Node Dates and Times ^ Timestamps >
-	  | Traverse Mode >
-	  | Urtext Selector List for Linking >
-	  | Urtext Starter Project >
-	  | Urtext Syntax >
-	  | Using Multiple Projects >
-	  | Using a Sublime Project for an Urtext Project >
-	  | Viewing Linked Relationships >
-	  | Virtual Targets >
-	  | WHEN() >
-	  | Web/HTTP(S) Links >
-	  | Word Wrap in Traverse Mode >
-	  | Wrap Selectino >
-	  | another node >
-	  | another node ... >
-	  | bold >
-	  | buffer _ >
-	  | clipboard _ >
-	  | console _ >
-	  | etc. >
-	  | example node >
-	  | inline_timestamp >
-	  | italic >
-	  | links_from >
-	  | links_to >
-	  | log _ >
-	  | newest_timestamp >
-	  | oldest_timestamp >
-	  | output >
-	  | output dest >
-	  | popup _ >
-	  | project_settings >
-	  | self >
-	  | target link >
-	  | test >
-	}
+| Index >>
 
 See Next: | INCLUDE() >
-
+See also:
+| INCLUDE() >>
+| LIMIT() >>
+| SORT() >>
+| SHOW() >>
+| TREE() >>
+| COLLECT() >>
+| TEXT() >>
+| MAX_LENGTH() >>
+| LOG() >>
+| EXEC() >>
+| WHEN() >>

@@ -26,12 +26,16 @@ class Navigation:
 	def forward(self):
 		if self.nav_index + 1 > (len(self.navigation) - 1):
 			return self.project_list.handle_message('index is already at the end')
-
 		self.nav_index += 1
 		project, next_node = self.navigation[self.nav_index]
-		self.project_list.set_current_project(project)
-		self.triggered_node_visit = True
-		self.project_list.current_project.open_node(next_node)
+		if project and next_node in project.nodes:
+			self.project_list.set_current_project(project)
+			self.triggered_node_visit = True
+			self.project_list.current_project.open_node(next_node)
+		else:
+			del self.navigation[self.nav_index]
+			self.nav_index -= 1
+			self.forward()
 
 	def reverse(self):
 		if not self.navigation:
@@ -41,11 +45,16 @@ class Navigation:
 		if self.nav_index == -1:
 			return self.project_list.handle_message('index is already at the beginning.')
 		project, previous_node = self.navigation[self.nav_index]
-		self.project_list.set_current_project(project)
-		self.triggered_node_visit = True
-		self.project_list.current_project.open_node(previous_node)
+		if project and previous_node in project.nodes:
+			self.project_list.set_current_project(project)
+			self.triggered_node_visit = True
+			self.project_list.current_project.open_node(previous_node)
+		else:
+			del self.navigation[self.nav_index]
+			self.nav_index += 1
+			self.reverse()
 
-	def on_node_visited(self, project, node_id):
+	def on_node_visited(self, project, node):
 		if self.triggered_node_visit:
 			self.triggered_node_visit = False
 			return
@@ -53,13 +62,12 @@ class Navigation:
 		if self.navigation:
 			last_project, last_id = self.navigation[self.nav_index]
 			# don't re-remember consecutive duplicate links
-			if (-1 < self.nav_index < len(self.navigation) - 1 and node_id == last_id): 
+			if (-1 < self.nav_index < len(self.navigation) - 1 and node.id == last_id): 
 				return
 
-		# add the newly opened file as the new "HEAD"
 		self.nav_index += 1
 		del self.navigation[self.nav_index:]
-		self.navigation.append((project, node_id))
+		self.navigation.append((project, node.id))
 
 	def before_file_deleted(self, project, filename):
 		for item in list(self.navigation):
@@ -67,9 +75,9 @@ class Navigation:
 			if filename in project.files and node_id in project.files[filename].node_ids():				
 				if self.navigation.index(item) <= self.nav_index:
 					self.nav_index -= 1
-				self.navigation.remove(item)
+				del self.navigation[self.nav_index]
 
-	def on_node_id_changed(self, project, old_id, new_node_id):
+	def on_node_id_changed(self, project, old_id,  new_node_id):
 		for index, item in enumerate(self.navigation):
 			nav_project = item[0]
 			old_nav_id = item[1]
@@ -97,6 +105,17 @@ class Navigation:
 				if action == 'open_any':
 					filename = list(project.files.keys())[0]
 					project.run_editor_method('open_file_to_position', filename)
+
+	def on_file_moved_to_other_project(self, source_project, destination_project, old_filename, new_filename):
+		if new_filename in destination_project.files:
+			for index, item in enumerate(self.navigation):
+				old_nav_project = item[0]
+				nav_node_id = item[1]
+				if old_filename not in old_nav_project.files:
+					nodes = destination_project.files[new_filename].nodes
+					for node in nodes:
+						if node.filename == new_filename and node.id == nav_node_id:
+							self.navigation[index] = (destination_project, nav_node_id)
 
 class NavigateForward:
 
@@ -143,9 +162,9 @@ class NavigateToPreviousNode:
 					return self.current_project().open_node(node.id)
 
 ProjectList.add_call(Navigation)
-ThisProject.add_selector(NavigateForward)
-ThisProject.add_selector(NavigateBackward)
-ThisProject.add_selector(NavigateToNextNode)
-ThisProject.add_selector(NavigateToPreviousNode)
+ThisProject.add_action(NavigateForward)
+ThisProject.add_action(NavigateBackward)
+ThisProject.add_action(NavigateToNextNode)
+ThisProject.add_action(NavigateToPreviousNode)
 
 %%

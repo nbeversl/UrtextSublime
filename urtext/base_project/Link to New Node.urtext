@@ -16,7 +16,7 @@ class InsertLinkToNewNodeCommand:
 		# TODO insert notification
 
 
-ThisProject.add_selector(InsertLinkToNewNodeCommand)
+ThisProject.add_action(InsertLinkToNewNodeCommand)
 %%
 
 	{ Documentation _

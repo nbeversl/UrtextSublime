@@ -30,7 +30,7 @@ Metadata may appear anywhere. They attach to their containing (parent) node, rem
 
 		}
 
-	  | Node Links > are evaluated in metadata.
+	  | Node Link ^ Links > are evaluated in metadata.
 	  See also | Nodes as Metadata >
 	}
 

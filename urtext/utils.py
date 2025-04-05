@@ -34,12 +34,12 @@ def make_project_link(project_name):
         '"%s"' % project_name
         ])
 
-def make_selector_link(selector_string):
+def make_action_link(action_string):
     return ''.join([
         syntax.link_opening_pipe,
         syntax.node_link_modifiers['bound'],
         ' ',
-        selector_string,
+        action_string,
         syntax.link_closing_wrapper     
         ])
 
@@ -93,7 +93,7 @@ def get_all_targets_from_string(string, node, project_list):
         target = UrtextTarget(link.matching_string)
         target.is_link = True
         target.link = link
-        target.project_name = link.project_name
+        target.containing_project_name = link.containing_project_name
         link.containing_node = node
         target.is_node = link.is_node
         target.filename = link.filename
@@ -120,7 +120,7 @@ def get_all_links_from_string(string, node, project_list, include_http=False):
     replaced_contents = string
     for match in syntax.cross_project_link_with_node_c.finditer(replaced_contents):
         link = UrtextLink(match.group(), node, project_list)
-        link.project_name = match.group(2)
+        link.target_project_name = match.group(2)
         link.node_id = match.group(7)
         link.is_node = True
         if match.group(9):
@@ -225,8 +225,46 @@ def get_link_from_position_in_string(string, string_pos, node, project_list, inc
                 return link
         return link
 
-def strip_errors(contents):
-    matches = syntax.urtext_message_c.findall(contents)
-    for match in matches:
-        contents = contents.replace(match, '')
+def strip_nested_links(title):
+    stripped_title = title
+    for nested_link in syntax.node_link_or_pointer_c.finditer(title):
+        stripped_title = title.replace(nested_link.group(), '')
+    return stripped_title
+
+def strip_dynamic_markers(contents):
+    if len(contents) and contents[0] == '~':
+        contents = contents[1:]
+        if len(contents) and contents[0] == '?':
+            contents = contents[1:]
     return contents
+
+def strip_embedded_syntaxes(contents):
+    replaced_contents = contents
+    stripped_contents = contents
+    ranges = []
+    for e in syntax.embedded_syntax_c.finditer(contents):
+        contents = e.group()
+        stripped_contents = stripped_contents.replace(contents, '')
+        replaced_contents = replaced_contents.replace(contents, ' '*len(contents))
+        ranges.append([e.start(), e.end()])
+    return ranges, stripped_contents, replaced_contents
+
+def strip_frames(contents):
+    stripped_contents = contents
+    for m in syntax.frame_c.finditer(contents):
+        stripped_contents = stripped_contents.replace(m.group(),'', 1)
+    return stripped_contents
+
+def strip_metadata(contents):
+    stripped_contents = contents
+    for m in syntax.metadata_entry_with_or_without_values_c.finditer(contents):
+        stripped_contents = stripped_contents.replace(m.group(),'', 1)
+    return stripped_contents
+
+def strip_urtext_syntax(contents):
+    ranges, stripped_contents = strip_backtick_escape(contents) 
+    stripped_contents = strip_whitespace_anchors(stripped_contents)
+    ranges, stripped_contents, replaced_contents = utils.strip_embedded_syntaxes(stripped_contents)
+
+    return contents
+

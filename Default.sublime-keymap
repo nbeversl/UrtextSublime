@@ -19,7 +19,7 @@
     }, 
     {
         "args": {
-            "urtext_call": "all_selectors"
+            "urtext_call": "show_all_actions"
         }, 
         "keys": [
             "ctrl+shift+z"
@@ -199,7 +199,7 @@
     }, 
     {
         "args": {
-            "urtext_call": "pop_node"
+            "urtext_call": "pop"
         }, 
         "keys": [
             "ctrl+shift+alt+right"
@@ -217,7 +217,7 @@
     }, 
     {
         "args": {
-            "urtext_call": "pull_node"
+            "urtext_call": "pull"
         }, 
         "keys": [
             "ctrl+shift+alt+left"

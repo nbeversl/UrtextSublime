@@ -1,0 +1,175 @@
+Export _ #call
+
+[[  >(| export example >)
++(| Urtext Starter Project >)
+EXPORT(root =Urtext Starter Project)
+
+]]
+
+	{~ export example _
+
+	  Urtext Starter Project
+
+	  !---------------------------------------------------
+	  IF YOU ARE SEEING THIS TEXT, YOU ARE VIEWING THE STARTER PROJECT IN THE URTEXT LIBRARY. Do not modify it here; instead, copy it to a new project using either "Urtext: Create Starter Project" in the Sublime Command palette or the "Create Starter Project" action from within Urtext.
+	  !-----------------------------------------------------
+
+	  Urtext /ˈʊrtekst/ is an open-source plaintext library for writing, research, documentation, knowledge bases, journaling, Zettelkasten, project/personal organization, note taking, a lightweight database substitute, or any other writing or information management that can be done in text format.
+
+	  This starter project demonstrates Urtext with examples to get you going. Add, delete or modify any parts to make the system you need.
+
+	  To **open a link**, hold Ctrl-Shift and click it, or put the cursor on it and press `Ctrl-Shift-/`
+
+	  To optimize Sublime Text for Urtext see [ MISSING LINK :  Sublime Text Settings and Tips ]
+	  You can look up features and terms in the [ MISSING LINK :  Index ]
+
+	  Navigating the Starter Project
+
+	  Browsing Nodes
+
+	  Sublime Text's dropdown will browse all nodes in the project.
+
+	  Press `Control - Shift - E`. Type part of a node's title to locate, and Enter to open it.
+
+	  Nodes sort by title.
+	  This can be modified using the `node_browser_sort` key in [ MISSING LINK :  project_settings ] .
+
+	  Key bindings for Sublime Text are listed when helpful. These can be modified using the Sublime Text keymap files (see https://www.sublimetext.com/docs/key_bindings.html ) or from Urtext using the[ MISSING LINK :  KEY_BINDINGS_TO_JSON() ]  call.
+
+	  Navigation
+
+	  To return to this home node at any time, press the Home Key, `Ctrl + Shift + H`.
+	  Your navigation path can be recalled with `Ctrl + Shift + <` (back) and `Ctrl + Shift + >` (forward).
+
+	  Basics
+	  | Files >>
+	  | Projects >>
+	  | Nodes >>
+	  | Urtext Syntax >>
+
+	  Table of Contents~
+	  [ MISSING LINK :  Urtext Starter Project ]
+	  .├── [ MISSING LINK :  Navigating the Starter Project ]
+	  .│   ├── [ MISSING LINK :  Browsing Nodes ]
+	  .│   └── [ MISSING LINK :  Navigation ]
+	  .├── [ MISSING LINK :  Basics ]
+	  .│   ├── [ MISSING LINK :  Files ]
+	  .│   ├── [ MISSING LINK :  Projects ]
+	  .│   ├── [ MISSING LINK :  Nodes ]
+	  .│   │   ├── [ MISSING LINK :  File Nodes ]
+	  .│   │   └── [ MISSING LINK :  Bracket Nodes ]
+	  .│   │       ├── [ MISSING LINK :  One node ]
+	  .│   │       │   └── [ MISSING LINK :  another node ]
+	  .│   │       │       └── [ MISSING LINK :  another node ... ]
+	  .│   │       │           └── [ MISSING LINK :  etc. ]
+	  .│   │       ├── [ MISSING LINK :  Node Titles ]
+	  .│   │       └── [ MISSING LINK :  Node IDs ]
+	  .│   └── [ MISSING LINK :  Urtext Syntax ]
+	  .│       ├── [ MISSING LINK :  Bracket Node Wrappers ]
+	  .│       ├── [ MISSING LINK :  Space-Underscore ]
+	  .│       ├── [ MISSING LINK :  Node Link ^ Urtext Syntax ]
+	  .│       ├── [ MISSING LINK :  Pointer ]
+	  .│       ├── [ MISSING LINK :  Timestamp Wrappers ]
+	  .│       ├── [ MISSING LINK :  Metadata ]
+	  .│       ├── [ MISSING LINK :  Bold Text ]
+	  .│       ├── [ MISSING LINK :  Italic Text ]
+	  .│       └── [ MISSING LINK :  Whitespace Anchor ]
+	  .├── [ MISSING LINK :  Links ]
+	  .│   ├── [ MISSING LINK :  Node Link ^ Links ]
+	  .│   │   └── [ MISSING LINK :  Urtext Action List for Linking ]
+	  .│   ├── [ MISSING LINK :  How to Open Links ]
+	  .│   ├── [ MISSING LINK :  Dynamic IDs ]
+	  .│   ├── [ MISSING LINK :  Link to Character Location ]
+	  .│   ├── [ MISSING LINK :  File Link ]
+	  .│   │   └── [ MISSING LINK :  Making a File Link With a Dialog in Sublime Text ]
+	  .│   ├── [ MISSING LINK :  Web/HTTP(S) Link ]
+	  .│   ├── [ MISSING LINK :  Missing Link ]
+	  .│   ├── [ MISSING LINK :  Trigger Link ]
+	  .│   ├── [ MISSING LINK :  Action Link ]
+	  .│   └── [ MISSING LINK :  Cross-Project Link ]
+	  .├── [ MISSING LINK :  Metadata Syntax ]
+	  .│   ├── [ MISSING LINK :  Keys ]
+	  .│   ├── [ MISSING LINK :  Assigner ]
+	  .│   ├── [ MISSING LINK :  Values ]
+	  .│   │   └── [ MISSING LINK :  Value Timestamps ]
+	  .│   ├── [ MISSING LINK :  Value Separator ]
+	  .│   ├── [ MISSING LINK :  Entry Terminator ]
+	  .│   ├── [ MISSING LINK :  Hash ]
+	  .│   ├── [ MISSING LINK :  Propagating metadata to descendents ]
+	  .│   ├── [ MISSING LINK :  Case-sensitivity ]
+	  .│   ├── [ MISSING LINK :  System Keys ]
+	  .│   │   ├── [ MISSING LINK :  inline_timestamp ]
+	  .│   │   ├── [ MISSING LINK :  oldest_timestamp ]
+	  .│   │   ├── [ MISSING LINK :  newest_timestamp ]
+	  .│   │   ├── [ MISSING LINK :  links_from ]
+	  .│   │   ├── [ MISSING LINK :  links_to ]
+	  .│   │   ├── [ MISSING LINK :  bold ]
+	  .│   │   └── [ MISSING LINK :  italic ]
+	  .│   ├── [ MISSING LINK :  Title Key ]
+	  .│   ├── [ MISSING LINK :  Auto-Completions ]
+	  .│   └── [ MISSING LINK :  See also: ^ Metadata Syntax ]
+	  .│       ├── [ MISSING LINK :  Nodes as Metadata ]
+	  .│       │   ├── [ MISSING LINK :  The Beautiful and Damned ]
+	  .│       │   └── [ MISSING LINK :  Scott Fitzgerald ]
+	  .│       │       ├── [ MISSING LINK :  Short description here	asdfasd ]
+	  .│       │       ├── [ MISSING LINK :  Accessing Nested Metadata in Frames ]
+	  .│       │       │   └── [ MISSING LINK :  Example of Nested Metadata Output ]
+	  .│       │       └── [ MISSING LINK :  Nested Metadata as Link ]
+	  .│       │           └── [ MISSING LINK :  Example of Linked Node as Metadata Output ]
+	  .│       ├── [ MISSING LINK :  Extended Metadata ]
+	  .│       └── [ MISSING LINK :  Theming Metadata ]
+	  .├── [ MISSING LINK :  Frames ]
+	  .│   ├── [ MISSING LINK :  Calls ]
+	  .│   ├── [ MISSING LINK :  Syntax ]
+	  .│   ├── [ MISSING LINK :  Default Execution Times ]
+	  .│   ├── [ MISSING LINK :  Snippet ^ Frames ]
+	  .│   ├── [ MISSING LINK :  Index ]
+	  .│   ├── [ MISSING LINK :  INCLUDE() ]
+	  .│   │   ├── [ MISSING LINK :  Operators ]
+	  .│   │   ├── [ MISSING LINK :  AND/OR ]
+	  .│   │   ├── [ MISSING LINK :  EXCLUDE() ]
+	  .│   │   ├── [ MISSING LINK :  Evaluation Order ]
+	  .│   │   ├── [ MISSING LINK :  Example Use of INCLUDE and EXCLUDE ]
+	  .│   │   │   └── [ MISSING LINK :  All Available Calls ]
+	  .│   │   ├── [ MISSING LINK :  Shorthand ^ INCLUDE() ]
+	  .│   │   ├── [ MISSING LINK :  Asterisk ]
+	  .│   │   └── [ MISSING LINK :  Flags ^ INCLUDE() ]
+	  .│   ├── [ MISSING LINK :  LIMIT() ]
+	  .│   │   └── [ MISSING LINK :  Example Use of LIMIT() ]
+	  .│   ├── [ MISSING LINK :  SORT() ]
+	  .│   │   ├── [ MISSING LINK :  Example Use of SORT() ]
+	  .│   │   ├── [ MISSING LINK :  Arguments ]
+	  .│   │   └── [ MISSING LINK :  Flags ^ SORT() ]
+	  .│   ├── [ MISSING LINK :  SHOW() ]
+	  .│   │   ├── [ MISSING LINK :  Parameters ^ SHOW() ]
+	  .│   │   ├── [ MISSING LINK :  Example Use of SHOW() ]
+	  .│   │   └── [ MISSING LINK :  See also: ^ SHOW() ]
+	  .│   ├── [ MISSING LINK :  TREE() ]
+	  .│   │   ├── [ MISSING LINK :  Parameters ^ TREE() ]
+	  .│   │   └── [ MISSING LINK :  Example Use of TREE() ]
+	  .│   ├── [ MISSING LINK :  COLLECT() ]
+	  .│   │   └── [ MISSING LINK :  Example Use of COLLECT() ]
+	  .│   ├── [ MISSING LINK :  TEXT() ]
+	  .│   │   └── [ MISSING LINK :  Example Use of TEXT() ]
+	  .│   ├── [ MISSING LINK :  MAX_LENGTH() ]
+	  .│   │   ├── [ MISSING LINK :  Parameters ^ MAX_LENGTH() ]
+	  .│   │   └── [ MISSING LINK :  Example Use of MAX_LENGTH ]
+	  .│   ├── [ MISSING LINK :  LOG() ]
+	  .│   │   └── [ MISSING LINK :  Example use of LOG ]
+	  .│   ├── [ MISSING LINK :  EXEC() ]
+	  .│   │   ├── [ MISSING LINK :  Example Python Code ]
+	  .│   │   ├── [ MISSING LINK :  Example EXEC() output ]
+	  .│   │   └── [ MISSING LINK :  Nested EXEC()s ]
+	  .│   │       ├── [ MISSING LINK :  example node ]
+	  .│   │       └── [ MISSING LINK :  Snippet ^ Nested EXEC()s ]
+	  .│   └── [ MISSING LINK :  WHEN() ]
+	  .│       ├── [ MISSING LINK :  Parameters ^ WHEN() ]
+	  .│       ├── [ MISSING LINK :  Flags ^ WHEN() ]
+	  .│       └── [ MISSING LINK :  Action Links Example ]
+	  .│           ├── [ MISSING LINK :  Code to exec ]
+	  .│           └── [ MISSING LINK :  Open Urtext Website ]
+	  .└── [ MISSING LINK :  project_settings ]
+	  .    └── [ MISSING LINK :  Lint Settings ]
+
+	  [[>(@self) +([ MISSING LINK :  Urtext Starter Project ] ) TREE(*)]] }
+

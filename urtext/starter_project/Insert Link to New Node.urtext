@@ -1,0 +1,8 @@
+Insert Link to New Node _ #action
+
+|: Insert Link to New Node >
+
+Creates a link to a new node and simultaneously creates that node in a new buffer.
+The link will be initially untitled but will update when then node is changed. (see | Dynamic IDs >)
+
+Default Sublime Text Keybinding: 'Ctrl+Shift+  '

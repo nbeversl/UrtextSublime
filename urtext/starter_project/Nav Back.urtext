@@ -1,0 +1,8 @@
+Nav Back _ #action
+
+Navigates to the previous visited node, if any.
+
+|: Nav Back >
+
+Default Sublime Text Keybinding: `ctrl+shift+,`
+All actions can be called three ways. See | Actions >

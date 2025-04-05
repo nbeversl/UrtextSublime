@@ -1,0 +1,9 @@
+Projects _
+
+A project is a collection of Urtext | Files >.
+
+Urtext does not depend on organization at the filesystem level and looks for no subfolder scheme. To use files organized in folders, specify which folders to include using the `paths` key in | project_settings >. Moving files among included folders has no effect on their function or behavior in Urtext.
+
+A useful and user-friendly project title can be set with the `project_title` key in | project_settings >. Otherwise, the title of the project is the path to its entry point.
+
+See next: | Nodes >

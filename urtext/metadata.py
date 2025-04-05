@@ -314,7 +314,12 @@ class NodeMetadata:
     def get_oldest_timestamp(self):
         value = self.get_first_value('_oldest_timestamp')
         if value:
-            return value.timestamp                  
+            return value.timestamp
+
+    def get_newest_timestamp(self):
+        value = self.get_first_value('_newest_timestamp')
+        if value:
+            return value.timestamp                    
 
     def log(self):
         for entry in self.entries():

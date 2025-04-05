@@ -1,0 +1,9 @@
+Copy Link to Here With Project _ #action
+
+Copies a link to the node containing the cursor, including the project (see | Cross-Project Link >), to the clipboard.
+
+|: Copy Link to Here With Project >
+Default Sublime Text Keybinding: `ctrl+shift+super+c`
+
+All actions can be called three ways. See | Actions >
+

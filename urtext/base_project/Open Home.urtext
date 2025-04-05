@@ -10,5 +10,5 @@ class OpenHome:
 	def run(self):
 		self.current_project().open_home()
 
-ThisProject.add_selector(OpenHome)
+ThisProject.add_action(OpenHome)
 %%

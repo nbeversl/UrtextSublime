@@ -9,5 +9,5 @@ class ShowBaseProject:
 			base_project = self.project_list.get_project(self.project_list.base_project_path)
 			base_project.visible = True
 
-ThisProject.add_selector(ShowBaseProject)
+ThisProject.add_action(ShowBaseProject)
 %%

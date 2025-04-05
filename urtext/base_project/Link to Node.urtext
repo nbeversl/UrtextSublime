@@ -2,7 +2,7 @@ Link To Node _
 %%Python
 class LinkToNode:
 
-	name = 'Link To Node ..'
+	name = 'Link To Node'
 	thread_safe = True
 
 	def run(self):
@@ -16,5 +16,5 @@ class LinkToNode:
 
 		self.project_list.run_editor_method('show_panel', self.selections, callback)
 
-ThisProject.add_selector(LinkToNode)
+ThisProject.add_action(LinkToNode)
 %%

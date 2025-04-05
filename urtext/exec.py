@@ -62,5 +62,5 @@ class Exec:
                     traceback.format_exc(),
                     '`'                    
                 ])
-        return text_contents + make_node_link(node_to_exec.id) + ' : no Python code found\n'
+        return text_contents + node_to_exec.link() + ' : no Python code found\n'
         

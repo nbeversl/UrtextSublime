@@ -1,0 +1,9 @@
+Next Node _ #action
+
+Within a buffer, moves the cursor to and centers the next node (if any).
+
+|: Next Node >
+
+Default Sublime Text Keybinding: `ctrl+shift+n`
+See also | Previous Node >
+All actions can be called three ways. See | Actions >

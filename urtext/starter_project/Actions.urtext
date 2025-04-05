@@ -1,0 +1,49 @@
+Actions _
+
+Actions are units of functionality that can be called on demand.
+They can be accessed three ways:
+
+- from the Action List, `Ctrl + Shift + z` (default)
+- from Keybindings
+- with the | Action Link > syntax
+
+Below is a an index of all actions links included with Urtext. You can also write your own.
+
+	{~ All Actions _
+	  | All Actions in Scratch Buffer >
+	  | Browse Backlinks >
+	  | Browse Forward Links >
+	  | Browse Metadata >
+	  | Copy Link to Here >
+	  | Copy Link to Here With Project >
+	  | Create Starter Project >
+	  | Delete This Buffer >
+	  | File Outline >
+	  | Go to Frame >
+	  | Insert Link to File >
+	  | Insert Link to New Node >
+	  | Insert Timestamp >
+	  | Link Preview On Hover >
+	  | Link To Node >
+	  | Move the current file to another project >
+	  | Nav Back >
+	  | Nav Forward >
+	  | New File Node >
+	  | Next Node >
+	  | Node Browser >
+	  | Node Browser All Projects >
+	  | Pop >
+	  | Previous Node >
+	  | Pull >
+	  | Random Node >
+	  | Rename All Files >
+	  | Rename Single File >
+	  | Search Patterns >
+	  | Select Project >
+	  | Show All Actions >
+	  | Show Base Project >
+	  | Wrap Line >
+	  | Wrap Selection >
+
+	  [[>(@self) +(#action)]]}
+

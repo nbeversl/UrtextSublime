@@ -1,0 +1,12 @@
+Pull _ #action
+
+Pulls the node referenced by a | Pointer > into the current buffer, replacing the pointer with the node.
+Position the cursor on the pointer.
+
+|: Pull >
+
+To reverse this, see | Pop >.
+
+Default Sublime Text Keybinding: `Shift + Ctrl + Super + right-arrow`
+See also | Pointer > and | Pop >
+All actions can be called three ways. See | Actions >

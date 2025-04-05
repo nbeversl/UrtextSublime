@@ -49,13 +49,6 @@ node_link_modifier_group = r'(' + '|'.join([
 file_link_modifier_group = r'(' + re.escape(file_link_modifiers['missing']) + ')?'
 link_closing_wrapper = ' >'
 pointer_closing_wrapper = ' >>'
-urtext_message_opening_wrapper = '<!'
-urtext_message_closing_wrapper = '!>'
-urtext_message = ''.join([
-    urtext_message_opening_wrapper,
-    '.*?',
-    urtext_message_closing_wrapper
-    ])
 timestamp_opening_wrapper = '<'
 timestamp_closing_wrapper = '>'
 timestamp = r''.join([
@@ -68,8 +61,8 @@ metadata_closing_marker = ';'
 metadata_separator = '-'
 metadata_separator_syntax = ''.join([space, metadata_separator, space])
 other_project_link_prefix = '=>'
-dynamic_def_opening_wrapper = '[['
-dynamic_def_closing_wrapper = ']]'
+frame_opening_wrapper = '[['
+frame_closing_wrapper = ']]'
 resolution_identifier = ' ^ '
 virtual_target_marker = '@'
 file_link_opening_wrapper = ''.join([
@@ -86,24 +79,24 @@ node_link_opening_wrapper_match = r''.join([
     ])
 # Base Patterns
 closing_wrapper = r'(?<!\\)' + re.escape(node_closing_wrapper)
-dd_flag = '((-[\w_]+)|\*)(\s|$)'
-dd_flags = r''.join([
+call_flag = '((-[\w_]+)|\*)(\s|$)'
+call_flags = r''.join([
     '(^|\s)(',
-    dd_flag,
+    call_flag,
     ')+'
     ])
 hash_key = r'#'
-dd_key = r'([^\'\-' + hash_key + virtual_target_marker + '][\w\._]+)'
-dd_key_with_opt_flags = r''.join([
-    dd_key,
+call_key = r'([^\'\-' + hash_key + virtual_target_marker + '][\w\._]+)'
+call_key_with_opt_flags = r''.join([
+    call_key,
     '\s*?',
     '(',
-    dd_flags,
+    call_flags,
     ')?',
     ])
-dynamic_def = r'(?:\[\[)([^\]]*?)(?:\]\])'
+frame = r'(?:\[\[)([^\]]*?)(?:\]\])'
 dynamic_marker = '~'
-dynamic_def_missing_marker = '?'
+missing_frame_marker = '~?'
 embedded_syntax_open = r'%%\w+'
 embedded_syntax_close = r'%%'+pattern_break
 format_key = r'\$_?[\.A-Za-z0-9_-]*'
@@ -124,7 +117,14 @@ metadata_entry = r''.join([
     metadata_entry_modifiers,
     metadata_key,
     metadata_assigner,
-    metadata_values
+    metadata_values,
+    ])
+
+metadata_entry_with_or_without_values = ''.join([
+    metadata_entry_modifiers,
+    metadata_key,
+    metadata_assigner,
+    '(', metadata_values, ')*'
     ])
 metadata_key_only = r''.join([
     metadata_entry_modifiers, 
@@ -147,6 +147,7 @@ disallowed_title_characters = [
     r'\r',
     r'`',
     r'\^',
+    r'\$',
     r'\[\[',
     r'\]\]',
     r'#',
@@ -179,7 +180,7 @@ hash_meta = r''.join([
     timestamp,
     ')?'
     ])
-dd_hash_meta = hash_key + r'[A-Z,a-z].*'
+call_hash_meta = hash_key + r'[A-Z,a-z].*'
 node_link_or_pointer = r''.join([
     link_opening_pipe_escaped,
     node_link_modifier_group,
@@ -194,7 +195,6 @@ node_link = r''.join([
     '(', id_pattern, ')',
     '(\s>)(\:\d{1,99})?(?!>)',
     ])
-
 
 cross_project_link_with_node = r''.join ([
     project_link,
@@ -249,7 +249,7 @@ metadata_ops = r'(' + r'|'.join([
             metadata_op_contains,
             metadata_op_is_like,
         ]) + r')'
-dd_key_op_value = r''.join([
+call_key_op_value = r''.join([
     '(',
     metadata_key,
     ')',
@@ -267,11 +267,11 @@ bold_text_c = re.compile(bold_text)
 
 closing_wrapper_c = re.compile(closing_wrapper)
 cross_project_link_with_node_c = re.compile(cross_project_link_with_node)
-dd_flags_c = re.compile(dd_flags)
-dd_hash_meta_c = re.compile(dd_hash_meta)
-dd_key_with_opt_flags = re.compile(dd_key_with_opt_flags)
-dd_key_op_value_c = re.compile(dd_key_op_value)
-dynamic_def_c = re.compile(dynamic_def, flags=re.DOTALL)
+call_flags_c = re.compile(call_flags)
+call_hash_meta_c = re.compile(call_hash_meta)
+call_key_with_opt_flags = re.compile(call_key_with_opt_flags)
+call_key_op_value_c = re.compile(call_key_op_value)
+frame_c = re.compile(frame, flags=re.DOTALL)
 dynamic_marker_c = re.compile(dynamic_marker)
 file_link_c = re.compile(file_link)
 embedded_syntax_open_c = re.compile(embedded_syntax_open, flags=re.DOTALL)
@@ -284,6 +284,7 @@ hash_meta_c = re.compile(hash_meta)
 italic_text_c = re.compile(italic_text)
 metadata_arg_delimiter_c = re.compile(metadata_arg_delimiter)
 metadata_entry_c = re.compile(metadata_entry, flags=re.DOTALL)
+metadata_entry_with_or_without_values_c = re.compile(metadata_entry, flags=re.DOTALL)
 metadata_key_only_c = re.compile(metadata_key_only, flags=re.DOTALL)
 metadata_ops_c = re.compile(metadata_ops)
 metadata_ops_or_c = re.compile(metadata_ops_or)
@@ -305,7 +306,6 @@ project_link_c = re.compile(project_link, flags=re.DOTALL)
 subnode_regexp_c = re.compile(sub_node, flags=re.DOTALL)
 timestamp_c = re.compile(timestamp)
 title_regex_c = re.compile(title_pattern)
-urtext_message_c =re.compile(urtext_message, flags=re.DOTALL)
 virtual_target_match_c = re.compile(virtual_target, flags=re.DOTALL)
 whitespace_anchor_c = re.compile(whitespace_anchor, flags=re.M)
 metadata_replacements = re.compile("|".join([

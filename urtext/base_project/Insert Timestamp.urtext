@@ -9,5 +9,5 @@ class InsertTimestampCommand:
 	def run(self):
 		self.project_list.current_project.editor_insert_timestamp()
 
-ThisProject.add_selector(InsertTimestampCommand)
+ThisProject.add_action(InsertTimestampCommand)
 %%

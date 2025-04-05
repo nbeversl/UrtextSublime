@@ -1,0 +1,8 @@
+Copy Link to Here _ #action
+
+Copies a link to the node containing the cursor, to the clipboard.
+
+|: Copy Link to Here >
+
+Default Sublime Text Keybinding: `Ctrl+Shift+c`
+All actions can be called three ways. See | Actions >

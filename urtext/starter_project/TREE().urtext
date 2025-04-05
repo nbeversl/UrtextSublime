@@ -27,59 +27,27 @@ Example:
 Output:
 
 	{~ Example Use of TREE() _
-	  | (untitled) ^ Base Project Info: >
 	  | AND/OR >
 	  | About Urtext >
-	  ├── | Features and Philosophy >
-	  │   ├── | Plain Text >
-	  │   ├── | Freeform, Flexible Syntax >
-	  │   ├── | Open source >
-	  │   ├── | Extensible >
-	  │   ├── | Future Proof >
-	  │   └── | Local >
-	  └── | Features >
+	  .├── | Features and Philosophy >
+	  .│   ├── | Plain Text >
+	  .│   ├── | Freeform, Flexible Syntax >
+	  .│   ├── | Open source >
+	  .│   ├── | Extensible >
+	  .│   ├── | Future Proof >
+	  .│   └── | Local >
+	  .└── | Features >
 	  | Accessing Nested Metadata in Frames >
-	  └── | Example of Nested Metadata Output >
+	  .└── | Example of Nested Metadata Output >
 	  | Action Links ^ Links >
 	  | Action Links ^ WHEN() >
-	  ├── | Code to exec >
-	  └── | Open Urtext Website >
+	  .├── | Code to exec >
+	  .└── | Open Urtext Website >
 	  | All Available Calls >
-	  | All Selectors >
-	  | All Selectors Documentation >
-	  ├── | Rename Single File >
-	  ├── | Open Home >
-	  ├── | Wrap Selectino >
-	  ├── | All Selectors >
-	  ├── | Forward Links Browser >
-	  ├── | Copy Link to Here With Project >
-	  ├── | Go to Frame >
-	  ├── | Nav Back >
-	  ├── | Pull >
-	  ├── | Show Base Project >
-	  ├── | Browse Metadata >
-	  ├── | Insert Timestamp >
-	  ├── | Next Node >
-	  ├── | Insert Link to New Node >
-	  ├── | Move the current file to another project >
-	  ├── | Rename All Files >
-	  ├── | Previous Node >
-	  ├── | Compact Node >
-	  ├── | Delete this Node >
-	  ├── | New File Node >
-	  ├── | Node Browser >
-	  ├── | Pop >
-	  ├── | Link Preview On Hover >
-	  ├── | Backlinks Browser >
-	  ├── | Copy Link to Here >
-	  ├── | Node Browser All Projects >
-	  ├── | Link To Node .. >
-	  ├── | File Outline >
-	  ├── | Random Node >
-	  ├── | Select Project >
-	  ├── | All Selectors in Scratch Buffer >
-	  └── | Nav Forward >
-	  | All Selectors in Scratch Buffer >
+	  | Arguments >
+	  | Assigner >
+	  | Asterisk >
+	  | Auto-Completions >
 	}
 
 See next: | COLLECT() >

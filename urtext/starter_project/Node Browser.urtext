@@ -1,0 +1,11 @@
+Node Browser _ #action
+
+Opens the editor's native dropdown to browse all nodes in the active project. Type part of a node's title to locate and open it with Enter.
+
+|: Node Browser >
+
+By default nodes are sorted by their time of creation, most recent first.
+This can be modified with the `node_browser_sort` key in | project_settings >.
+
+Default Sublime Text Keybinding: `ctrl+shift+e`
+All actions can be called three ways. See | Actions >

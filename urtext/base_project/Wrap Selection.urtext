@@ -13,5 +13,5 @@ class WrapSelection:
 			end=position+len(selection),
 			replacement_text=''.join(['{ ',selection, ' }']))
 
-ThisProject.add_selector(WrapSelection)
+ThisProject.add_action(WrapSelection)
 %%

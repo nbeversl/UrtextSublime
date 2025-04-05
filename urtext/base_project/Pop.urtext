@@ -3,8 +3,6 @@ Pop  _
 Pops a node from a file and leaves a pointer in its place.
 See also | Pull >
 
-<Fri., Nov. 08, 2024, 02:34 PM CET> Bug is that on_modified is now running due to use of retarget_file triggering save and the new node is not yet there.
-
 %%Python
 
 class PopNode:
@@ -25,10 +23,10 @@ class PopNode:
                 '%s not in project' % source_filename)
         file_pos = self.run_editor_method('get_position')
 
-        if self.project_list.selectors['pull'].is_running or self.project_list.selectors['pop'].is_running:
+        if self.project_list.actions['pull'].is_running or self.project_list.actions['pop'].is_running:
             return
 
-        self.project_list.selectors['pop'].is_running = True
+        self.project_list.actions['pop'].is_running = True
         self.run_editor_method('save_file', source_filename)
         return self._pop_node_from_editor(source_filename, file_pos, from_project=from_project)
 
@@ -38,11 +36,11 @@ class PopNode:
 
         popped_node = self.current_project().get_node_from_position(source_filename, file_pos) 
         if not popped_node:
-            self.project_list.selectors['pop'].is_running = False
+            self.project_list.actions['pop'].is_running = False
             return self.current_project().handle_info_message('No node ID or duplicate Node ID')        
 
         if popped_node.is_root_node:
-            self.project_list.selectors['pop'].is_running = False
+            self.project_list.actions['pop'].is_running = False
             return self.current_project().handle_info_message('Node "%s" is already a root node.' % popped_node.id)
 
         return self._pop_node(popped_node, from_project=from_project)
@@ -96,8 +94,8 @@ class PopNode:
         self.current_project().files[source_filename].write_buffer_contents()
 
         new_file_node = self.current_project().new_file_node(contents=popped_node_contents, open_file=False)
-        self.project_list.selectors['pop'].is_running = False
+        self.project_list.actions['pop'].is_running = False
 
-ThisProject.add_selector(PopNode)
+ThisProject.add_action(PopNode)
         
 %%

@@ -49,10 +49,10 @@ class UrtextNode:
         stripped_contents = utils.strip_whitespace_anchors(stripped_contents)
         self.full_contents = stripped_contents
 
-        ranges, stripped_contents, replaced_contents = self._strip_embedded_syntaxes(stripped_contents)
+        ranges, stripped_contents, replaced_contents = utils.strip_embedded_syntaxes(stripped_contents)
         self.embedded_syntax_ranges.extend(ranges)
 
-        replaced_contents, self.marked_dynamic = check_and_sanitize_dynamic_marker(replaced_contents)
+        replaced_contents, _, self.marked_dynamic = check_dynamic_marker(replaced_contents)
         self._get_links(replaced_contents)
         self.frame_ranges, stripped_contents, replaced_contents = self.parse_frames(replaced_contents)
         self.metadata = self.urtext_metadata(self, self.project)        
@@ -95,7 +95,7 @@ class UrtextNode:
             contents = self.full_contents
 
         if strip_dynamic_marker:
-            contents = strip_dynamic_markers(contents)
+            contents = utils.strip_dynamic_markers(contents)
 
         if strip_first_line_title:
             contents = self.strip_first_line_title(contents)
@@ -112,30 +112,29 @@ class UrtextNode:
     def resolve_id(self, existing_nodes=[]):
         if self.resolution:
             return self.id
-        timestamps = self.metadata.get_values('_inline_timestamp')
+        newest_timestamp = self.metadata.get_newest_timestamp()
         existing_ids = [n.id for n in existing_nodes]
-        # try resolving to own timestamp        
-        for timestamp in timestamps:
+        if newest_timestamp:
             resolved_id = ''.join([
                 self.title,
                 syntax.resolution_identifier,
-                timestamp.timestamp.unwrapped_string, 
+                newest_timestamp.unwrapped_string, 
                 ])
             if resolved_id not in existing_ids:
-                self.resolution = timestamp.timestamp.unwrapped_string
+                self.resolution = newest_timestamp.unwrapped_string
                 self.id = resolved_id
                 return self.id
+
         if self.is_meta:
-            for timestamp in timestamps:
-                resolved_id = ''.join([
-                    self.meta_key,
-                    syntax.resolution_identifier,
-                    timestamp.timestamp.unwrapped_string
-                ])
-                if resolved_id not in existing_ids:
-                    self.resolution = timestamp.timestamp.unwrapped_string
-                    self.id = resolved_id
-                    return self.id
+            resolved_id = ''.join([
+                self.title,
+                syntax.resolution_identifier,
+                self.meta_key
+            ])
+            if resolved_id not in existing_ids:
+                self.resolution = self.meta_key
+                self.id = resolved_id
+                return self.id
         # try resolving to parent title
         if self.parent and self.parent.title != '(untitled)':
             resolved_id = ''.join([
@@ -147,13 +146,15 @@ class UrtextNode:
                 self.id = resolved_id
                 return self.id
         existing_resolutions = [n.resolution for n in existing_nodes if n.resolution]
+        inline_timestamps = self.metadata.get_values('_inline_timestamp')
+        existing_resolutions.extend([t.timestamp.unwrapped_string for t in inline_timestamps])
         timestamp = self.project.timestamp(ensure_unique=True, existing_resolutions=existing_resolutions)
-        self._set_contents(''.join([' ', timestamp.wrapped_string, ' ',
-            self.contents_with_contained_nodes()]),
+        contents, marker, _ = check_dynamic_marker(self.contents_with_contained_nodes())
+        self._set_contents(''.join([
+            marker, ' ', timestamp.wrapped_string, ' ', contents]),
             preserve_title=False)
-        self.buffer.write_buffer_contents()
+        self.buffer.write_buffer_contents(re_parse=False)
         return False
-
 
     def _get_links(self, positioned_contents):
         urtext_links, replaced_contents = utils.get_all_links_from_string(positioned_contents, self, self.project.project_list)
@@ -177,7 +178,7 @@ class UrtextNode:
         contents_lines = contents.strip().split('\n')
         for line in contents_lines:
             first_non_blank_line = line.strip()
-            first_non_blank_line = strip_nested_links(first_non_blank_line).strip()
+            first_non_blank_line = utils.strip_nested_links(first_non_blank_line).strip()
             if first_non_blank_line and first_non_blank_line not in ['_', '~']:
                 break
         title = syntax.node_title_c.search(contents)
@@ -207,9 +208,9 @@ class UrtextNode:
         print(self.filename)
         self.metadata.log()
 
-    def bound_action(self, selector_string):
+    def bound_action(self, action_string):
         # this does not work as hoped
-        self.project.project_list.run_selector(selector_string)
+        self.project.project_list.run_action(action_string)
 
     def consolidate_metadata(self, separator='::'):
         
@@ -290,7 +291,7 @@ class UrtextNode:
         frame_ranges = []
         stripped_contents = contents
         replaced_contents = contents
-        for d in syntax.dynamic_def_c.finditer(contents):
+        for d in syntax.frame_c.finditer(contents):
             frame_ranges.append([d.start(),d.end()])
             param_string = d.group(0)[2:-2]
             self.frames.append(
@@ -455,17 +456,6 @@ class UrtextNode:
         m_format = m_format.replace(r'\n', '\n')
         return m_format
 
-    def _strip_embedded_syntaxes(self, contents):
-        replaced_contents = contents
-        stripped_contents = contents
-        ranges = []
-        for e in syntax.embedded_syntax_c.finditer(contents):
-            contents = e.group()
-            stripped_contents = stripped_contents.replace(contents, '')
-            replaced_contents = replaced_contents.replace(contents, ' '*len(contents))
-            ranges.append([e.start(), e.end()])
-        return ranges, stripped_contents, replaced_contents
-    
 def node_descendants(node, known_descendants=[]):
     # differentiate between pointer and "real" descendants
     all_descendants = [n for n in node.children if n not in known_descendants]
@@ -481,31 +471,23 @@ def node_ancestors(node, known_ancestors=[]):
         return node_ancestors(node.parent, known_ancestors)
     return known_ancestors
 
-def strip_nested_links(title):
-    stripped_title = title
-    for nested_link in syntax.node_link_or_pointer_c.finditer(title):
-        stripped_title = title.replace(nested_link.group(), '')
-    return stripped_title
-
-def check_and_sanitize_dynamic_marker(text):
+def check_dynamic_marker(text):
     marked_dynamic = False
-    missing = False
+    marker = ''
+    text = text.lstrip()
     while True:
         text = text.lstrip()
         if not len(text):
             break
         if text[0] == syntax.dynamic_marker:
             marked_dynamic = True
+            marker = syntax.dynamic_marker
             text = text[1:]
+            if len(text) and text[0] == syntax.missing_frame_marker:
+                marker += syntax.missing_frame_marker
+                text = text[1:]
+                break
         else:
             break
-    if len(text) and text[0] == syntax.dynamic_def_missing_marker:
-        text = text[1:]
-    return text, marked_dynamic
+    return text, marker, marked_dynamic
 
-def strip_dynamic_markers(contents):
-    if len(contents) and contents[0] == '~':
-        contents = contents[1:]
-        if len(contents) and contents[0] == '?':
-            contents = contents[1:]
-    return contents

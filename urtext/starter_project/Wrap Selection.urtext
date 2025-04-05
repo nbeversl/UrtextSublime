@@ -1,0 +1,7 @@
+Wrap Selection _ #action
+
+Wraps the selected text in bracket nodes.
+
+|: Wrap Selection >
+
+No default keybinding in Sublime Text; available in the | Show All Actions > Action

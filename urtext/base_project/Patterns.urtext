@@ -18,19 +18,20 @@ class Patterns:
 	def parse_patterns(self, patterns, node):
 		contents = node.replaced_contents
 		for pattern in patterns:
-			if pattern.node():				
+			if pattern.node():
 				name = pattern.node().metadata.get_first_value('name')
-				name = name.text
-				pattern = pattern.node().metadata.get_first_value('regex')
-				pattern = pattern.text
-				self.patterns.setdefault(name, [])
-				for match in self.re.finditer(pattern, contents):
-					self.patterns[name].append({
-						'node_id': node.id,
-						'start': match.start(),
-						'end': match.end(),
-						'contents': match.group()
-						})
+				if name:
+					name = name.text
+					pattern = pattern.node().metadata.get_first_value('regex')
+					pattern = pattern.text
+					self.patterns.setdefault(name, [])
+					for match in self.re.finditer(pattern, contents):
+						self.patterns[name].append({
+							'node_id': node.id,
+							'start': match.start(),
+							'end': match.end(),
+							'contents': match.group()
+							})
 
 	def on_node_dropped(self, node):
 		for pattern in list(self.patterns.keys()):
@@ -56,7 +57,7 @@ class SearchPatterns:
 	def run(self):
 		self.project_list.run_call('PATTERNS')
 
-ThisProject.add_selector(SearchPatterns)	
+ThisProject.add_action(SearchPatterns)	
 ThisProject.add_call(Patterns)
 %%
 

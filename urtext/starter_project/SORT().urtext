@@ -18,21 +18,21 @@ Includes all nodes in the project, sorts them in reverse order by title, and lim
 Output:
 
 	{~ Example Use of SORT() _
+	  | target link >
 	  | self >
 	  | project_settings >
 	  | popup _ >
+	  | output dest >
 	  | oldest_timestamp >
 	  | newest_timestamp >
 	  | log _ >
-	  | lint should not move the closing bracket down a lint bove >
 	  | links_to >
 	  | links_from >
-	  | link character location is not right. >
+	  | keybinding output >
 	  | italic >
 	  | inline_timestamp >
 	  | example node >
 	  | etc. >
-	  | debugging output >
 	}
 
 	{ Arguments _

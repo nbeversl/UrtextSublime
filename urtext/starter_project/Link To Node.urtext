@@ -1,0 +1,8 @@
+Link To Node _ #action
+
+Opens the node browser (see | Node Browser >), and inserts a link to the selected node at the cursor postion.
+
+|: Link To Node >
+
+All actions can be called three ways. See | Actions >
+No default keybinding in Sublime Text; available in the | Show All Actions > Action

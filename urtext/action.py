@@ -1,7 +1,7 @@
 import urtext.syntax as syntax
 import urtext.utils as utils
 
-class UrtextSelector:
+class UrtextAction:
     syntax = syntax
     utils = utils
     display = True
@@ -13,7 +13,7 @@ class UrtextSelector:
         self.selection_has_changed = False
         self.run_editor_method = project_list.run_editor_method
         self.source_node = None
-        self.selector_string = self.name.replace(' ','_').lower()
+        self.action_string = self.name.replace(' ','_').lower()
 
     def run(self):
         pass

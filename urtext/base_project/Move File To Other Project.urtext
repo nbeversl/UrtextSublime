@@ -21,7 +21,7 @@ class MoveFileToAnotherProjectCommand:
 		if filename:
 			self.project_list.run_editor_method('show_panel', selections, move_file)
 
-ThisProject.add_selector(MoveFileToAnotherProjectCommand)
+ThisProject.add_action(MoveFileToAnotherProjectCommand)
 %%
 
 	{ Documentation _

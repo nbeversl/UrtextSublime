@@ -23,6 +23,5 @@ Limits the output to four lines.
 Sets the node below as the output target. ]]
 
 	{~ Example Use of MAX_LENGTH _
-	  No call has text output	}
+	  No call has text output}
 
-See next: | POP and PULL >

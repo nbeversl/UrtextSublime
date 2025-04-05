@@ -5,7 +5,7 @@ TARGET directs the output of any frame (see | Frames >) to a target, either a no
 	{ Node Output _
 
 	  If no special syntax is included, the target is assumed to be an existing node in the project.
-	  The | Node Link ^ Links > syntax is not required inside TARGET() but is more readable and also provides a working link to the output node.
+	  The | Node Link ^ Urtext Syntax > syntax is not required inside TARGET() but is more readable and also provides a working link to the output node.
 
 	  Example:
 
@@ -27,7 +27,7 @@ TARGET directs the output of any frame (see | Frames >) to a target, either a no
 
 	{ File Output _
 
-	  Using the | File Links > syntax inside TARGET() will output the content to the specified file, creating the file if it does not exist.
+	  Using the | File Link > syntax inside TARGET() will output the content to the specified file, creating the file if it does not exist.
 	  Example:
 
 	  [[ >(|/ example file output.txt >)
@@ -55,7 +55,7 @@ TARGET directs the output of any frame (see | Frames >) to a target, either a no
 			  [[>(@self) TEXT(This text outputs to the same node containing the frame)]]}
 		}
 
-		{ @clipboard _
+		{ clipboard _
 
 		  Sends the output to the clipboard, from which it can be pasted.
 

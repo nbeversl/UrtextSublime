@@ -1,0 +1,8 @@
+New File Node _ #action
+
+Creates and opens a new file node.
+
+|: New File Node >
+
+Default Sublime Text Keybinding: `ctrl+shift+-`
+All actions can be called three ways. See | Actions >

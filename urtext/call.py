@@ -63,7 +63,7 @@ class UrtextCall:
         arguments = self.syntax.metadata_arg_delimiter_c.split(argument_string)     
         for arg in arguments:
             arg = arg.strip()
-            key_op_value = syntax.dd_key_op_value_c.match(arg)          
+            key_op_value = syntax.call_key_op_value_c.match(arg)          
             if key_op_value:
                 key = key_op_value.group(1)
                 op = key_op_value.group(2)
@@ -71,7 +71,7 @@ class UrtextCall:
                 self.params.append((key,value,op))
                 continue
 
-            key_with_opt_flags = syntax.dd_key_with_opt_flags.match(arg)
+            key_with_opt_flags = syntax.call_key_with_opt_flags.match(arg)
             if key_with_opt_flags:
                 key = key_with_opt_flags.group(1).strip()
                 flags = []
@@ -82,14 +82,14 @@ class UrtextCall:
                 self.keys_with_flags.append((key, flags))
                 continue
 
-            flags = syntax.dd_flags_c.match(arg)
+            flags = syntax.call_flags_c.match(arg)
             if flags:
                 flags = flags.group().split(' ')
                 flags = [f.strip() for f in flags if f]
                 self.flags.extend(flags)
                 continue
             
-            hash_value = syntax.dd_hash_meta_c.match(arg)
+            hash_value = syntax.call_hash_meta_c.match(arg)
             if hash_value:
                 hash_value = hash_value.group()[1:]
                 self.params.append((

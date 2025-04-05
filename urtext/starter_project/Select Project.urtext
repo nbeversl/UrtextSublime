@@ -1,0 +1,8 @@
+Select Project _ #action
+
+Opens a list of available Urtext projects in the editor dropdown and switches to the one selected.
+
+|: Select Project >
+
+Default Sublime Text Keybinding: `Ctrl + Shift + O`
+All actions can be called three ways. See | Actions >

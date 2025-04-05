@@ -1,0 +1,9 @@
+Delete This Buffer _ #action
+
+Deletes the current buffer (file) entirely, including all contained nodes.
+
+|: Delete This Buffer >
+(note clicking the link above will delete this buffer!)
+
+No default keybinding in Sublime Text; available in the | Show All Actions > Action
+All actions can be called three ways. See | Actions >

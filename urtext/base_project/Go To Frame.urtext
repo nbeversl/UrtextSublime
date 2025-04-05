@@ -14,7 +14,7 @@ class GoToFrame:
 			return self.project_list.current_project.go_to_frame(target_node.id)
 		self.project_list.handle_message('No node here')
 
-ThisProject.add_selector(GoToFrame)
+ThisProject.add_action(GoToFrame)
 
 %%
 

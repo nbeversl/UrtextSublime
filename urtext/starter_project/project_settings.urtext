@@ -7,7 +7,7 @@ True/false values can be written as on/off, true/false, or yes/no, all case-inse
 The settings in this starter project are the defaults.
 
 pop_breadcrumb_key::popped_from
-When popping nodes, optionally adds a breadcrumb showing which node the popped node was popped from, and the timestamp. See | POP > and | PULL > and for more information.
+When popping nodes, optionally adds a breadcrumb showing which node the popped node was popped from, and the timestamp. See | Pop > and | Pull > and for more information.
 
 case_sensitive_keys::title - project_title - timestamp_format - filenames - timestamp
 Specifies which keys’ values should be parsed case-sensitively. The defaults are not overwritten when additional values added, but supplemented.
@@ -28,13 +28,13 @@ filename_datestamp_format::%m-%d-%Y %I-%M %p
 Specifies how dates will be formatted in filenames when the timestamp is included in the filename. Provided because some characters common in dates and times are not valid in filenames on certain platforms. Accepts the Python strftime format, see https://strftime.org/
 
 filename_title_length::100
-Sets a maximum title length (in characters) for filenames. See | RENAME_FILES() >
+Sets a maximum title length (in characters) for filenames. See | Rename All Files > and  | Rename Single File >
 
 file_extensions::urtext
 In project_settings, specifies file extensions for Urtext to compile in addition to .urtext. Only evaluated once, so reload the project if you change it. The dot is optional and is added if not supplied.
 
 filenames::title
-Specifies format for filenames when using | RENAME_FILES() >. Any metadata key used in the project is valid, in addition to the PREFIX placeholder, which will apply a numerical prefix to the outputted filename.
+Specifies format for filenames when using | Rename All Files > and | Rename Single File >. Any metadata key used in the project is valid, in addition to the PREFIX placeholder, which will apply a numerical prefix to the outputted filename.
 
 hash_key::keyword
 The keyname to use for the hash metadata shortcut. See | Hash >
@@ -89,7 +89,7 @@ Provides a title for the entire project
 
 rename_on_save::False
 Specifies whether to rename files, if necessary, on each save. Takes true/false values.
-See | RENAME_FILES() > for more information
+See | Rename Single File > for more information
 
 timestamp_format::%a., %b. %d, %Y, %I:%M %p %Z
 Set the format for timestamps globally. Accepts Python `strftime` and arbitrary text. For format strings, see https://strftime.org/

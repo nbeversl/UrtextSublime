@@ -1,0 +1,8 @@
+Nav Forward _ #action
+
+Navigates to the next node in the navigation history (if any).
+
+|: Nav Forward >
+
+Default Sublime Text Keybinding: `ctrl+shift+.`
+All actions can be called three ways. See | Actions >

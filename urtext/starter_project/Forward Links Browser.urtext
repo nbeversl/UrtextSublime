@@ -1,0 +1,8 @@
+Browse Forward Links _ #action
+
+Displays a list of all nodes linked to from the current node.
+
+|: Browse Forward Links >
+
+Default Sublime Text Keybinding: `Ctrl+Shift+rightArrow`
+All actions can be called three ways. See | Actions >

@@ -1,0 +1,8 @@
+Random Node _ #action
+
+Opens a random node in the active project.
+
+|: Random Node >
+
+Default Sublime Text Keybinding: `ctrl+shift+i`
+All actions can be called three ways. See | Actions >

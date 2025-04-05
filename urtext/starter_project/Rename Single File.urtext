@@ -1,0 +1,10 @@
+Rename Single File _ #action
+
+Renames the current file. The filename template can be set in `filenames` key in | project_settings >. The default is the title of the root node.
+
+|: Rename Single File >
+(changing the title of the root node of this buffer and clicking the link above will renam the file.)
+
+See also: | Rename All Files >
+Default Sublime Text Keybinding: `ctrl+shift+s`
+All actions can be called three ways. See | Actions >

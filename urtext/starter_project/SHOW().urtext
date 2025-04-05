@@ -58,25 +58,11 @@ Provides an output template for each included node
 
 	{~ Example Use of SHOW() _
 	  ---
-	  Link: | Bugs >
-
-	  Last updated: Mon., Nov. 25, 2024, 11:43 AM CET
-	  Excerpt:
-
-	  ---
-	  Link: | Inserting link to new node does not rename the link fast enough if the filename changes >
-
-	  Last updated: Tue., Dec. 03, 2024, 02:34 PM CET
-	  Excerpt:
-	  <Tue., Dec. 03, 2024, 02:34 PM CET>
-	  Inserting link to new node does not rename the link fast enough if the filename changes #bug
-
-	  ---
-	  Link: | Timestamps ^ 1066 >
+	  Link: | Example Timstamps >
 
 	  Last updated: Fri., Oct. 09, 2020, 09:59 AM
 	  Excerpt:
-	  Timestamps _
+	  Example Timstamps
 
 	}
 

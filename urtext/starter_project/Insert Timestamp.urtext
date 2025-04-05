@@ -1,0 +1,8 @@
+Insert Timestamp _ #action
+
+Inserts the current date/timestamp at the cursor. See | Timestamps >
+
+|: Insert Timestamp >
+
+Default Sublime Text Keybinding: `Ctrl+Shift+T`
+All actions can be called three ways. See | Actions >

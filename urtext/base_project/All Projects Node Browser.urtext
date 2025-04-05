@@ -26,7 +26,7 @@ class AllProjectsNodeBrowser:
 
 		self.project_list.run_editor_method('show_panel', self.selections, callback, on_highlight=on_highlight)
 
-ThisProject.add_selector(AllProjectsNodeBrowser)
+ThisProject.add_action(AllProjectsNodeBrowser)
 %%
 
 	{ Documentation _

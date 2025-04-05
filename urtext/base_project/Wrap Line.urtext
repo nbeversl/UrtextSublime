@@ -15,5 +15,5 @@ class WrapLine:
 				]))
 		self.project_list.run_editor_method('set_position', file_pos + 2)
 
-ThisProject.add_selector(WrapLine)
+ThisProject.add_action(WrapLine)
 %%

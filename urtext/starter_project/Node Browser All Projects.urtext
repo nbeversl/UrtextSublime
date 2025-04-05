@@ -1,0 +1,9 @@
+Node Browser All Projects _ #action
+
+Shows a selection panel or buffer of all nodes in all active projects
+
+|: Node Browser All Projects >
+
+(Similar to | Node Browser > but includes all active projects)
+No default keybinding in Sublime Text; available in the | Show All Actions > Action
+All actions can be called three ways. See | Actions >

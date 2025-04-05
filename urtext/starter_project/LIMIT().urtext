@@ -15,10 +15,10 @@ Output:
 	  | Action Links ^ Links >
 	  | Action Links ^ WHEN() >
 	  | All Available Calls >
+	  | All Actions >
+	  | All Actions Documentation >
+	  | All Actions in Scratch Buffer >
 	  | Arguments >
-	  | Asterisk >
-	  | Auto-Completions >
-	  | Bold Text >
 	}
 
 See next: | SORT() >

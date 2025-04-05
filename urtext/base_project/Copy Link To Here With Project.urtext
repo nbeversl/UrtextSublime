@@ -10,7 +10,7 @@ class CopyLinkToHereWithProject:
 		position = self.project_list.run_editor_method('get_position')
 		self.project_list.editor_copy_link_to_node(position, filename, include_project=True)
 
-ThisProject.add_selector(CopyLinkToHereWithProject)
+ThisProject.add_action(CopyLinkToHereWithProject)
 %%
 
 	{ Documentation _

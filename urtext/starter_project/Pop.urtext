@@ -1,0 +1,11 @@
+Pop _ #action
+
+Pops a node out into its own buffer, leaving a pointer (see | Pointer >) in its place.
+Position the cursor inside the node to be popped.
+To reverse this, see | Pull >.
+
+|: Pop >
+
+Default Sublime Text Keybinding: `Shift + Ctrl + Super + right-arrow`
+See also | Pointer > and | Pull >
+All actions can be called three ways. See | Actions >

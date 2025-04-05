@@ -1,0 +1,7 @@
+Browse Backlinks _ #action
+
+Shows a list of all nodes linking to the current node
+
+|: Browse Backlinks >
+Default Sublime Text Keybinding: `Ctrl+Shift+leftArrow`
+All actions can be called three ways. See | Actions >

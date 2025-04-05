@@ -14,5 +14,5 @@ class LinkPreviewOnHover:
 			if dest_node:
 				self.current_project().run_editor_method('hover_popup', dest_node.contents_with_contained_nodes(), file_pos)
 
-ThisProject.add_selector(LinkPreviewOnHover)
+ThisProject.add_action(LinkPreviewOnHover)
 %%

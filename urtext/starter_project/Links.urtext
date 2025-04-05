@@ -1,17 +1,23 @@
 Links _
 
-	{ Node Links _
+	{ Node Link _
 
 	  To link from one node to another, use the pipe and a space (`| `) followed immediately by a node ID, followed by a space and the right angle bracket (` >`). Examples of links are throughout this starter project.
 
-		{ Urtext Selector List for Linking _
+		{ Urtext Action List for Linking _
 
-		  Two Selectors can make linking quick and easy:
+		  Two Actions can make linking quick and easy:
 
 		  See | Copy Link to Here >
-		  and |? Link to Node >
-		  See also | Cross-Project Linking >>
+		  and | Link To Node >
+		  See also | Cross-Project Link >
 		}
+
+	}
+
+	{ How to Open Links _
+
+	  To **open a link**, hold Ctrl-Shift and click it, or put the cursor on it and press `Ctrl-Shift-/`
 
 	}
 
@@ -25,14 +31,14 @@ Links _
 	  Node links may link to specific locations by following the closing wrapper with a colon and a character number.
 
 	  Example:
-	  | File Links >:50 (links to character 50 in | File Links >, below)
+	  | File Link >:50 (links to character 50 in | File Link >, below)
 
 	  Since character locations on every edit, this syntax is most useful when outputted dynamically.
 	  See the | COLLECT() > call for an example use.
 
 	}
 
-	{ File Links _
+	{ File Link _
 
 	  Links to files can be made by writing `|/ `, followed immediately with a relative or absolute file path, and ending with a right angle bracket ` >`:
 	  Example: |/ README.md >
@@ -49,13 +55,13 @@ Links _
 		}
 	}
 
-	{ Web/HTTP(S) Links _
+	{ Web/HTTP(S) Link _
 
 	  HTTP(S) links are recognized automatically and will open in the system default browser.
 	  Example: https://urtext.co/
 	}
 
-	{ Missing Links _
+	{ Missing Link _
 
 	  When any syntax links to a node or file not found, a question mark will immediately follow the opening wrapper. Examples:
 
@@ -67,10 +73,10 @@ Links _
 	  Missing link markers are added and removed by Urtext and are "read-only" -- you can add or delete them but they will revert on save.
 	}
 
-	{ Action Links _
+	{ Trigger Link _
 
-	  The exclamation mark `!` can be inserted after the opening pipe to make an action link.
-	  Action links trigger execution of their | Frames > without visiting the frame or target node.
+	  The exclamation mark `!` can be inserted after the opening pipe to make a trigger link.
+	  Clicking the link triggers execution of its fream (| Frames >) without visiting the frame or target node.
 
 	  Example:
 
@@ -80,19 +86,36 @@ Links _
 	  To have an effect, the node must be the target of a frame (see | Frames >)
 	}
 
-	{ Selector Links _
+	{ Action Link _
 
-	  The colon `:` modifier after the opening pipe indicates a selector link.
-	  The text inside the link is a reference to an Urtext Selector, or unit of functionality. (See |? Key Binding: >)
+	  The colon `:` modifier after the opening pipe indicates an action link.
+	  The link name is a reference to an Urtext Action, or unit of functionality.
 
-	  Selector links are an alternative to menus, dialogs, and or other user interface elements, so all Urtext functionality is accessible from the text.
+	  Action links are an alternative to menus, dialogs, and or other user interface elements, so all Urtext functionality is accessible from the text. Clicking them is equivalent to selecting the same Action from the dropdown or using their keybindings.
+
+	  Not all actions are equally useful as links.
 
 	  Example:
-	  The following selector will open a random node in this project:
-	  |: random_node >
+	  The following action will open a random node in this project:
+	  |: Random Node >
 
-	  The referenced selector must be available in the project.
-	  See | Selectors > for more information.
+	  The referenced action must be available in the project.
+	  See | Actions > for more information, including the actions included with Urtext.
+
+	}
+
+	{ Cross-Project Link _
+
+	  To link from one Urtext Project to another use:
+
+	  =>"name or path of the other project"
+	  (example only, non-functioning)
+
+	  To link to a specific node, add the "pipe and angle-bracket" notation followed by a node title:
+	  =>"name or path of the other project"|? node ID >
+	  (example only, non-functioning)
+
+	  Following this link will change the active project to the one linked and open the specified node, if any.
 
 	}
 

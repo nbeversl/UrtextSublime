@@ -1,0 +1,7 @@
+Move the current file to another project _ #action
+Opens a panel or buffer to select another active project to which to move the current file.
+
+|: Move The Current File to Another Project >
+
+No default keybinding in Sublime Text; available in the | Show All Actions > Action
+All actions can be called three ways. See | Actions >

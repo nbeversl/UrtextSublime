@@ -1,5 +1,6 @@
 import urtext.syntax as syntax
 import webbrowser
+import re
 import os
 
 class UrtextLink:
@@ -11,7 +12,8 @@ class UrtextLink:
 		self.project_list = project_list
 		self.bound = False
 		self.bound_argument = None
-		self.project_name = None
+		self.containing_project_name = None
+		self.target_project_name = None
 		self.is_http = False
 		self.is_node = False
 		self.node_id = None
@@ -37,8 +39,12 @@ class UrtextLink:
 	def click(self):
 		if self.bound:
 			return self.bound_action()
-		elif self.project_name:
-			self.project_list.set_current_project(self.project_name)
+		elif self.target_project_name:
+			if not self.project_list.set_current_project(self.target_project_name):
+				self.project_list.run_editor_method("popup", "project %s is not available" % self.target_project_name)
+				return
+		elif self.containing_project_name:
+			self.project_list.set_current_project(self.containing_project_name)
 		elif self.filename:
 			self.project_list.set_current_project(os.path.dirname(self.filename))
 		dest_node = self.get_node()
@@ -77,6 +83,46 @@ class UrtextLink:
 			if open_http_link(self.url) is False:
 				self.project_list.current_project.handle_info_message('Could not open the weblink')
 
+	def verify(self, contents):
+		if self.is_file:
+			if self.is_missing and self.target_file_exists():
+				return contents.replace(self.matching_string, ''.join([
+					syntax.file_link_opening_wrapper,
+					self.path,
+					syntax.link_closing_wrapper]))
+			if not self.target_file_exists():
+				return contents.replace(self.matching_string, ''.join([
+					syntax.missing_file_link_opening_wrapper,
+					self.path,
+					syntax.link_closing_wrapper,
+					self.suffix]))
+		if not self.node_id or (
+			self.target_project_name and self.target_project_name != self.containing_project_name
+			) or self.bound:
+			return contents
+		suffix = ' >>' if self.is_pointer else ' >'
+		
+		if self.node_id not in self.containing_node.project.nodes:
+			link_position = contents.find(self.matching_string)
+			if link_position < 0:
+				return contents
+			project_links = []
+			for m in syntax.project_link_c.finditer(contents):
+				project_links.append((m.end() - m.start(), m.start()))			
+			for l in project_links:
+				if link_position - l[0] == l[1]:
+					return contents
+			return contents[:link_position] + ''.join([
+				syntax.missing_node_link_opening_wrapper,
+				self.node_id,
+				suffix]) + contents[link_position + len(self.matching_string):]
+		if self.is_missing and self.node_id in self.containing_node.project.nodes:
+			return contents.replace(self.matching_string, ''.join([
+				syntax.link_opening_wrapper,
+				self.node_id,
+				suffix]))
+		return contents
+
 	def hover(self):
 		if self.is_node or self.is_pointer:
 			dest_node = self.project_list.current_project.get_node(self.node_id)
@@ -90,30 +136,7 @@ class UrtextLink:
 	def bound_action(self):
 		return self.project_list.bound_action(self.containing_node, self.bound_argument)
 
-	def rewrite(self, include_project=False):
-		# not currently used
-		link_modifier = ''
-		if self.is_action:
-			link_opening_wrapper = ''.join([
-					syntax.link_opening_wrapper,
-					syntax.node_link_modifiers['action']
-				])
-		elif self.is_file:
-			link_opening_wrapper = ''.join([
-					syntax.link_opening_wrapper,
-					file_link_modifiers['file']
-				])
-
-		return ''.join([
-				syntax.other_project_link_prefix,
-				'"%s"' % self.project_name if self.project_name and include_project else '',
-				link_opening_wrapper,
-				link_modifier,
-				syntax.pointer_closing_wrapper if self.is_pointer else syntax.link_closing_wrapper,
-				(':%s' % dest_node_position) if self.dest_node_position else ''
-			])
-
-	def exists(self):
+	def target_file_exists(self):
 		if self.is_file and self.path:
 			if os.path.exists(self.path):
 				return True
@@ -122,28 +145,14 @@ class UrtextLink:
 				return True
 			return False
 
-	def replace(self, replacement):
-		if self.containing_node:
-			node_contents = self.containing_node.contents(stripped=False)
-			replacement_contents = ''.join([
-				node_contents[:self.start_position],
-				replacement,
-				node_contents[self.start_position+len(self.matching_string):]
-				])
-			self.containing_node.project._set_node_contents(
-				containing_node.id,
-				replacement_contents,
-				preserve_title=False)
-
 	def end_position(self):
 		return self.position_in_string + len(self.matching_string)
 
 def open_http_link(link):
-    if link[:8] != 'https://' and link [:7] != 'http://':
-        link = 'https://' + link
-    return True if webbrowser.get().open(link) else False
-
+	if link[:8] != 'https://' and link [:7] != 'http://':
+		link = 'https://' + link
+	return True if webbrowser.get().open(link) else False
 
 def get_file_extension(filename):
-    if len(os.path.splitext(filename)) == 2:
-        return os.path.splitext(filename)[1].lstrip('.')
+	if len(os.path.splitext(filename)) == 2:
+		return os.path.splitext(filename)[1].lstrip('.')

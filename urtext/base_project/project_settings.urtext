@@ -32,7 +32,7 @@ open_in_editor::urtext - txt
 project_title::Urtext Base Project & Documentation
 propagate_settings::_all
 propagate_calls::_all
-propagate_selectors::_all
+propagate_actions::_all
 timestamp_format::%a., %b. %d, %Y, %I:%M %p %Z
 title_length::255
 use_timestamp::timestamp - _inline_timestamp - _oldest_timestamp - _newest_timestamp

@@ -1,0 +1,12 @@
+Files _
+
+Urtext looks for all files with the extension `.urtext` in the folder from which it is started.
+Functionality is otherwise independent of filenames. Files will parse and function no matter their name.
+
+Create a new Urtext file in an existing folder by pressing `Ctrl–Shift–;`  Urtext creates, names and opens new files automatically when you make a new file node. Using links and the Node Browser, you need never open a file manually or know its name or location, unless you want to.
+
+Using Urtext, think about files as little as possible. Think of a file as the saved state of text buffer.
+
+To include extensions other than `.urtext`, see the `file_extensions` key in | project_settings >
+
+See next: | Projects >

@@ -2,9 +2,9 @@ File Naming _
 
 Since node identities are independent of their filenames, you can use any naming convention you want. Urtext can also rename files automatically in convenient formats based on their title and/or other metadata. Renaming by number is useful, for instance, if you want file-level nodes easily readable inside a file system, mobile app, or other file browser.
 
-To rename a file, select "Rename Single File" from the Urtext selector palette (`Ctrl + Shift *+ Z`). By default, this will rename the files alphabetically by title, with numerical prefixes to preserve ordering where the filesystem might not.
+To rename a file, select "Rename Single File" from the Urtext action palette (`Ctrl + Shift *+ Z`).
 
 This behavior can be changed, if desired, by modifying the `filenames` key of project settings
 See | project_settings >
 
-To rename multiple files at once, see | RENAME_FILES() > below:
+To rename multiple files at once, see | Rename All Files >

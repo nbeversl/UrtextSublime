@@ -1,29 +1,29 @@
-All Selectors Scratch Buffer _
+All Actions Scratch Buffer _
 	
 %%Python
 class InScratchBuffer:
 
-	name = 'All Selectors in Scratch Buffer'
+	name = 'All Actions in Scratch Buffer'
 
 	def run(self):
 		text = 'Urtext Scratch Buffer _\n'+ '\n'.join([
-			self.utils.make_bound_link(selector) for selector in self.project_list.selectors 
+			self.utils.make_bound_link(action) for action in self.project_list.actions 
 			])
 		buffer_id = self.current_project().run_editor_method('scratch_buffer', text)
 		buffer = self.current_project().urtext_buffer(self.current_project(), None, text)
 		buffer.identifier = buffer_id
 		self.current_project()._parse_buffer(buffer)
 		def bound_action(text):
-			self.current_project().run_selector(text)
+			self.current_project().run_action(text)
 		buffer.root_node.bound_action = bound_action
 
 
-ThisProject.add_selector(InScratchBuffer)
+ThisProject.add_action(InScratchBuffer)
 
 %%
 
 {	Documentation _
 
-	Shows a list of all selectors in a scratch buffer, as a selector links. Alternative to using a menu.
+	Shows a list of all actions in a scratch buffer, as a action links. Alternative to using a menu.
 
 }

@@ -30,11 +30,11 @@ Output:
 
 	  This text appears in the middle
 
+	  | target link >
 	  | self >
 	  | project_settings >
 	  | popup _ >
-	  | oldest_timestamp >
-	  | newest_timestamp >
+	  | output dest >
 
 	  This text appears at the end
 	}

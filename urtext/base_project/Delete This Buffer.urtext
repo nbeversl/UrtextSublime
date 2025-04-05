@@ -1,0 +1,15 @@
+Delete This Buffer _
+	
+%%Python
+class DeleteThisBuffer:
+
+	name = 'Delete This Buffer'
+
+	def run(self):
+		filename = self.project_list.run_editor_method('get_current_filename')
+		if filename:
+			self.project_list.delete_file(filename)
+
+ThisProject.add_action(DeleteThisBuffer)
+
+%%

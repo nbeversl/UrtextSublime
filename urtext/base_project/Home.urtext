@@ -5,7 +5,6 @@ The dynamic definition below executes them in order. Each node will include docu
 
 [[
 EXEC(| Target Call >)
-EXEC(| Document All Selectors >)
 EXEC(| Tree >)
 EXEC(| Sort >)
 EXEC(| Text >)
@@ -28,7 +27,8 @@ EXEC(| Show >)
 EXEC(| Wrap Selection >)
 EXEC(| Lint Code >)
 EXEC(| Projects >)
-EXEC(| File Link >)
+EXEC(| Export >)
+EXEC(| Insert Link to File >)
 EXEC(| Node Browser >)
 EXEC(| Random Node >)
 EXEC(| Go To Frame >)
@@ -37,7 +37,7 @@ EXEC(| Show Base Project >)
 EXEC(| File Outline Dropdown >)
 EXEC(| Move File To Other Project >)
 EXEC(| Link to New Node >)
-EXEC(| Delete This Node >)
+EXEC(| Delete This Buffer >)
 EXEC(| Insert Timestamp >)
 EXEC(| Browse Metadata >)
 EXEC(| Copy Link To Here >)
@@ -46,12 +46,12 @@ EXEC(| Link To Node >)
 EXEC(| Open Home >)
 EXEC(| Copy Link To Here With Project >)
 EXEC(| New File Node >)
-EXEC(| Keybindings to Sublime Text JSON >)
-EXEC(| All Selectors >)
+EXEC(| Keybindings to JSON >)
+EXEC(| All Actions >)
 EXEC(| Strip >)
-EXEC(| Backlinks Browser >)
-EXEC(| Forward Links Browser >)
-EXEC(| All Selectors Scratch Buffer >)
+EXEC(| Browse Backlinks >)
+EXEC(| Browse Forward Links >)
+EXEC(| All Actions Scratch Buffer >)
 EXEC(| All Projects Node Browser >)
 EXEC(| Create Starter Project >)
 +(*)
@@ -62,43 +62,40 @@ TREE()
 
 	{~ results _
 | (untitled) ^ project_settings >
+| All Actions >
+| All Actions Scratch Buffer >
 | All Projects Node Browser >
-| All Selectors >
-| All Selectors Scratch Buffer >
 | Anchor >
-| Backlinks Browser >
+| Browse Backlinks >
+| Browse Forward Links >
 | Browse Metadata >
 | Collect >
 | Copy Link To Here >
 | Copy Link To Here With Project >
 | Create Starter Project >
-| Delete This Node >
-| Document All Selectors >
+| Delete This Buffer >
+| Documentation ^ All Actions Scratch Buffer >
 | Documentation ^ All Projects Node Browser >
-| Documentation ^ All Selectors >
-| Documentation ^ All Selectors Scratch Buffer >
 | Documentation ^ Browse Metadata >
 | Documentation ^ Collect >
 | Documentation ^ Copy Link To Here >
 | Documentation ^ Copy Link To Here With Project >
-| Documentation ^ Delete This Node >
 | Documentation ^ File Outline Dropdown >
 | Documentation ^ Go To Frame >
 | Documentation ^ Link to New Node >
 | Documentation ^ Move File To Other Project >
 | Export >
-| File Link >
 | File Outline Dropdown >
 | Files >
 | Format >
-| Forward Links Browser >
 | Go To Frame >
 | Home >
 | Include and Exclude >
 | Info >
+| Insert Link to File >
 | Insert Timestamp >
 | Interlinks >
-| Keybindings to Sublime Text JSON >
+| Keybindings to JSON >
 | Limit >
 | Link Preview >
 | Link To Node >
@@ -121,21 +118,16 @@ TREE()
 | Random Node >
 | Rename Files >
 | Request >
-| Selectors >
 | Show >
 | Show Base Project >
 | Sort >
 | Strip >
 | Target Call >
 | Text >
-| To Next Node >
-| To Previous Node >
 | Tree >
-| Urtext Starter Project >
 | When >
 | Wrap Line >
 | Wrap Selection >
 | debugging output >
-| dropped nodes should not drop the whole file >
 | project_settings >
 }

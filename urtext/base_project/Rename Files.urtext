@@ -128,6 +128,6 @@ class RenameSingleFile(RenameFiles):
             self.current_project().run_editor_method('close_file', filename)
             self.current_project().run_editor_method('open_file_to_position', renamed_files[filename])
 
-ThisProject.add_selector(RenameSingleFile)
-ThisProject.add_selector(RenameFiles)
+ThisProject.add_action(RenameSingleFile)
+ThisProject.add_action(RenameFiles)
 %%

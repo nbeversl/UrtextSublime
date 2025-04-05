@@ -1,0 +1,7 @@
+Show Base Project _ #action
+
+|: show_base_project >
+
+This makes the | Base Project > available in the project list. Normally, it is hidden.
+
+No default keybinding in Sublime Text; available in the | Show All Actions > Action

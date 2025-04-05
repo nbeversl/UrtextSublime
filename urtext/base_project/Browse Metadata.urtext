@@ -28,12 +28,12 @@ class BrowseMetadata:
 		self.project_list.run_editor_method('show_panel', [[n.id, n.display_detail] for n in self.selections], self.open_the_node)
 
 	
-ThisProject.add_selector(BrowseMetadata)
+ThisProject.add_action(BrowseMetadata)
 %%
 
 { Documentation _
 
-Shows a panel or buffer with all metadata keys in the project, then all values for the selector key, then all nodes matching the selected key and value.
-If your project is simpler and you want this selector to show values for only one key, set that key as the `meta_browser_key` in | project_settings >
+Shows a panel or buffer with all metadata keys in the project, then all values for the action key, then all nodes matching the selected key and value.
+If your project is simpler and you want this action to show values for only one key, set that key as the `meta_browser_key` in | project_settings >
 
 }

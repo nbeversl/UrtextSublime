@@ -31,7 +31,7 @@ class ProjectList:
         self.editor_methods = editor_methods if editor_methods else {}
         self.entry_point = entry_point.strip()
         self.calls = {}
-        self.selectors = {}
+        self.actions = {}
         self.project_instance_calls = {}
         self.project_list_instance_calls = {}
         self.projects = []
@@ -50,8 +50,8 @@ class ProjectList:
         initial=False,
         visible=True,
         make_current=False,
-        selector=None):
-        self.execute(self._init_project, entry_point, new_file_node_created=new_file_node_created, initial=initial, make_current=make_current, visible=visible, selector=selector)
+        action=None):
+        self.execute(self._init_project, entry_point, new_file_node_created=new_file_node_created, initial=initial, make_current=make_current, visible=visible, action=action)
 
     def _init_project(self,
         entry_point,
@@ -59,7 +59,7 @@ class ProjectList:
         initial=None,
         visible=True,
         make_current=False,
-        selector=None):
+        action=None):
 
         if self.get_project(entry_point):
             return
@@ -69,14 +69,17 @@ class ProjectList:
                                 editor_methods=self.editor_methods,
                                 initial=initial,
                                 new_file_node_created=new_file_node_created)
-
-        if project.initialize(visible=visible, make_current=make_current, selector=selector):
+        self.projects.append(project)
+        if initial or make_current:
+            self.current_project = project
+        if project.initialize(visible=visible, make_current=make_current, action=action):
             if initial or make_current:
                 self.current_project = project
-            self.projects.append(project)
             self.entry_points.append(project.entry_point)
-            if selector:
-                self.run_selector(selector)
+            if action:
+                self.run_action(action)
+        else:
+            self.projects.remove(project)
 
     def execute(self, function, *args, **kwargs):
         if self.is_async:
@@ -112,12 +115,12 @@ class ProjectList:
         link = utils.get_link_from_position_in_string(string, col_pos, node, self, include_http=True)
         return link
 
-    def bound_action(self, node, selector_string):
+    def bound_action(self, node, action_string):
         if node:
             node = self.current_project.get_node(node.id)
             if node:
-                return node.bound_action(selector_string)
-        return self.run_selector(selector_string)
+                return node.bound_action(action_string)
+        return self.run_action(action_string)
 
     def handle_link(self, string, filename, file_pos, col_pos=0, identifier=None):
         link = self.parse_link(string, filename, file_pos, col_pos=col_pos, identifier=identifier)
@@ -273,6 +276,8 @@ class ProjectList:
                         new_project=destination_project.title())
 
         source_project.run_hook('on_file_moved_to_other_project',
+                                source_project,
+                                destination_project,
                                 old_filename,
                                 new_filename)
 
@@ -385,28 +390,28 @@ class ProjectList:
     def node_has_been_opened(self):
         return self.node_opened
 
-    def selector_menu(self):
+    def action_menu(self):
         
         def callback(selection):
-            selections = list(self.selectors.keys())
+            selections = list(self.actions.keys())
             if selection > -1 :
-                if selections[selection] in self.selectors:
-                    return self.selectors[selections[selection]].run()
+                if selections[selection] in self.actions:
+                    return self.actions[selections[selection]].run()
                 return self.handle_message('No selection for %s' % selections[selection])
 
-        selections = list(self.selectors.keys())
+        selections = list(self.actions.keys())
         self.run_editor_method('show_panel', selections, callback)
 
-    def run_selector(self, selection):
+    def run_action(self, selection):
         selection = selection.replace(' ', '_').lower()
-        if self.current_project and selection in self.current_project.selectors:
-            if self.current_project.selectors[selection].thread_safe:
-                return self.current_project.selectors[selection].run()
-            return self.execute(self.current_project.selectors[selection].run)
-        if selection in self.selectors:
-            if self.selectors[selection].thread_safe:
-                return self.selectors[selection].run()
-            self.execute(self.selectors[selection].run)
+        if self.current_project and selection in self.current_project.actions:
+            if self.current_project.actions[selection].thread_safe:
+                return self.current_project.actions[selection].run()
+            return self.execute(self.current_project.actions[selection].run)
+        if selection in self.actions:
+            if self.actions[selection].thread_safe:
+                return self.actions[selection].run()
+            self.execute(self.actions[selection].run)
 
     @classmethod
     def make_starter_project(self, folder):
@@ -428,8 +433,6 @@ class ProjectList:
             print(folder, 'is not a folder')
 
 
-NO_MODIFY_WARNING = """!--------------------------------------------------------------------------------------------------------------------------------------------!
-IF YOU ARE SEEING THIS TEXT, YOU ARE VIEWING THE STARTER PROJECT IN THE URTEXT LIBRARY.
-Do not modify it here; instead, copy it to a new project using either "Urtext: Create Starter Project" in the
-Sublime Command palette or the "Create Starter Project" selector from within Urtext.
-!--------------------------------------------------------------------------------------------------------------------------------------------!"""
+NO_MODIFY_WARNING = """!---------------------------------------------------
+IF YOU ARE SEEING THIS TEXT, YOU ARE VIEWING THE STARTER PROJECT IN THE URTEXT LIBRARY. Do not modify it here; instead, copy it to a new project using either "Urtext: Create Starter Project" in the Sublime Command palette or the "Create Starter Project" action from within Urtext.
+!-----------------------------------------------------"""

@@ -108,7 +108,7 @@ class UrtextFrame:
             accumulated_text = self.default_output()
 
         self.flags = []
-        self.project.run_hook('on_dynamic_def_process_ended', self)
+        self.project.run_hook('on_process_frame_ended', self)
         if self.system_contents:
             accumulated_text += '\n'.join(self.system_contents)
         return accumulated_text
@@ -145,9 +145,9 @@ class UrtextFrame:
 
     def get_definition_text(self):
         return '\n' + ''.join([
-            syntax.dynamic_def_opening_wrapper,
+            syntax.frame_opening_wrapper,
             '\n'.join([line.strip() for line in self.contents.split('\n')]),
-            syntax.dynamic_def_closing_wrapper
+            syntax.frame_closing_wrapper
         ])
 
     def target_ids(self):

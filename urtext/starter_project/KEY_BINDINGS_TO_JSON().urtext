@@ -1,8 +1,6 @@
-Sublime Text Keybindings _
+KEY_BINDINGS_TO_JSON() _
 
-This node uses is the KEY_BINDINGS_TO_JSON call to update the Sublime Text keybindings to Urtext selectors by writing them to the Default.sublime-keymap of the Urtext package.
-
-See https://www.sublimetext.com/docs/key_bindings.html for more information
+Translates keybindings from Urtext metadata to JSON, writing them to the specified filename. It is made to work with Sublime Text Key Bindings but could be adapted to work with other editors. See https://www.sublimetext.com/docs/key_bindings.html for more information.
 
 new_file_node::ctrl+shift+-
 node_browser::ctrl+shift+e
@@ -21,27 +19,27 @@ copy_link_to_here::ctrl+shift+c
 copy_link_to_here_with_project::ctrl+shift+super+c
 insert_link_to_new_node::ctrl+shift+'
 insert_link_to_file::ctrl+shift+j
-backlinks_browser::ctrl+shift+left
-forward_links_browser::ctrl+shift+right
+browse_backlinks::ctrl+shift+left
+browse_forward_links::ctrl+shift+right
 link_to_node::ctrl+shift+l
 pop::ctrl+shift+alt+right
 pull::ctrl+shift+alt+left
 wrap_selection::ctrl+shift+[
 go_to_frame::ctrl+shift+f
-find_by_meta::ctrl+shift+m
+browse_metadata::ctrl+shift+m
 next_node::ctrl+shift+n
 previous_node::ctrl+shift+b
 toggle_fold_single::ctrl+shift+0
 toggle_fold_all::ctrl+shift+9
 file_outline_dropdown::ctrl+shift+j
-all_selectors::ctrl+shift+z
+show_all_actions::ctrl+shift+z
 
 [[  >(| keybinding output >)
-+(| Sublime Text Keybindings >)
-KEY_BINDINGS_TO_JSON()
+.	+(| KEY_BINDINGS_TO_JSON() >)
+.	KEY_BINDINGS_TO_JSON()
+.	To make this work, a file link to an existing JSON file must be passed as an argument, such as `Default.sublime-keymap`
 ]]
 
 	{~ keybinding output _
 
-}
-
+	  KEY_BINDINGS_TO_JSON requires a link to an existing file.}

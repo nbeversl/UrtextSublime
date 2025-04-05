@@ -1,0 +1,7 @@
+Wrap Line _ #action
+
+Wraps the line containing the cursor in brackets.
+
+|: Wrap Line >
+
+No default keybinding in Sublime Text; available in the | Show All Actions > Action
