@@ -73,9 +73,12 @@ class Navigation:
 		for item in list(self.navigation):
 			project, node_id = item
 			if filename in project.files and node_id in project.files[filename].node_ids():				
-				if self.navigation.index(item) <= self.nav_index:
+				if self.navigation.index(item) < self.nav_index:
 					self.nav_index -= 1
 				del self.navigation[self.nav_index]
+
+	def after_file_deleted(self, project, filename):
+		self.reverse()
 
 	def on_node_id_changed(self, project, old_id,  new_node_id):
 		for index, item in enumerate(self.navigation):

@@ -58,7 +58,8 @@ class UrtextLink:
 				return self.project_list.current_project.open_node(dest_node.id,
 					position=dest_node.start_position + self.dest_node_position)
 		elif self.is_node:
-			return self.project_list.current_project.run_editor_method('popup', 'Node cannot be found in the current project.')
+			return self.project_list.current_project.run_editor_method('popup', 
+				'Node cannot be found in project "%s"' % self.project_list.current_project.title())
 		elif self.is_file:
 			path = None
 			rel_path = os.path.abspath(os.path.join(self.project_list.current_project.entry_path, self.path))

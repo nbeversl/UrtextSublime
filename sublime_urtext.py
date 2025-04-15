@@ -46,7 +46,7 @@ def close_inactive(extensions='urtext'):
                     sheet.view().set_scratch(True)
                     sheet.close()
 
-def close_file(filename):
+def close_file(filename, save=None):
     view = sublime.active_window().find_open_file(filename)
     if view:
         view.run_command('close')

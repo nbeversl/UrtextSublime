@@ -6,7 +6,14 @@
         "keys": [
             "ctrl+shift+,"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -15,7 +22,14 @@
         "keys": [
             "ctrl+shift+8"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -33,16 +47,14 @@
         "keys": [
             "ctrl+shift+left"
         ], 
-        "command": "run_urtext_call"
-    }, 
-    {
-        "args": {
-            "urtext_call": "compact_node"
-        }, 
-        "keys": [
-            "ctrl+shift+6"
-        ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -51,7 +63,14 @@
         "keys": [
             "ctrl+shift+c"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -60,7 +79,14 @@
         "keys": [
             "ctrl+shift+super+c"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -69,7 +95,14 @@
         "keys": [
             "ctrl+shift+j"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -78,7 +111,14 @@
         "keys": [
             "ctrl+shift+m"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -87,7 +127,14 @@
         "keys": [
             "ctrl+shift+right"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -96,7 +143,14 @@
         "keys": [
             "ctrl+shift+f"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -105,7 +159,14 @@
         "keys": [
             "ctrl+shift+j"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -114,7 +175,14 @@
         "keys": [
             "ctrl+shift+'"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -123,7 +191,14 @@
         "keys": [
             "ctrl+shift+t"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -132,7 +207,14 @@
         "keys": [
             "ctrl+shift+l"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -141,7 +223,14 @@
         "keys": [
             "ctrl+shift+,"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -150,7 +239,14 @@
         "keys": [
             "ctrl+shift+."
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -159,7 +255,14 @@
         "keys": [
             "ctrl+shift+-"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -168,7 +271,14 @@
         "keys": [
             "ctrl+shift+n"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -186,7 +296,14 @@
         "keys": [
             "ctrl+shift+h"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -195,7 +312,14 @@
         "keys": [
             "ctrl+shift+/"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -204,7 +328,14 @@
         "keys": [
             "ctrl+shift+alt+right"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -213,7 +344,14 @@
         "keys": [
             "ctrl+shift+b"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -222,7 +360,14 @@
         "keys": [
             "ctrl+shift+alt+left"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -231,7 +376,14 @@
         "keys": [
             "ctrl+shift+i"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -240,7 +392,14 @@
         "keys": [
             "ctrl+shift+s"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -249,7 +408,14 @@
         "keys": [
             "ctrl+shift+o"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -258,7 +424,14 @@
         "keys": [
             "ctrl+shift+9"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -267,7 +440,14 @@
         "keys": [
             "ctrl+shift+0"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -276,7 +456,14 @@
         "keys": [
             "ctrl+shift+r"
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }, 
     {
         "args": {
@@ -285,6 +472,13 @@
         "keys": [
             "ctrl+shift+["
         ], 
-        "command": "run_urtext_call"
+        "command": "run_urtext_call",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "urtext"
+            }
+        ]
     }
 ]

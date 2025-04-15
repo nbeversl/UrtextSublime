@@ -248,11 +248,11 @@ class ProjectList:
         destination_project = self.get_project(destination_project_name_or_path)
 
         if not destination_project:
-            print('Destination project `' + destination_project_name_or_path + '` was not found.')
+            self.run_editor_method('popup', 'Destination project was not found.')
             return None
 
         if old_filename not in source_project.files:
-            print('File ' + old_filename + ' not included in the current project.')
+            self.run_editor_method('popup', 'File not included in the current project.')
             return None
 
         moved_nodes = list(source_project.files[old_filename].nodes)
@@ -281,8 +281,8 @@ class ProjectList:
                                 old_filename,
                                 new_filename)
 
-        self.run_editor_method('retarget_view', old_filename, new_filename)
-
+        self.run_editor_method('popup', 'File moved.')
+        self.run_editor_method('close_file', old_filename, save=False)
         return changed_ids
 
     def editor_copy_link_to_node(self, 
@@ -342,7 +342,7 @@ class ProjectList:
     def run_editor_method(self, method_name, *args, **kwargs):
         if method_name in self.editor_methods:
             return self.editor_methods[method_name](*args, **kwargs)
-        print('No editor method available for "%s"' % method_name)
+        print('Not implemented (%s)' % method_name)
         return False
 
     def handle_message(self, message):
