@@ -46,11 +46,6 @@ def close_inactive(extensions='urtext'):
                     sheet.view().set_scratch(True)
                     sheet.close()
 
-def close_file(filename, save=None):
-    view = sublime.active_window().find_open_file(filename)
-    if view:
-        view.run_command('close')
-
 def select_file_or_folder(callback):
     sublime.open_dialog(callback, allow_folders=True)
 
@@ -165,7 +160,7 @@ def close_current():
     if view:
         view.close()
 
-def close_file(filename):
+def close_file(filename, save=None): # save kwarg not used in ST
     view = sublime.active_window().find_open_file(filename)
     if view:
         view.set_scratch(True)
@@ -363,7 +358,6 @@ editor_methods = {
     'show_panel': show_panel,
     'open_file_dialog': open_file_dialog,
     'get_current_filename': get_current_filename,
-    'close_file': close_file,
     'get_position': get_position,
     'set_position': set_position,
     'get_line_and_cursor': get_line_and_cursor,
@@ -408,6 +402,14 @@ class RunUrtextCallCommand(sublime_plugin.TextCommand):
                 return _UrtextProjectList.handle_link(line, self.view.file_name(), get_position(), col_pos=cursor, identifier=self.view.id())
             _UrtextProjectList.run_action(urtext_call)
  
+class UrtextShowAllActionsCommand(sublime_plugin.TextCommand):
+
+    def run(self, edit):
+        global _UrtextProjectList
+        check_urtext_project_list()
+        if _UrtextProjectList:
+            _UrtextProjectList.run_action('show_all_actions')
+
 class UrtextReplace(sublime_plugin.TextCommand):
     def run(self, edit, start=0, end=0, replacement_text=''):
         self.view.replace(edit, sublime.Region(start, end), replacement_text)    

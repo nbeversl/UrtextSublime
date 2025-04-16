@@ -33,6 +33,7 @@ toggle_fold_single::ctrl+shift+0
 toggle_fold_all::ctrl+shift+9
 file_outline_dropdown::ctrl+shift+j
 show_all_actions::ctrl+shift+z
+global_keybindings::show_all_actions
 
 [[  >(| keybinding output >)
 .	+(| KEY_BINDINGS_TO_JSON() >)

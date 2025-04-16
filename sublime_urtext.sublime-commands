@@ -1,5 +1,6 @@
 [
     /* Starter Project */
+    { "caption": "Urtext: Show All Actions", "command": "urtext_show_all_actions"},
     { "caption": "Urtext: Create Starter Project", "command": "urtext_starter_project"},
       
     /* Development and Debugging */

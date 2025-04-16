@@ -37,14 +37,8 @@ class NodeMetadata:
                 start_position=m.start(),
                 end_position=m.start() + len(m.group().strip()))
 
-            parsed_contents = parsed_contents.replace(
-                m.group(),
-                ' '*len(m.group()), 
-                1)
-            remaining_contents = remaining_contents.replace(
-                m.group(),
-                '', 
-                1)
+            parsed_contents = parsed_contents.replace(m.group(), ' '*len(m.group()), 1)
+            remaining_contents = remaining_contents.replace(m.group(), '', 1)
 
         for m in syntax.hash_meta_c.finditer(parsed_contents):
             tag_self=False
@@ -72,14 +66,8 @@ class NodeMetadata:
                 start_position=m.start(), 
                 end_position=m.start() + len(m.group()))
             
-            parsed_contents = parsed_contents.replace(
-                m.group(),
-                ' '*len(m.group()),
-                1)
-            remaining_contents = remaining_contents.replace(
-                m.group(),
-                '',
-                1)
+            parsed_contents = parsed_contents.replace(m.group(), ' '*len(m.group()), 1)
+            remaining_contents = remaining_contents.replace(m.group(), '', 1)
 
         # inline timestamps:
         for m in syntax.timestamp_c.finditer(parsed_contents):
@@ -89,25 +77,13 @@ class NodeMetadata:
                 self.node,
                 start_position=m.start(),
                 end_position=m.start() + len(m.group()))
-            parsed_contents = parsed_contents.replace(
-                m.group(),
-                ' '*len(m.group()),
-                1)
-            remaining_contents = remaining_contents.replace(
-                m.group(),
-                '',
-                1)
+            parsed_contents = parsed_contents.replace(m.group(), ' '*len(m.group()), 1)
+            remaining_contents = remaining_contents.replace(m.group(), '', 1)
 
         #remove from contents entries without or entries that are nodes:
         for m in syntax.metadata_key_only_c.finditer(parsed_contents):
-            parsed_contents = parsed_contents.replace(
-                m.group(),
-                ' '*len(m.group()),
-                1)
-            remaining_contents = remaining_contents.replace(
-                m.group(),
-                '',
-                1)
+            parsed_contents = parsed_contents.replace(m.group(), ' '*len(m.group()), 1)
+            remaining_contents = remaining_contents.replace(m.group(), '', 1)
 
         for m in syntax.bold_text_c.finditer(parsed_contents):
             self.add_entry(
@@ -116,14 +92,8 @@ class NodeMetadata:
                 self.node,
                 start_position=m.start(),
                 end_position=m.start() + len(m.group()))
-            parsed_contents = parsed_contents.replace(
-                m.group(),
-                ' '*len(m.group()),
-                1)
-            remaining_contents = remaining_contents.replace(
-                m.group(),
-                '',
-                1)
+            parsed_contents = parsed_contents.replace(m.group(), ' '*len(m.group()), 1)
+            remaining_contents = remaining_contents.replace(m.group(), '', 1)
 
         for m in syntax.italic_text_c.finditer(parsed_contents):
             self.add_entry(
@@ -132,14 +102,8 @@ class NodeMetadata:
                 self.node,
                 start_position=m.start(),
                 end_position=m.start() + len(m.group()))
-            parsed_contents = parsed_contents.replace(
-                m.group(),
-                ' '*len(m.group()),
-                1)
-            remaining_contents = remaining_contents.replace(
-                m.group(),
-                '',
-                1)
+            parsed_contents = parsed_contents.replace(m.group(), ' '*len(m.group()), 1)
+            remaining_contents = remaining_contents.replace(m.group(), '', 1)
 
         self.add_system_keys()
         return remaining_contents, parsed_contents
@@ -211,9 +175,7 @@ class NodeMetadata:
                 end_position=inline_timestamps[-1].end_position)
 
     def get_first_value(self, keyname, order_by='default'):
-        values = self.get_values(
-            keyname,
-            order_by=order_by)
+        values = self.get_values(keyname, order_by=order_by)
         if values:
             return values[0]
 
@@ -236,9 +198,7 @@ class NodeMetadata:
                 values[v] +=1
         return values
 
-    def get_values(self,
-        keyname,
-        order_by=None):
+    def get_values(self, keyname, order_by=None):
 
         values = []
         entries = self.get_entries(keyname)

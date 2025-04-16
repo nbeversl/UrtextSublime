@@ -14,8 +14,15 @@ class KeybindingsToJson:
 				json_filepath = link.path
 				keybindings = {}
 				set_commands = []
+				urtext_context_setttings =  [{
+		                "key": "selector",
+		                "operator": "equal",
+		                "operand": "urtext"}]
 				for node in self.frame.included_nodes:
 					set_commands.extend(node.metadata.get_keys())
+					global_keybindings = node.metadata.get_values('global_keybindings')
+					if global_keybindings:
+						global_keybindings = [v.text for v in global_keybindings]
 					set_commands = list(set(set_commands))
 					for command in set_commands:
 						if command == 'title': continue
@@ -26,6 +33,8 @@ class KeybindingsToJson:
 								"keys": [key_binding.text],
 								"args": { "urtext_call" : command},
 								}
+							if key_binding not in global_keybindings:
+								keybindings[command]["context"] = urtext_context_setttings
 					current_settings = []
 					with open(json_filepath, "r") as f:
 						contents = f.read()
