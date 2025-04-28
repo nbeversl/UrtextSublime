@@ -9,18 +9,12 @@ contexts:
   main: 
     - include: customizations
     - include: syntax-main
-    - match: '(?<!\\)({\s*~)(?!\?)'
+    - match: '(?<!\\)({)(~)?(\?)?'
       captures:
-        1: punctuation.section.braces.begin.dynamic_inline_node_1.urtext
-        2: dynamic_indicator.urtext
-      push: dynamic-node
-    - match: '(?<!\\)({\s*~)(\?)'
-      captures:
-        1: punctuation.section.braces.begin.dynamic_inline_node_1.urtext
+        1: punctuation.section.braces.begin.inline_node_1.urtext
         2: dynamic_indicator.urtext
         3: missing_frame.urtext
-      push: inline-node-1
-    
+      push: dynamic-node    
     - match: '(?<!\\){'
       scope: punctuation.section.braces.begin.inline_node_1.urtext
       push: inline-node-1
@@ -313,23 +307,23 @@ contexts:
     - meta_scope: inline_node_2.urtext
     - include: customizations 
     - include: syntax-main
-    - match: '(?<!\\)}'
-      scope: punctuation.section.braces.end.inline_node_2.urtext
-      pop: true
     - match: '(?<!\\){'
       scope: punctuation.section.braces.begin.inline_node_3.urtext
       push: inline-node-3
+    - match: '(?<!\\)}'
+      scope: punctuation.section.braces.end.inline_node_2.urtext
+      pop: true
 
   inline-node-3: 
     - meta_scope: inline_node_3.urtext
     - include: customizations 
     - include: syntax-main
-    - match: '(?<!\\)}'
-      scope: punctuation.section.braces.end.inline_node_3.urtext
-      pop: true
     - match: '(?<!\\){'
       scope: punctuation.section.braces.begin.inline_node_4.urtext
       push: inline-node-4
+    - match: '(?<!\\)}'
+      scope: punctuation.section.braces.end.inline_node_3.urtext
+      pop: true
 
   inline-node-4: 
     - meta_scope: inline_node_4.urtext
@@ -366,13 +360,16 @@ contexts:
         8: link_destination.urtext
 
   node_pointer:
-    - match: '(\|)([\?]?)\s([^>]+)(>>)(\:\d{1,99})?'
+    - match: '(\|)(\?\s)?(\!\s)?([^>\^]+)( \^ )?([^>\^]+)?(>>)(\:\d{1,99})?'
       captures:
         1: link_opening_wrapper.urtext 
         2: missing_node.urtext
-        3: pointer_id.urtext
-        4: pointer_closing_wrapper.urtext
-        5: pointer_destination.urtext
+        3: action_node.urtext
+        4: pointer_id.urtext
+        5: link_uniquifier_marker.urtext
+        6: link_uniquifier.urtext
+        7: pointer_closing_wrapper.urtext
+        8: pointer_destination.urtext
 
   file_link:
     - match: '(\|)(\/)(\?)?(\s)([^\s][^;]*?)(\s>)((\:|\.)\d{1,99})?'

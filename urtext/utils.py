@@ -174,7 +174,7 @@ def get_all_links_from_string(string, node, project_list, include_http=False):
                 link.dest_node_position = int(match.group(8)[1:])
             except:
                 pass
-        if match.group(6) == syntax.pointer_closing_wrapper:
+        if match.group(7) == syntax.pointer_closing_wrapper:
             link.is_pointer = True  
         link.position_in_string = match.start()
         links.append(link)

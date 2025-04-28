@@ -148,18 +148,13 @@
             "font_style": "italic"
         },
         {
-            "scope": "punctuation.section.braces.begin.inline_node_1.urtext",
-            "foreground": "var(bright-green2)",
+            "scope": "missing_frame.urtext",
+            "foreground": "var(yellow)",
             "font_style": "bold"
         },
         {
-            "scope": "punctuation.section.braces.begin.dynamic_inline_node_1.urtext",
-            "foreground": "var(bright-green2)",
-            "font_style": "bold"
-        },        
-        {
             "scope": "dynamic_indicator.urtext",
-            "foreground": "var(yellow)",
+            "foreground": "var(bright-green2)",
             "font_style": "bold"
         },
         {
@@ -167,13 +162,18 @@
             "background": "var(slightly-brigther)",
         },
         {
+            "scope": "punctuation.section.braces.begin.inline_node_1.urtext",
+            "foreground": "var(bright-green2)",
+            "font_style": "bold"
+        }, 
+        {
             "scope": "punctuation.section.braces.begin.inline_node_2.urtext",
             "foreground": "var(bright-green2)",
             "font_style": "bold"
         },
         {
             "scope": "punctuation.section.braces.begin.inline_node_3.urtext",
-            "foreground": "var(wrapper3)",
+            "foreground": "var(bright-green2)",
             "font_style": "bold"
         },
         {

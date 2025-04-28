@@ -65,14 +65,14 @@ class UrtextFrame:
         if target.is_virtual and target.matching_string == '@self':
             source_node = self.project.get_node(self.source_node.id)
             if source_node:
-                oldest_timestamp = source_node.metadata.get_oldest_timestamp()
-                if oldest_timestamp:
-                    return oldest_timestamp.wrapped_string
+                newest_timestamp = source_node.metadata.get_newest_timestamp()
+                if newest_timestamp:
+                    return newest_timestamp.wrapped_string
         if target.is_node:
             target_node = self.project.get_node(target.node_id)
-            oldest_timestamp = target_node.metadata.get_oldest_timestamp()
-            if oldest_timestamp:
-                return oldest_timestamp.wrapped_string
+            newest_timestamp = target_node.metadata.get_newest_timestamp()
+            if newest_timestamp:
+                return newest_timestamp.wrapped_string
         return ''
 
     def process_output(self):
@@ -170,7 +170,7 @@ class UrtextFrame:
 
     def post_process(self, target, output):
         output = ''.join([
-            # self.preserve_timestamp_if_present(target),
+            self.preserve_timestamp_if_present(target),
             self.preserve_title_if_present(target),
             output])
         if target.is_virtual and target.matching_string == '@self':

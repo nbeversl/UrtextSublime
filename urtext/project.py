@@ -99,7 +99,10 @@ class UrtextProject:
     def get_propagated_settings(self, _called_from_project_list=False):
         propagated_settings = self.get_setting_as_text('propagate_settings', _called_from_project_list=_called_from_project_list)
         if '_all' in propagated_settings:
-            return self.get_settings_keys()
+            all_settings = self.get_settings_keys()
+            if 'project_title' in all_settings:
+                all_settings.remove('project_title')
+            return all_settings
         return propagated_settings
 
     def initialize(self, visible=True, make_current=False, action=None):
@@ -236,7 +239,6 @@ class UrtextProject:
 
         for n in buffer.nodes:
             if not self._resolve_duplicate_ids(n):
-                self.drop_buffer(buffer)
                 return False
 
         self.drop_buffer(buffer)     
@@ -362,7 +364,7 @@ class UrtextProject:
         if duplicate_titled_nodes:
             for d in duplicate_titled_nodes:
                 old_id = d.id
-                resolution = d.resolve_id(existing_nodes=[f for f in self.nodes.values() if d != f])
+                resolution = d.resolve_id(existing_nodes=self.nodes.values())
                 if resolution is False:
                     return False
                 del self.nodes[old_id]
@@ -471,9 +473,6 @@ class UrtextProject:
         self.run_hook('on_buffer_dropped', buffer.filename)
         if buffer.identifier and buffer.identifier in self.buffers:
             del self.buffers[buffer.identifier]
-        for n in buffer.nodes:
-            if n.id in self.nodes:
-                self._drop_node(self.nodes[n.id])
         file_nodes = [n for n in self.nodes.values() if n.filename == buffer.filename]
         for node in file_nodes:
             self._drop_node(node)
@@ -481,16 +480,16 @@ class UrtextProject:
             del self.files[buffer.filename]
 
     def _drop_node(self, node):
+        self._remove_dynamic_metadata_entries(node.id)
+        if node.id in self.project_settings_nodes:
+            self.project_settings_nodes.remove(node.id)
+        self._remove_sub_tags(node.id)
+        if node.id in self.frames:
+            del self.frames[node.id]
+        self.run_hook('on_node_dropped', node)
         if node.id in self.nodes:
-            self._remove_dynamic_metadata_entries(node.id)
-            if node.id in self.project_settings_nodes:
-                self.project_settings_nodes.remove(node.id)
-            self._remove_sub_tags(node.id)
-            if node.id in self.frames:
-                del self.frames[node.id]
-            self.run_hook('on_node_dropped', node)
             del self.nodes[node.id]
-            del node
+        del node
 
     def delete_file(self, filename):
         """
@@ -1013,7 +1012,7 @@ class UrtextProject:
 
     def get_all_values_for_key_with_frequency(self, key):
         values = {}
-        for node in self.nodes.values():
+        for node in list(self.nodes.values()):
             values_occurrences = node.metadata.get_values_with_frequency(key)
             for v in values_occurrences:
                 values[v.text] = values.get(v.text, 0)
@@ -1170,17 +1169,17 @@ class UrtextProject:
         modified_buffers = set()
         dynamic_nodes = set()
         buffer = self._parse_file(filename)
-        if buffer is not None:
+        if buffer:
             for node in buffer.nodes:
                 frames = self._get_frames(target_node=node)
                 for frame in frames:
                     m_buffers, d_nodes = self._run_frame(frame, flags=flags, buffer=buffer)
                     modified_buffers.update(m_buffers)
                     dynamic_nodes.update(d_nodes)
-                    for b in modified_buffers:
-                        for node in b.nodes:
-                            self._verify_frame_present_if_marked(node.id, buffer=b)
             modified_buffers.add(buffer)
+            for b in modified_buffers:
+                for node in b.nodes:
+                    self._verify_frame_present_if_marked(node.id, buffer=b)
             for b in list(modified_buffers):
                 verified_links_content = self._reverify_links(b.filename, buffer=b)
                 b.set_buffer_contents(verified_links_content)

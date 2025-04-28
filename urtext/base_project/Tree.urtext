@@ -43,7 +43,7 @@ class TreeCall:
                             ))
                     continue
                 else:
-                    if this_node.name[:11] == '! RECURSION':
+                    if this_node.name[:11] == 'RECURSION':
                         tree_render += "%s%s" % (pre, this_node.name + '\n')    
                         continue
 
@@ -109,11 +109,11 @@ class TreeCall:
                     next_childen_node = self._duplicate_tree(new_tree_node, ancestors=ancestors)
                     next_childen_node.parent = from_tree_node
                 else:
-                    new_tree_node = self.Node('! RECURSION (from tree duplication) : '+ child.id + ' >')
+                    new_tree_node = self.Node(' RECURSION : '+ child.id + ' >')
                     new_tree_node.parent = from_tree_node
                     new_tree_node.position = child.start_position
         else:
-            from_tree_node = self.Node('! MISSING NODE: '+from_tree_node.name)
+            from_tree_node = self.Node('MISSING NODE: '+from_tree_node.name)
             from_tree_node.position = 0
         return from_tree_node
 
