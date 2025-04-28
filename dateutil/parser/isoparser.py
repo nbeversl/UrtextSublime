@@ -9,12 +9,12 @@ ISO-8601 specification.
 """
 from datetime import datetime, timedelta, time, date
 import calendar
-from Urtext.dateutil import tz
+from UrtextSublime.dateutil import tz
 
 from functools import wraps
 
 import re
-import Urtext.six.six as six
+import UrtextSublime.six.six as six
 
 __all__ = ["isoparse", "isoparser"]
 

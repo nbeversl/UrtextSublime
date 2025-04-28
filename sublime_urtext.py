@@ -1,5 +1,5 @@
 from sublime_plugin import EventListener, ViewEventListener
-from Urtext.urtext.project_list import ProjectList
+from UrtextSublime.urtext.project_list import ProjectList
 import sublime_plugin
 import subprocess
 import sublime

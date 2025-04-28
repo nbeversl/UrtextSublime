@@ -1,4 +1,4 @@
-from Urtext.six.six import PY2
+from UrtextSublime.six.six import PY2
 
 from functools import wraps
 

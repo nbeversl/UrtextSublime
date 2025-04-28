@@ -5,7 +5,7 @@ import calendar
 import operator
 from math import copysign
 
-from Urtext.six.six import integer_types
+from UrtextSublime.six.six import integer_types
 from warnings import warn
 
 from ._common import weekday
