@@ -12,6 +12,9 @@ class NewFileNode:
 		filename = self.project_list.run_editor_method('get_current_filename')
 		if filename:
 			path = self.os.path.dirname(filename)
+		if path is None:
+			if self.project_list.current_project:
+				path = self.project_list.current_project.entry_path
 		if path:
 			self.project_list.set_current_project(path)
 			new_urtext_file = self.project_list.current_project.new_file_node(path=path)

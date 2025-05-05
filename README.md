@@ -2,37 +2,25 @@
 
 ## What Urtext Is
 
-Urtext is a Python library wrapping and syntax, parser and compiler for plaintext writing. It is for prose, research, documentation, journaling, project organization, notetaking, and any other writing or information management that can be done in text form.
+Urtext /ˈʊrtekst/ is an open-source library for plaintext writing, research, documentation, knowledge bases, journaling, Zettelkasten, project/personal organization, note taking, a lightweight database substitute, or any other writing or information management that can be done in text format.
 
-The core library has no user interface and requires a text editor implementation. This package is an implementation for desktop (PC/Mac/Linux) using [Sublime Text](https://www.sublimetext.com/.
+The core library has no user interface and requires a text editor implementation. This package is an implementation for desktop (PC/Mac/Linux) using [Sublime Text](https://www.sublimetext.com/).
 
-## Documentation
-
-A documentation both of Urtext and this Sublime Text implementation is at https://urtext.co/.
+[![Starter Project example](assets/starter_project_example.png)](https://urtext.co)
 
 ## Installation
 
-For experienced Sublime Text users, note that this package is no longer updated on [Package Control](https://urtext.co/installation-and-setup/sublime-text/installation-and-setup-in-sublime-text/). It should be installed manually.
+### Using Package Control
 
+***For experienced Sublime Text users, note this package is no longer updated on [packagecontrol.io](https://urtext.co/installation-and-setup/sublime-text/installation-and-setup-in-sublime-text/) and has its own Package Control channel.***
 
-### Basic (most users):
-
-1. Download the Urtext package as a .ZIP file.
-2. Unzip the file
-3. Rename the folder to `Urtext` (this step is required)
-4. Move the folder to the Sublime Text Packages folder:
-- Windows: `%APPDATA%\Sublime Text`
-- Mac: `~/Library/Application Support/Sublime Text/Packages` On Mac, the ~/Library directory is hidden by default. To navigate there, select the Go ▶ Go to Folder menu item in Finder, and type in `~/Library`.
-- Linux: `~/.config/sublime-text`
+See instructions at https://urtext.co/setup/sublime-text/.
 
 ### With Git:
 
-Install using Git if you are developer, want to contribute, want to pull updates without re-downloading, or want to be able to switch to the development branch.
+Clone this repository into the Sublime Text Packages folder. (See above for the folder location depending on operating system.)
 
-1. Clone this repository into the Sublime Text Packages folder. (See above for the folder location depending on operating system.)
-2. Rename the folder `Urtext` (this step is required)
-
-## Getting Started
+## Starter Project & Documentation
 
 - Restart Sublime Text
 - Press ⌘/Ctrl + ⇧ + P to access the Command Pallete. 
@@ -40,19 +28,13 @@ Install using Git if you are developer, want to contribute, want to pull updates
 - Select a folder for the starter project
 - The project will open and display its start page.
 
+See https://urtext.co/documentation/ for more information.
+
+## Implementations
+
+There is also an implementation for iOS using [Pythonista](https://omz-software.com/pythonista/), [urtext_pythonista](https://github.com/nbeversl/urtext_pythonista).
+
 ## Questions and Issues
 
-Questions and issues may be submitted either to https://urtext.co/support/ or to https://github.com/nbeversl/urtext-sublime/issues.
-
-## Versioning
-
-[SemVer](http://semver.org/).
-
-## License
-
-Urtext is licensed under the GNU 3.0 License.
-
-## Acknowledgments
-
-Hat tip to @c0fec0de for [anytree](https://github.com/c0fec0de/anytree).
+Questions and issues may be submitted either to https://urtext.co/support/ or to https://github.com/nbeversl/UrtextSublime/issues.
 

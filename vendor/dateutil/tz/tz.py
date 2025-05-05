@@ -16,9 +16,9 @@ import bisect
 import weakref
 from collections import OrderedDict
 
-import UrtextSublime.six.six as six
-from UrtextSublime.six.six import string_types
-from UrtextSublime.six.six.moves import _thread
+import UrtextSublime.vendor.six.six as six
+from UrtextSublime.vendor.six.six import string_types
+from UrtextSublime.vendor.six.six.moves import _thread
 from ._common import tzname_in_python2, _tzinfo
 from ._common import tzrangebase, enfold
 from ._common import _validate_fromutc_inputs

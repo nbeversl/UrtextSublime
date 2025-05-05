@@ -1,8 +1,7 @@
-from .sublime_urtext import get_line_and_cursor, highlight_region, position_file
+from UrtextSublime.implementation.editor_methods import get_line_and_cursor, highlight_region, position_file
+from UrtextSublime.implementation.project_list_manager import _UrtextProjectList, initialize_project_list
 from sublime_plugin import EventListener, TextCommand
-from sublime_urtext import _UrtextProjectList
 import sublime, sublime_plugin
-from .sublime_urtext import initialize_project_list
 
 class ToggleTraverse(sublime_plugin.TextCommand):
 

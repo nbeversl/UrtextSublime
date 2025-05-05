@@ -4,8 +4,8 @@ import sys
 import shutil
 
 if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'sublime.txt')):
-    custom_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..')
-    sys.path.append(custom_path)
+    sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../vendor'))
+    sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
 
 from urtext.project import UrtextProject
 from urtext.call import UrtextCall
