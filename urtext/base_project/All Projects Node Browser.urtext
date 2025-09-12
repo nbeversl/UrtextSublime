@@ -16,7 +16,7 @@ class AllProjectsNodeBrowser:
 
 		def on_highlight(index):
 			if self.selection_has_changed:
-				nodes[index].project.run_editor_method('preview_urtext_node', self.selections[index][0])
+				nodes[index].project.preview_node(self.selections[index][0])
 			else:
 				self.selection_has_changed = True
 

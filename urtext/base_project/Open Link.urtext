@@ -1,0 +1,17 @@
+Open Link _
+
+%%Python
+
+class OpenLink:
+
+	name = 'Open Link'
+	inline_safe = True
+
+	def run(self):
+		full_line, col_pos, file_pos, [_, _] = self.project_list.run_editor_method('get_line_and_cursor')
+		filename = self.project_list.run_editor_method('get_current_filename')
+		return self.project_list.handle_link(full_line, filename, file_pos, col_pos=col_pos)
+
+ThisProject.add_action(OpenLink)
+
+%%

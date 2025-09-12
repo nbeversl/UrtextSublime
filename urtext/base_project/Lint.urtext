@@ -54,7 +54,6 @@ class UrtextLint:
 	
 	def lint(self, urtext_buffer):
 		lines_between_nodes = 2
-		strip_blank_lines = True
 		separate_opening_braces = False
 		left_padding = 1
 		if self.settings:
@@ -71,46 +70,45 @@ class UrtextLint:
 		separated_lines = []
 		do_not_concat = []
 		contents = urtext_buffer.contents
-		lines = self.re.split(''.join([
-			'(\n|\})|(',
-			'(?:'+self.syntax.metadata_key+ '\:\:)?\{~?\??)']), contents)
+		lines = contents.split('\n')
 		length = 0
 		skip_lines = []
 		blank_lines = 0
 		lines_between_nodes += 1
 		for index, l in enumerate(lines):
-			if l is None:
-				continue
 			if index in skip_lines:
-				length += len(lines[index])
+				length += len(lines[index]) + 1
 				continue
 			if l.strip() == '':
-				node = urtext_buffer.get_node_from_position(length)
+				node = urtext_buffer.get_node_from_position(length+1)
 				if self.is_embedded_syntax(node, length):
 					separated_lines.append({
 						'contents': l,
 						'embedded' : True,
 						})
-				elif '\n' in l:
-					separated_lines.append({'contents': '\n' })
+				else:
+					separated_lines.append({
+						'contents': l,
+						})
 					blank_lines += 1
-				length += len(l)
+				length += len(l) + 1
 				continue
-			elif l.strip()[0] == '{':
+
+			if l.strip()[0] == '{':
 				margin = len(l) - len(l.lstrip())
 				node = urtext_buffer.get_node_from_position(length+margin+1)
 				if node is None or self.is_embedded_syntax(node, length+1):
 					separated_lines.append({
-						'contents': l,
+						'contents': self.remove_trailing_space_before_bracket(l),
 						'embedded' : True,
 					})
-					length += len(l)
+					length += len(l) + 1
 					continue
-				if index < len(lines) - 2 and lines[index+1].strip() and lines[index+1].strip()[0] != '{':
-					contents = (l.strip() + (' ' * left_padding) + lines[index+1].strip()) if not node.is_dynamic else (l + lines[index+1])
-					skip_lines.append(index+1)
-				else:
-					contents = l.strip() if not node.is_dynamic else l
+				# if index < len(lines) - 2 and lines[index+1].strip() and lines[index+1].strip()[0] != '{':
+				# 	contents = (l.strip() + (' ' * left_padding) + lines[index+1].strip()) if not node.is_dynamic else (l + lines[index+1])
+				# 	skip_lines.append(index+1)
+				# else:
+				contents = l.strip() if not node.is_dynamic else l
 				if blank_lines > lines_between_nodes:
 					for back in range(len(separated_lines) - 2, 0, -1):
 						line = separated_lines[back]
@@ -118,37 +116,26 @@ class UrtextLint:
 							do_not_concat.append(back)
 						else: 
 							break
-				elif blank_lines < lines_between_nodes:
-					for i in range(blank_lines, lines_between_nodes):
-						separated_lines.append({'contents': '\n' })
 				elif len(separated_lines) and '\n' not in separated_lines[-1]['contents']:
 					separated_lines.append({'contents': '\n' })
 				separated_lines.append({
-					'contents': contents,
+					'contents': self.remove_trailing_space_before_bracket(contents),
 					'nested': node.nested,
 					})
-				length += len(l)
+				length += len(l) + 1
 				blank_lines = 0
 				continue
 
-			elif len(l) > 2 and "::{" in l:
+			if len(l) > 2 and "::{" in l:
 				blank_lines = 0
 				node = urtext_buffer.get_node_from_position(length + len(l.split('::{')[0]) + 4)
 				if node is None or self.is_embedded_syntax(node, length):
 					separated_lines.append({
-					'contents': l,
-					'embedded' : True,
+						'contents': self.remove_trailing_space_before_bracket(l),
+						'embedded' : True,
 					})
-					length += len(l)
+					length += len(l) + 1
 					continue
-				if index < len(lines) - 2 and lines[index+1] and lines[index+1] != '{':
-					contents = l.lstrip() + lines[index+1]
-					skip_lines.append(index+1)
-					if index < len(lines) - 3 and lines[index+2] and '}' in lines[index+2]:
-						contents += lines[index+2]
-						skip_lines.append(index+2)
-				else:
-					contents = l.lstrip()
 				if not node.is_meta:
 					nested = node.nested
 				else:
@@ -156,23 +143,38 @@ class UrtextLint:
 					 	nested = node.parent.nested
 					 else:
 					 	nested = 0
-				separated_lines.append({
-					'contents': contents,
-					'nested': nested,
-					'padding': (left_padding + 1) if nested > 0 else 0,
+
+				if index < len(lines) - 2 and lines[index+1] != '{':
+					separated_lines.append({
+						'contents': self.remove_trailing_space_before_bracket(l),
+						'nested': nested,
+						'padding': (left_padding + 1) if nested > 0 else 0,
 					})
-				length += len(l)
+					separated_lines.append({
+						'contents': self.remove_trailing_space_before_bracket(lines[index+1]),
+						'nested': nested + 1,
+						'padding': (left_padding + 1) if nested > 0 else 0,
+					})
+					skip_lines.append(index+1)
+					if index < len(lines) - 3 and lines[index+2] and '}' in lines[index+2]:
+						separated_lines.append({
+							'contents': self.remove_trailing_space_before_bracket(lines[index+2]),
+							'nested': nested,
+							'padding': (left_padding + 1) if nested > 0 else 0,
+						})
+						skip_lines.append(index+2)
+				length += len(l) + 1
 				continue
 
-			elif l == '}':
+			if l.strip() == '}':
 				blank_lines = 0
 				node = urtext_buffer.get_node_from_position(length + (len(l)) - 1)
 				if node is None or self.is_embedded_syntax(node, length):
 					separated_lines.append({
-						'contents': l,
+						'contents': l.strip(),
 						'embedded' : True,
 					})
-					length += len(l)
+					length += len(l) + 1
 					continue
 				# future:
 				# add whitespace optionally at end of nodes
@@ -193,50 +195,51 @@ class UrtextLint:
 					'contents': l.strip(),
 					'nested': nested,
 					})
-				length += len(l)
+				length += len(l) + 1
 				continue
 			
-			else: # any other line
-				blank_lines = 0
-				node = urtext_buffer.get_node_from_position(length+1)
-				if not node: # compact
-					node = urtext_buffer.get_node_from_position(length+len(l))
-				if not node:
-					separated_lines.append({'contents': l})
-					length += len(l)
-					continue
-				if self.is_embedded_syntax(node, length):
-					separated_lines.append({
-						'contents': l,
-						'embedded' : True,
-					})
-					length += len(l)
-					continue
-				if not node.is_meta:
-					nested = node.nested
-				else:
-					if node.parent:
-					 	nested = node.parent.nested
-					else:
-					 	nested = 0
-				added_text = l.strip()
-				if not node.is_dynamic:
-					if index < (len(lines) - 2) and '}' in lines[index+1]:
-						added_text = l.lstrip() + lines[index+1]
-						skip_lines.append(index+1)
-				else:
-					added_text = l
+			# any other line
+			blank_lines = 0
+			node = urtext_buffer.get_node_from_position(length+1)
+			if not node: # compact
+				node = urtext_buffer.get_node_from_position(length+len(l))
+			if not node:
+				separated_lines.append({'contents': l})
+				length += len(l) + 1
+				continue
+			if self.is_embedded_syntax(node, length):
 				separated_lines.append({
-					'contents': added_text,
-					'nested': nested,
-					'padding': (left_padding + 1) if node.nested > 0 else 0,
-					})
-				length += len(l)
+					'contents': l,
+					'embedded' : True,
+				})
+				length += len(l) + 1
+				continue
+			if not node.is_meta:
+				nested = node.nested
+			else:
+				if node.parent:
+				 	nested = node.parent.nested
+				else:
+				 	nested = 0
+			added_text = l.strip()
+			# if not node.is_dynamic:
+			# 	if index < (len(lines) - 2) and lines[index+1] and '}' in lines[index+1]:
+			# 		added_text = l.lstrip() + lines[index+1]
+			# 		skip_lines.append(index+1)
+			# else:
+			# 	added_text = l
+			separated_lines.append({
+				'contents': self.remove_trailing_space_before_bracket(added_text),
+				'nested': nested,
+				'padding': (left_padding + 1) if node.nested > 0 else 0,
+				})
+			length += len(l) + 1
 
 		linted_lines = []
 		blank_lines = 0
 
 		for index, s in enumerate(separated_lines):
+			# print(s)
 			if index in do_not_concat:
 				continue
 			contents = s['contents']
@@ -253,7 +256,7 @@ class UrtextLint:
 				if blank_lines < lines_between_nodes:
 					linted_lines.append(linted_line)
 					blank_lines += 1
-		return ''.join(linted_lines)
+		return '\n'.join(linted_lines)
 
 	def is_embedded_syntax(self, node, file_position):
 		if not node: return False
@@ -263,6 +266,17 @@ class UrtextLint:
 			if file_position in range(pos0, pos1):
 				return True
 		return False
+
+	def remove_trailing_space_before_bracket(self, line):
+			if line.strip()[-1] == '}':
+				line = ''.join([
+					line[:-1].strip(),
+					'  ',
+					'}'
+					])
+			# print(line)
+			return line.strip()
+
 
 ThisProject.add_call(UrtextLint)
 %%

@@ -134,7 +134,7 @@ class ProjectList:
             message = "Project is still compiling"
         else:
             message = "No link"
-        return self.run_editor_method('popup', message)
+        return self.run_editor_method('info_message', message)
 
     def on_modified(self, filename):
         return self.execute(self._on_modified, filename)
@@ -177,7 +177,7 @@ class ProjectList:
                 project.title() != self.current_project.title()):
             self.current_project = project
             if visible:
-                self.run_editor_method('popup', 'Switched to project: %s ' % self.current_project.title())
+                self.run_editor_method('info_message', 'Switched to project: %s ' % self.current_project.title())
             project_paths = self.current_project.get_settings_paths()
             if project_paths and run_hook:
                 self.current_project.on_selected()
@@ -248,11 +248,11 @@ class ProjectList:
         destination_project = self.get_project(destination_project_name_or_path)
 
         if not destination_project:
-            self.run_editor_method('popup', 'Destination project was not found.')
+            self.run_editor_method('info_message', 'Destination project was not found.')
             return None
 
         if old_filename not in source_project.files:
-            self.run_editor_method('popup', 'File not included in the current project.')
+            self.run_editor_method('info_message', 'File not included in the current project.')
             return None
 
         moved_nodes = list(source_project.files[old_filename].nodes)
@@ -281,7 +281,7 @@ class ProjectList:
                                 old_filename,
                                 new_filename)
 
-        self.run_editor_method('popup', 'File moved.')
+        self.run_editor_method('info_message', 'File moved.')
         self.run_editor_method('close_file', old_filename, save=False)
         return changed_ids
 
@@ -346,7 +346,7 @@ class ProjectList:
         return False
 
     def handle_message(self, message):
-        self.run_editor_method('popup', message)
+        self.run_editor_method('info_message', message)
         print(message)
 
     def add_call(self, call):
@@ -405,11 +405,11 @@ class ProjectList:
     def run_action(self, selection):
         selection = selection.replace(' ', '_').lower()
         if self.current_project and selection in self.current_project.actions:
-            if self.current_project.actions[selection].thread_safe:
+            if self.current_project.actions[selection].inline_safe:
                 return self.current_project.actions[selection].run()
             return self.execute(self.current_project.actions[selection].run)
         if selection in self.actions:
-            if self.actions[selection].thread_safe:
+            if self.actions[selection].inline_safe:
                 return self.actions[selection].run()
             self.execute(self.actions[selection].run)
 

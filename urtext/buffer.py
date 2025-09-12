@@ -190,6 +190,9 @@ class UrtextBuffer:
         return new_node
 
     def _get_contents(self):
+        buffer_setting = self.project.get_single_setting('use_buffer')
+        if buffer_setting and buffer_setting.true():
+            return self.project.run_editor_method('get_buffer', self.filename)
         return self.contents
 
     def set_buffer_contents(self, new_contents):

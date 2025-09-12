@@ -27,6 +27,8 @@ def get_file_extension(filename):
         return os.path.splitext(filename)[1].lstrip('.')
 
 def close_inactive(extensions='urtext'):
+    pass
+    #todo re-implement
     for window in sublime.windows():
         for sheet in window.sheets():
             if not sheet.is_selected():
@@ -60,9 +62,9 @@ def save_file(filename):
 
 def set_clipboard(text):
     sublime.set_clipboard(text)
-    show_popup(text + '\ncopied to the clipboard')
+    info_message(text + '\ncopied to the clipboard')
 
-def show_popup(text):
+def info_message(text):
     view = get_view()
     if view:
         view = sublime.active_window().active_view()
@@ -167,6 +169,15 @@ def refresh_views(file_list):
         if view:
             view.window().run_command('revert')
 
+def get_open_files():
+    open_files = {}
+    for window in sublime.windows():
+        for view in window.views():
+            file_name = view.file_name()
+            if file_name:
+                open_files[file_name] = view.is_dirty()
+    return open_files
+
 def show_panel(selections, callback, on_highlight=None):
     """ shows a quick panel with an option to cancel if -1 """
     window = sublime.active_window()
@@ -264,15 +275,11 @@ def popup(content):
         markup = popup_markup % content
         view.show_popup(markup, max_width=512, max_height=512, location=get_position())
 
-# toto fix
-# def preview_urtext_node(node_id):
-#     window = sublime.active_window()
-#     if _UrtextProjectList.current_project:
-#         filename, node_position = _UrtextProjectList.current_project.get_file_and_position(node_id)
-#         if filename:
-#             window.open_file(filename, flags=sublime.TRANSIENT)
-#             preview = window.active_sheet().view()
-#             focus_position(preview, character=node_position)
+def preview_file_at_position(filename, position):
+    window = sublime.active_window()
+    window.open_file(filename, flags=sublime.TRANSIENT)
+    preview = window.active_sheet().view()
+    focus_position(preview, character=position)
 
 def focus_position(focus_view, line=None, character=None, highlight_range=None):
     if not focus_view.is_loading():
@@ -332,7 +339,7 @@ editor_methods = {
     'get_buffer' : get_buffer,
     'set_buffer' : set_buffer,
     'replace' : replace,
-    'popup' : show_popup,
+    'info_message' : info_message,
     'close_current': close_current,
     'write_to_console' : print,
     'get_current_folder': get_current_folder,
@@ -342,8 +349,9 @@ editor_methods = {
     'retarget_view' : retarget_view,
     'select_file_or_folder': select_file_or_folder,
     'refresh_files' : refresh_views,
-    # 'preview_urtext_node': preview_urtext_node,
-    # 'close_inactive': close_inactive,
+    'get_open_files': get_open_files,
+    'preview_file_at_position' : preview_file_at_position,
+    'close_inactive': close_inactive,
     'show_panel': show_panel,
     'open_file_dialog': open_file_dialog,
     'get_current_filename': get_current_filename,
@@ -351,7 +359,6 @@ editor_methods = {
     'set_position': set_position,
     'get_line_and_cursor': get_line_and_cursor,
     'scratch_buffer': scratch_buffer,
-    'popup': popup,
     'hover_popup': hover_popup,
     'get_selection': get_selection
 }

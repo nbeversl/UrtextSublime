@@ -5,7 +5,7 @@ Open Home _
 class OpenHome:
    
 	name = "Open Home"
-	thread_safe = True
+	inline_safe = True
 
 	def run(self):
 		self.current_project().open_home()

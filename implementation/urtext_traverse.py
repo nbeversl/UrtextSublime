@@ -1,5 +1,5 @@
 from UrtextSublime.implementation.editor_methods import get_line_and_cursor, highlight_region, position_file
-from UrtextSublime.implementation.project_list_manager import _UrtextProjectList, initialize_project_list
+from UrtextSublime.implementation.project_list_manager import check_urtext_project_list
 from sublime_plugin import EventListener, TextCommand
 import sublime, sublime_plugin
 

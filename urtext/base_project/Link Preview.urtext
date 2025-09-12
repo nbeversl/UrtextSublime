@@ -4,7 +4,7 @@ Link Preview _
 class LinkPreviewOnHover:
 
 	name = "Link Preview On Hover"
-	thread_safe = True
+	inline_safe = True
 
 	def on_hover(self, string, filename, file_pos, col_pos=0, identifier=None):
 		node = self.current_project().get_node_from_position(filename, file_pos)
@@ -14,5 +14,5 @@ class LinkPreviewOnHover:
 			if dest_node:
 				self.current_project().run_editor_method('hover_popup', dest_node.contents_with_contained_nodes(), file_pos)
 
-ThisProject.add_action(LinkPreviewOnHover)
+# ThisProject.add_action(LinkPreviewOnHover)
 %%

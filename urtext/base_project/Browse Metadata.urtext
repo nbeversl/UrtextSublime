@@ -4,7 +4,7 @@ Browse Metadata _
 class BrowseMetadata:
 
 	name = 'Browse Metadata'
-	thread_safe = True
+	inline_safe = True
 
 	def run(self):
 		if not self.project_list.current_project.get_single_setting('meta_browser_key'):

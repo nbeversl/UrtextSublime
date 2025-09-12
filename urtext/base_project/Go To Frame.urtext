@@ -4,7 +4,6 @@ Go To Frame _
 class GoToFrame:
 
 	name = "Go to Frame"
-	thread_safe = True
 
 	def run(self):
 		filename = self.project_list.run_editor_method('get_current_filename')

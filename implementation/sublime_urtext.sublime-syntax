@@ -14,7 +14,7 @@ contexts:
         1: punctuation.section.braces.begin.inline_node_1.urtext
         2: dynamic_indicator.urtext
         3: missing_frame.urtext
-      push: dynamic-node    
+      push: dynamic-node
     - match: '(?<!\\){'
       scope: punctuation.section.braces.begin.inline_node_1.urtext
       push: inline-node-1
@@ -47,9 +47,6 @@ contexts:
 
     - match: <[^!\s-]
       push: timestamp
-
-    - match: <!{1}
-      push: system-message
       
     # Embedded Syntaxes
     - match: '%%Python'
@@ -159,15 +156,6 @@ contexts:
   timestamp:
     - meta_scope: entity.name.struct.timestamp.urtext
     - match: '>'
-      pop: true
-
-  system-message:
-    - meta_scope: entity.name.struct.system-message.urtext
-    - include: node_link
-    - include: file_link
-    - match: <
-      push: timestamp
-    - match: '!>'
       pop: true
 
   metadata-timestamp:

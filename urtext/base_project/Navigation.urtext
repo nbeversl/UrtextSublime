@@ -9,7 +9,7 @@ class Navigation:
 	name = ["NAVIGATION"]
 	project_list_instance = True
 	import threading
-	thread_safe = True
+	inline_safe = True
 
 	def __init__(self, project_list):
 		super().__init__(project_list)
@@ -137,7 +137,7 @@ class NavigateBackward:
 class NavigateToNextNode:
 
 	name = "Next Node"
-	thread_safe = True
+	inline_safe = True
 	
 	def run(self):
 		position = self.run_editor_method('get_position')
@@ -152,7 +152,7 @@ class NavigateToNextNode:
 class NavigateToPreviousNode:
 
 	name = "Previous Node"
-	thread_safe = True
+	inline_safe = True
 	
 	def run(self):
 		position = self.run_editor_method('get_position')

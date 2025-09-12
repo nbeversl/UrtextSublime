@@ -2,12 +2,13 @@
     "name": "Urtext Sixteen",
     "variables":
     {
-        "paper": "hsl(9, 4%, 90%)",
+        // "paper": "hsl(9, 4%, 90%)",
         "background": "var(paper)",
         "foreground": "var(grey5)",
         "raw": "var(white2)",
         "highlight-yellow": "hsl(54, 95%, 67%)",
-        "yellow": "hsl(54, 95%, 67%)",
+        // "yellow": "hsl(54, 95%, 67%)",
+
         "meta-key": "var(foreground)",
         "value-separator": "var(foreground)",
         "meta-value": "var(foreground)",
@@ -21,11 +22,6 @@
         "timestamp": "var(grey3)",
         "embed-marker": "var(red)",
         "trigger": "var(red)",
-        "wrapper1": "var(blue-lighter2)",
-        "wrapper2": "var(aqua-green2)",
-        "wrapper3": "var(lime2)",
-        "wrapper4": "var(bright-green2)",
-        "wrapper5": "var(deep_blue2)",
         "open-frame": "var(grey6)",
         "close-frame": "var(grey6)",
         "call-key": "var(foreground)",
@@ -41,11 +37,11 @@
         "red": "hsl(0, 100%, 50%)",
         "blue-lighter2": "hsl(225, 40%, 85%)",
         "bright-green2": "hsl(113, 40%, 70%)",
-        "aqua-green2": "hsl(161, 20%, 77%)",
+        "node-wrapper": "hsl(287, 80%, 77%)",
         "lime2": "hsl(164, 40%, 46%)",
-        "deep_blue2": "hsl(285, 40%, 85%)",
         "grey3": "hsl(0, 0%, 5%)",
-        "white2": "hsl(0, 0%, 97%)"
+        "white2": "hsl(0, 0%, 97%)",
+        "bg_shaded": "color(hsl(0, 0%, 40%) a(0.1))",
     },
     "globals":
     {
@@ -81,8 +77,22 @@
         },
         {
             "scope": "entity.name.struct.timestamp.urtext",
-            "foreground": "var(timestamp)"
+            "foreground": "var(timestamp)",
+            "background": "var(bg_shaded)"
         },
+        {
+            "scope": "link_opening_wrapper.urtext",
+            "font_style": "bold"
+        },
+        {
+            "scope": "link_closing_wrapper.urtext",
+            "font_style": "bold"
+        },
+         {
+            "scope": "pointer_closing_wrapper.urtext",
+            "font_style": "bold"
+        },
+
         {
             "scope": "link_id.urtext",
             "foreground": "var(link)"
@@ -100,10 +110,6 @@
             "scope": "link.other-project.urtext",
             "font_style": "bold",
             "foreground": "var(other-project-link)"
-        },
-        {
-            "scope": "file_link.urtext",
-            "foreground": "var(file-link)"
         },
         {
             "scope": "punctuation.section.braces.begin.frame.urtext",
@@ -154,58 +160,55 @@
         },
         {
             "scope": "punctuation.section.braces.begin.inline_node_1.urtext",
-            "foreground": "var(wrapper1)",
-            "font_style": "bold"
+            "foreground": "var(node-wrapper)",
         },
         {
             "scope": "punctuation.section.braces.begin.inline_node_2.urtext",
-            "foreground": "var(wrapper2)",
-            "font_style": "bold"
+            "foreground": "var(node-wrapper)",
         },
         {
             "scope": "punctuation.section.braces.begin.inline_node_3.urtext",
-            "foreground": "var(wrapper3)",
-            "font_style": "bold"
+            "foreground": "var(node-wrapper)",
         },
         {
             "scope": "punctuation.section.braces.begin.inline_node_4.urtext",
-            "foreground": "var(wrapper4)",
-            "font_style": "bold "
+            "foreground": "var(node-wrapper)",
         },
         {
             "scope": "punctuation.section.braces.begin.inline_node_5.urtext",
-            "foreground": "var(wrapper5)",
-            "font_style": "bold"
+            "foreground": "var(node-wrapper)",
         },
         {
             "scope": "missing_node.urtext",
             "foreground": "var(red)",
-            "font_style": "bold"
         },
         {
             "scope": "punctuation.section.braces.end.inline_node_1.urtext",
-            "foreground": "var(wrapper1)",
-            "font_style": "bold"
+            "foreground": "var(node-wrapper)",
         },
         {
             "scope": "punctuation.section.braces.end.inline_node_2.urtext",
-            "foreground": "var(wrapper2)",
-            "font_style": "bold"
+            "foreground": "var(node-wrapper)",
         },
         {
             "scope": "punctuation.section.braces.end.inline_node_3.urtext",
-            "foreground": "var(wrapper3)",
-            "font_style": "bold"
+            "foreground": "var(node-wrapper)",
         },
         {
             "scope": "punctuation.section.braces.end.inline_node_4.urtext",
-            "foreground": "var(wrapper4)",
-            "font_style": "bold"
+            "foreground": "var(node-wrapper)",
         },
         {
             "scope": "punctuation.section.braces.end.inline_node_5.urtext",
-            "foreground": "var(wrapper5)",
-            "font_style": "bold"
+            "foreground": "var(node-wrapper)",
+        },
+        {
+            "scope": "escape_marker.urtext",
+            "foreground": "var(embed-marker)",
+            "font_style": "italic bold"
+        },
+        {   "scope" :"whitespace-anchor.urtext",
+            "foreground": "var(unobtrusive)"   
         },
         {
             "scope": "embed_marker.urtext",
@@ -218,12 +221,22 @@
             "font_style": "italic bold"
         },
         {
+            "scope": "file_link_path.urtext",
+            "foreground": "var(lime2)"
+        },
+        {
             "scope": "raw.urtext",
             "background": "var(raw)"
         },
         {
             "scope": "node_title.urtext",
-            "font_style": "bold"
+            "font_style": "bold",
+            "foreground": "var(link)"
+        },
+        {
+            "scope": "title_marker.urtext",
+            "font_style": "bold",
+            "foreground": "var(link)"
         },
         {
             "scope": "pointer_prefix.urtext",
@@ -260,9 +273,15 @@
             "foreground": "var(blue)"
         },
         {
-            "scope": "title_marker.urtext",
-            "foreground": "var(unobtrusive)"
+            "scope": "link_uniquifier_marker.urtext",
+            "foreground": "var(lime2)"
         },
+        {
+            "scope": "link_uniquifier.urtext",
+            "foreground": "var(lime2)",
+            "font_style": "italic"
+        },
+
         {
             "scope": "entity.name.struct.system-message.urtext",
             "foreground": "var(system-message)"

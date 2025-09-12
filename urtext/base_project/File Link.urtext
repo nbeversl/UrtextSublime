@@ -5,7 +5,7 @@ Insert Link to File _
 class FileLink:
 
 	name = 'Insert Link to File'
-	thread_safe = True
+	inline_safe = True
 
 	def run(self):
 

@@ -5,5 +5,5 @@
       
     /* Development and Debugging */
     { "caption": "Urtext: Debug", "command" :"urtext_debug"},
-    { "caption": "Urtext: Turn Off Async (debugginh)", "command" :"no_async"},  
+    { "caption": "Urtext: Turn Off Async (debugging)", "command" :"no_async"},  
 ] 

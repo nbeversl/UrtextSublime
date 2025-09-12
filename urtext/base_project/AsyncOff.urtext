@@ -1,0 +1,13 @@
+Async Off _
+
+%%Python
+class AsyncOff:
+
+	name = 'turn async off (debugging)'
+	inline_safe = True
+
+	def run(self):
+		self.project_list.is_async = False
+
+ThisProject.add_action(AsyncOff)
+%%

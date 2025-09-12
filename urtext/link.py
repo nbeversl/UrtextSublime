@@ -41,7 +41,7 @@ class UrtextLink:
 			return self.bound_action()
 		elif self.target_project_name:
 			if not self.project_list.set_current_project(self.target_project_name):
-				self.project_list.run_editor_method("popup", "project %s is not available" % self.target_project_name)
+				self.project_list.run_editor_method("info_message", "project %s is not available" % self.target_project_name)
 				return
 		elif self.containing_project_name:
 			self.project_list.set_current_project(self.containing_project_name)
@@ -58,7 +58,7 @@ class UrtextLink:
 				return self.project_list.current_project.open_node(dest_node.id,
 					position=dest_node.start_position + self.dest_node_position)
 		elif self.is_node:
-			return self.project_list.current_project.run_editor_method('popup', 
+			return self.project_list.current_project.run_editor_method('info_message', 
 				'Node cannot be found in project "%s"' % self.project_list.current_project.title())
 		elif self.is_file:
 			path = None

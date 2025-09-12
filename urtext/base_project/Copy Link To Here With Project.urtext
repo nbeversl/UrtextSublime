@@ -3,7 +3,7 @@ Copy Link To Here With Project _
 class CopyLinkToHereWithProject:
 
 	name = 'Copy Link to Here With Project'
-	thread_safe = True
+	inline_safe = True
 	
 	def run(self):
 		filename = self.project_list.run_editor_method('get_current_filename')

@@ -70,6 +70,11 @@
             "font_style": "bold"
         },
         {
+            "scope": "pointer_closing_wrapper.urtext",
+            "foreground": "var(reg-text-white)",
+            "font_style": "bold"
+        },
+        {
             "scope": "link.other-project.urtext",
             "font_style": "bold",
             "foreground": "var(reg-text-white)"
@@ -238,11 +243,6 @@
         {
             "scope": "url_link.urtext",
             "foreground": "var(blue-bright)"
-        },
-        {
-            "scope": "missing_node.urtext",
-            "foreground": "var(yellow)",
-            "font_style": "bold"
         },
         {
             "scope": "missing_node.urtext",

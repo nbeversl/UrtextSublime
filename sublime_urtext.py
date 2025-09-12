@@ -1,7 +1,7 @@
 from UrtextSublime.implementation.urtext_folding import ToggleFoldSingleCommand, ToggleFoldAllCommand
 from UrtextSublime.implementation.urtext_traverse import ToggleTraverse, TraverseFileTree
 from UrtextSublime.implementation.editor_methods import editor_methods
-from UrtextSublime.implementation.project_list_manager import initialize_project_list, check_urtext_project_list, _UrtextProjectList
+from UrtextSublime.implementation.project_list_manager import check_urtext_project_list
 from sublime_plugin import EventListener, ViewEventListener
 from UrtextSublime.urtext.project_list import ProjectList
 import sublime_plugin
@@ -22,9 +22,8 @@ class RunUrtextCallCommand(sublime_plugin.TextCommand):
                 return self.view.run_command('toggle_fold_all')
             if urtext_call == 'insert_link_to_file':
                 return self.view.run_command('insert_file_link')
-            if urtext_call == 'open_urtext_link':
-                line, cursor, file_pos, line_range = get_line_and_cursor()
-                return _UrtextProjectList.handle_link(line, self.view.file_name(), get_position(), col_pos=cursor, identifier=self.view.id())
+            if urtext_call == 'open_link':
+                return _UrtextProjectList.run_action('open_link') 
             _UrtextProjectList.run_action(urtext_call)
  
 class UrtextShowAllActionsCommand(sublime_plugin.TextCommand):
@@ -41,6 +40,7 @@ class UrtextReplace(sublime_plugin.TextCommand):
 class UrtextEventListeners(EventListener):
 
     def on_activated(self, view):
+        _UrtextProjectList = check_urtext_project_list()
         if view and view.file_name() and _UrtextProjectList:
             _UrtextProjectList.visit_file(view.file_name())
                 
@@ -79,7 +79,7 @@ class UrtextEventListeners(EventListener):
             view.show_popup(contents, 
                 max_width=512, 
                 max_height=512, 
-                location=get_position(),
+                location=editor_methods.get_position(),
                 on_navigate=unfold_region)
 
         if _UrtextProjectList and _UrtextProjectList.current_project:
@@ -88,7 +88,7 @@ class UrtextEventListeners(EventListener):
             _UrtextProjectList.on_hover(full_line, view.file_name(), point, col_pos=col_pos, identifier=view.id())
 
     def on_query_completions(self, view, prefix, locations):
-        _UrtextProjectList = initialize_project_list(view.window(), add_project=False)
+        _UrtextProjectList = check_urtext_project_list()
         if _UrtextProjectList and _UrtextProjectList.current_project:
             if _UrtextProjectList.set_current_project(os.path.dirname(view.file_name())):
                 subl_completions = []
@@ -125,8 +125,7 @@ class MouseOpenUrtextLinkCommand(sublime_plugin.TextCommand):
             full_line_region = self.view.full_line(region)
             row, col_pos = self.view.rowcol(click_position)
             full_line = self.view.substr(sublime.Region(full_line_region.a-1, full_line_region.b))
-            link = _UrtextProjectList.handle_link(
-                full_line,
+            _UrtextProjectList.handle_link(full_line,
                 self.view.file_name(),
                 file_pos,
                 identifier=self.view.id(),
@@ -199,6 +198,7 @@ class UrtextDebugCommand(sublime_plugin.TextCommand):
 class NoAsync(sublime_plugin.TextCommand):
 
     def run(self, edit):
+        _UrtextProjectList = check_urtext_project_list()
         if _UrtextProjectList:
             _UrtextProjectList.is_async = False
             print("async off")

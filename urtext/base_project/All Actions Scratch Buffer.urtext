@@ -9,12 +9,12 @@ class InScratchBuffer:
 		text = 'Urtext Scratch Buffer _\n'+ '\n'.join([
 			self.utils.make_bound_link(action) for action in self.project_list.actions 
 			])
-		buffer_id = self.current_project().run_editor_method('scratch_buffer', text)
+		buffer_id = self.project_list.run_editor_method('scratch_buffer', text)
 		buffer = self.current_project().urtext_buffer(self.current_project(), None, text)
 		buffer.identifier = buffer_id
 		self.current_project()._parse_buffer(buffer)
 		def bound_action(text):
-			self.current_project().run_action(text)
+			self.project_list.run_action(text)
 		buffer.root_node.bound_action = bound_action
 
 

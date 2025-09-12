@@ -5,7 +5,7 @@ class UrtextAction:
     syntax = syntax
     utils = utils
     display = True
-    thread_safe = False
+    inline_safe = False
     name = None
 
     def __init__(self, project_list):

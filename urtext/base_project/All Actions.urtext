@@ -5,12 +5,13 @@ All Actions _
 class ShowAllActionsAction:
 
 	name = 'Show All Actions'
-	thread_safe = True
+	inline_safe = True
+
 	def run(self):
 		self.selections = [action.name for action in self.project_list.actions.values()]
 		def run_the_action(selection):
 			if selection > -1:
-				self.current_project().run_action(self.selections[selection])
+				self.project_list.run_action(self.selections[selection])
 		self.project_list.run_editor_method('show_panel', self.selections, run_the_action)
 
 class ShowAllActionsCall:

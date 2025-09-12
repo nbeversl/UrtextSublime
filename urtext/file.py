@@ -6,6 +6,7 @@ class UrtextFile(UrtextBuffer):
    
     def __init__(self, filename, project):
         self.filename = filename
+        self.project = project
         super().__init__(project, filename, self._read_contents())
 
     def _get_contents(self):
@@ -15,6 +16,11 @@ class UrtextFile(UrtextBuffer):
 
     def _read_contents(self):
         """ returns the file contents, filtering out Unicode Errors, directories, other errors """
+        buffer_setting = self.project.get_single_setting('use_buffer')
+        if buffer_setting and buffer_setting.true():
+            contents = self.project.run_editor_method('get_buffer', self.filename)
+            if contents:
+                return contents
         try:
             with open(self.filename, 'r', encoding='utf-8') as theFile:
                 full_file_contents = theFile.read()
@@ -45,7 +51,9 @@ class UrtextFile(UrtextBuffer):
             if buffer_setting and buffer_setting.true():
                 self.project.run_editor_method('set_buffer', self.filename, self.contents)
             else:
-                self.project.run_editor_method('refresh_files', self.filename)
+                open_files = self.project.run_editor_method('get_open_files')
+                if self.filename in open_files and open_files[self.filename] == False:
+                    self.project.run_editor_method('refresh_files', self.filename)
         elif self.identifier:
             self.project.run_editor_method('set_buffer', None, self.contents, identifier=self.identifier)
         if re_parse:

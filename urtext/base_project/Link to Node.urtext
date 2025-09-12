@@ -3,7 +3,7 @@ Link To Node _
 class LinkToNode:
 
 	name = 'Link To Node'
-	thread_safe = True
+	inline_safe = True
 
 	def run(self):
 		self.selections = [[n.id, n.display_detail] for n in self.project_list.current_project.sort_for_node_browser()]

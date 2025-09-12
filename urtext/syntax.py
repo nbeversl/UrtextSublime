@@ -96,7 +96,7 @@ call_key_with_opt_flags = r''.join([
     ])
 frame = r'(?:\[\[)([^\]]*?)(?:\]\])'
 dynamic_marker = '~'
-missing_frame_marker = '~?'
+missing_frame_marker = '?'
 embedded_syntax_open = r'%%\w+'
 embedded_syntax_close = r'%%'+pattern_break
 format_key = r'\$_?[\.A-Za-z0-9_-]*'

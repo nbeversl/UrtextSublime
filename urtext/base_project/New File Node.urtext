@@ -3,7 +3,7 @@ New File Node _
 class NewFileNode:
 
 	name = 'New File Node'
-	thread_safe = True
+	inline_safe = True
 
 	import os
 	def run(self):

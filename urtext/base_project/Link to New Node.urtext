@@ -5,7 +5,6 @@ class InsertLinkToNewNodeCommand:
 
 	name = 'Insert Link to New Node'
 	import os
-	thread_safe = True
 
 	def run(self):
 		filename = self.project_list.run_editor_method('get_current_filename')

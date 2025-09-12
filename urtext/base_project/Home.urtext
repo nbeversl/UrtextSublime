@@ -8,11 +8,13 @@ EXEC(| Target Call >)
 EXEC(| Tree >)
 EXEC(| Sort >)
 EXEC(| Text >)
+EXEC(| Async Off >)
 EXEC(| Max Length >)
 EXEC(| Include and Exclude >)
 EXEC(| Limit >)
 EXEC(| Rename Files >)
 EXEC(| Files >)
+EXEC(| Open Link >)
 EXEC(| Navigation >)
 EXEC(| Log >)
 EXEC(| Collect >)
@@ -61,11 +63,12 @@ TREE()
 ]]
 
 	{~ results _
-| (untitled) ^ project_settings >
+| (untitled) ^ _lint >
 | All Actions >
 | All Actions Scratch Buffer >
 | All Projects Node Browser >
 | Anchor >
+| Async Off >
 | Browse Backlinks >
 | Browse Forward Links >
 | Browse Metadata >
@@ -109,6 +112,7 @@ TREE()
 | New File Node >
 | Node Browser >
 | Open Home >
+| Open Link >
 | Parameters >
 | Patterns >
 | Pop >

@@ -4,7 +4,7 @@ Browse Backlinks _
 class BrowseBacklinks:
 
 	name = 'Browse Backlinks'
-	thread_safe = True
+	inline_safe = True
 
 	def run(self):
 		node = self.current_project().get_node_from_editor()

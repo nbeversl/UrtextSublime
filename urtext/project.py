@@ -98,6 +98,8 @@ class UrtextProject:
 
     def get_propagated_settings(self, _called_from_project_list=False):
         propagated_settings = self.get_setting_as_text('propagate_settings', _called_from_project_list=_called_from_project_list)
+        not_propagated_settings = self.get_setting_as_text('do_not_propagate_settings', _called_from_project_list=_called_from_project_list)
+        propagated_settings = [s for s in propagated_settings if s not in not_propagated_settings]
         if '_all' in propagated_settings:
             all_settings = self.get_settings_keys()
             if 'project_title' in all_settings:
@@ -215,7 +217,8 @@ class UrtextProject:
 
         existing_buffer_ids = None
         if filename in self.files:
-            existing_buffer_ids = [n.id for n in self.nodes.values() if n.filename == filename]
+            existing_nodes = [n for n in self.nodes.values() if n.filename == filename]
+            existing_buffer_ids = [n.id for n in sorted(existing_nodes, key= lambda n : n.start_position)]
 
         if filename in self.files:
             self.drop_buffer(self.files[filename])
@@ -425,7 +428,14 @@ class UrtextProject:
         self.nodes[new_node.id] = new_node
         if new_node.title == 'project_settings':
             self.project_settings_nodes.append(new_node.id)
+            self.on_project_settings_found()
         self.run_hook('on_node_added', new_node)
+
+    def on_project_settings_found(self):
+        on_loaded_setting = self.get_setting_as_text('on_loaded')
+        for action in on_loaded_setting:
+            if action == 'open_home' and self.title() != 'Urtext Base Project' and not self.project_list.node_has_been_opened():
+                self.open_home()
 
     def get_source_node(self, filename, position):  # future
         if filename not in self.files:
@@ -550,15 +560,10 @@ class UrtextProject:
             self.run_hook('on_new_file_node', self.files[filename].root_node.id)
             if open_file:
                 self.open_node(self.files[filename].root_node.id, position=cursor_pos)
-            if filename in self.files:
-                return {
-                    'filename': filename,
-                    'root_node': self.files[filename].root_node,
-                    'id': buffer.root_node.id,
-                    'cursor_pos': cursor_pos
+        return {
+                'filename': filename,
+                'cursor_pos': cursor_pos
                 }
-            else:
-                print('(DEBUGGING) error in project.new_file_node')
 
     def new_inline_node(self,
                         metadata=None,
@@ -665,7 +670,15 @@ class UrtextProject:
                 self.nodes[target_id].metadata.clear_from_source(source_node)
 
     def open_node(self, node_id, position=None):
-        self.project_list.execute(self._open_node, node_id, position=position)
+        if not self.compiled:
+            self._open_node(node_id, position=position)
+        else:
+            self.project_list.execute(self._open_node, node_id, position=position)
+
+    def preview_node(self, node_id, position=None):
+        filename, position =self.get_file_and_position(node_id)
+        if filename:
+            self.run_editor_method('preview_file_at_position', filename, position)
 
     def _open_node(self, node_id, position=None):
         node = self.get_node(node_id)
@@ -711,7 +724,7 @@ class UrtextProject:
 
     def handle_info_message(self, message):
         print(message)
-        self.run_editor_method('popup', message)
+        self.run_editor_method('info_message', message)
 
     def handle_error_message(self, message):
         print(message)
@@ -773,7 +786,11 @@ class UrtextProject:
         if identifier and identifier in self.buffers:
             return self.buffers[identifier].get_node_from_position(position)
         if filename in self.files:
-            return self.files[filename].get_node_from_position(position)
+            node_id = None
+            for node in self.files[filename].nodes:
+                for r in node.ranges:
+                    if position in range(r[0], r[1] + 1):  # +1 in case the cursor is in the last position of the node.
+                        return node
 
     def get_node(self, node_id):
         if node_id in self.nodes:
@@ -883,7 +900,7 @@ class UrtextProject:
         if flags is None:
             flags = []
         included_files = self._get_included_files()
-        if self.compiled and filename in  included_files:
+        if self.compiled and filename in included_files:
             self._compile_file(filename, flags=['-on_modified'] + flags)    
         self.close_inactive()
         self._sync_file_list()
@@ -1234,8 +1251,8 @@ class UrtextProject:
                 return self.log_item(frame.source_node.filename, {'top_message': output})
             if target.matching_string == '@buffer':
                 return self.run_editor_method('scratch_buffer', output)
-            if target.matching_string == '@popup':
-                return self.run_editor_method('popup', output)
+            if target.matching_string == '@info':
+                return self.run_editor_method('info_message', output)
             if target.matching_string == '@line':
                 contents = frame.source_node.contents_with_contained_nodes()
                 return self._set_node_contents(
@@ -1248,8 +1265,8 @@ class UrtextProject:
                     '\n']))
             if target.matching_string == '@console':
                 return self.run_editor_method('write_to_console', output)
-            if target.matching_string == '@popup':
-                return self.run_editor_method('popup', output)
+            if target.matching_string == '@info':
+                return self.run_editor_method('info_message', output)
         if target.is_file:
             return utils.write_file_contents(os.path.join(self.entry_path, target.path), output)
         if target.is_raw_string and target.matching_string in self.nodes:  # fallback
@@ -1311,10 +1328,7 @@ class UrtextProject:
         return self.entry_point
 
     def on_initialized(self):
-        on_loaded_setting = self.get_setting_as_text('on_loaded')
-        for action in on_loaded_setting:
-            if action == 'open_home' and not self.project_list.node_has_been_opened():
-                if self.open_home(): return
+        pass
 
     def on_selected(self):
         self.run_hook('on_selected', self)
@@ -1392,11 +1406,13 @@ class UrtextProject:
         return call
 
     def run_action(self, action_string):
+        """
+        should not be called directly, is called from ProjectList
+        to determine whether it is safe outside a thread
+        """
         action_string = action_string.replace(' ','_').lower()
         if action_string in self.actions:
             return self.actions[action_string].run()
-        if action_string in self.project_list.actions:
-            return self.project_list.actions[action_string].run()
 
     def run_call(self, call_name, *args, **kwargs):
         call = self.get_call(call_name)

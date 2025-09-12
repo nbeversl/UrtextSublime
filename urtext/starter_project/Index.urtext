@@ -17,6 +17,7 @@
 | Bold Text >
 | Bracket Node Wrappers >
 | Bracket Nodes >
+| Bracket node >
 | Browse Backlinks >
 | Browse Forward Links >
 | Browse Metadata >
@@ -56,6 +57,7 @@
 | Example of Linked Node as Metadata Output >
 | Example of Nested Metadata Output >
 | Example use of LOG >
+| Export >
 | Extended Metadata >
 | Extensible >
 | Features >
@@ -91,6 +93,7 @@
 | Keys >
 | LIMIT() >
 | LOG() >
+| Link Examples for Web >
 | Link Preview On Hover >
 | Link To Node >
 | Link to Character Location >
@@ -172,6 +175,7 @@
 | Sublime Text_ >
 | Syntax >
 | Syntax Highlighting >
+| Syntax Overview >
 | System Keys >
 | TARGET() >
 | TEXT() >
@@ -210,16 +214,18 @@
 | console _ >
 | etc. >
 | example node >
+| export example >
+| info _ >
 | inline_timestamp >
 | italic >
 | keybinding output >
 | links_from >
 | links_to >
 | log _ >
+| nested bracket node >
 | newest_timestamp >
 | oldest_timestamp >
 | output dest >
-| popup _ >
 | project_settings >
 | self >
 | target link >

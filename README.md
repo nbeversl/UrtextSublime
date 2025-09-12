@@ -10,15 +10,16 @@ The core library has no user interface and requires a text editor implementation
 
 ## Installation
 
-### Using Package Control
+### as .ZIP file
 
-***For experienced Sublime Text users, note this package is no longer updated on [packagecontrol.io](https://urtext.co/installation-and-setup/sublime-text/installation-and-setup-in-sublime-text/) and has its own Package Control channel.***
+***This package is no longer updated on [packagecontrol.io](https://urtext.co/installation-and-setup/sublime-text/installation-and-setup-in-sublime-text/) and should be installed manually.***
 
 See instructions at https://urtext.co/setup/sublime-text/.
 
-### With Git:
+### with Git:
 
-Clone this repository into the Sublime Text Packages folder. (See above for the folder location depending on operating system.)
+Clone this repository into the Sublime Text Packages folder. 
+Rename it UrtextSublime
 
 ## Starter Project & Documentation
 

@@ -15,11 +15,13 @@ class Exec:
     name = ["EXEC"]
 
     def dynamic_output(self, text_contents):
-        node_is_self = False
+        target_is_self = False
+        for target in self.frame.targets:
+            if target.matching_string  == '@self':
+                target_is_self = True
         if self.argument_string.strip() == '@self':
             node_to_exec = self.frame.source_node
             contents = self.frame.source_node.full_contents
-            node_is_self = True
         else:
             node_to_exec = self.project.get_node(get_id_from_link(self.argument_string))
             if node_to_exec:
@@ -47,7 +49,7 @@ class Exec:
                 sys.stdout = old_stdout
                 message = mystdout.getvalue()
                 return_contents = text_contents + message 
-                if node_is_self:
+                if target_is_self:
                     return_contents = python_embed.group() + '\n' + return_contents
                 return return_contents
             except Exception as e:
