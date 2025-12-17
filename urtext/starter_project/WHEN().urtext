@@ -3,10 +3,12 @@ WHEN() _ #call
 Specifies when a frame should be run. (See | Default Execution Times > for the default times.)
 WHEN can limit unwanted execution or trigger execution times other than the defaults.
 
+
 	{ Parameters _
 
 	  Accepts any number of flags.
 	}
+
 
 	{ Flags _
 
@@ -36,6 +38,7 @@ WHEN can limit unwanted execution or trigger execution times other than the defa
 
 	}
 
+
 	{ Action Links Example _
 
 	  [[
@@ -47,6 +50,7 @@ WHEN can limit unwanted execution or trigger execution times other than the defa
 
 	  |! Open Urtext Website >
 
+
 		{ Code to exec _
 
 %%Python
@@ -56,6 +60,7 @@ webbrowser.get().open('https://urtext.co')
 
 %%
 		}
+
 
 		{~ Open Urtext Website _
 

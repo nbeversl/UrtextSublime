@@ -16,6 +16,7 @@ class Navigation:
 		self.navigation = []
 		self.nav_index = -1
 		self.triggered_node_visit = False
+		self.should_reverse = None
 
 	def run(self, arg):
 		if arg == 'forward':
@@ -70,15 +71,22 @@ class Navigation:
 		self.navigation.append((project, node.id))
 
 	def before_file_deleted(self, project, filename):
+		current_open_filename = self.project_list.run_editor_method('get_current_filename')
+		if filename == current_open_filename:
+			self.should_reverse = True
 		for item in list(self.navigation):
-			project, node_id = item
-			if filename in project.files and node_id in project.files[filename].node_ids():				
+			item_project, node_id = item
+			if filename in item_project.files and node_id in item_project.files[filename].node_ids():
 				if self.navigation.index(item) < self.nav_index:
 					self.nav_index -= 1
+				if self.navigation.index(item) == self.nav_index:
+					self.should_reverse = True
 				del self.navigation[self.nav_index]
 
 	def after_file_deleted(self, project, filename):
-		self.reverse()
+		if self.should_reverse:
+			self.reverse()
+		self.should_reverse = None
 
 	def on_node_id_changed(self, project, old_id,  new_node_id):
 		for index, item in enumerate(self.navigation):
@@ -140,8 +148,8 @@ class NavigateToNextNode:
 	inline_safe = True
 	
 	def run(self):
-		position = self.run_editor_method('get_position')
-		filename = self.run_editor_method('get_current_filename')
+		position = self.project_list.run_editor_method('get_position')
+		filename = self.project_list.run_editor_method('get_current_filename')
 		self.current_project()._parse_file(filename, try_buffer=True)
 		current_node = self.current_project().get_node_from_position(filename, position)
 		if current_node:
@@ -155,8 +163,8 @@ class NavigateToPreviousNode:
 	inline_safe = True
 	
 	def run(self):
-		position = self.run_editor_method('get_position')
-		filename = self.run_editor_method('get_current_filename')
+		position = self.project_list.run_editor_method('get_position')
+		filename = self.project_list.run_editor_method('get_current_filename')
 		self.current_project()._parse_file(filename, try_buffer=True)
 		current_node = self.current_project().get_node_from_position(filename, position)
 		if current_node:

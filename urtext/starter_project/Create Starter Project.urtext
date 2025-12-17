@@ -4,6 +4,6 @@ Opens an editor dialog to select a destination folder, copies this Urtext Starte
 
 |: Create Starter Project >
 
-No default keybinding in Sublime Text; available in the | Show All Actions > Action and directly in the Sublime Text Command Palette as "Urtext: Create Starter Project."
+No default keybinding in Sublime Text or Neovim; available in the | Show All Actions > Action and, in Sublime Text, directly in the Command Palette as "Urtext: Create Starter Project."
 
 All actions can be called three ways. See | Actions >

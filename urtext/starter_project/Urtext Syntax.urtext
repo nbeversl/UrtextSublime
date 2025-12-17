@@ -2,6 +2,7 @@ Urtext Syntax _
 
 Square brackets in this syntax documentation (`[`, `]`) indicate the enclosed text is variable.
 
+
 	{ `{`   `}`
 
 	  Bracket Node Wrappers _
@@ -9,6 +10,7 @@ Square brackets in this syntax documentation (`[`, `]`) indicate the enclosed te
 	  Can appear anywhere. Can be nested aribrarily deep.
 	  More information: | Bracket Nodes >
 	}
+
 
 	{ ` _`
 
@@ -20,6 +22,7 @@ Square brackets in this syntax documentation (`[`, `]`) indicate the enclosed te
 	  More information: | Metadata Syntax >
 	}
 
+
 	{ `| [ node id ] >`
 
 	  Node Link _
@@ -30,6 +33,7 @@ Square brackets in this syntax documentation (`[`, `]`) indicate the enclosed te
 	  You can also link to files: | File Link >
 	  and to HTTP(S)/web links: | Web/HTTP(S) Link >
 	}
+
 
 	{ `| [ node id ] >>`
 
@@ -43,6 +47,7 @@ Square brackets in this syntax documentation (`[`, `]`) indicate the enclosed te
 
 	}
 
+
 	{ `<` and `>`
 
 	  Timestamp Wrappers _
@@ -50,6 +55,7 @@ Square brackets in this syntax documentation (`[`, `]`) indicate the enclosed te
 	  Parses datetime strings as metadata.
 	  More information: | Timestamps >
 	}
+
 
 	{ `[ key ]::[ value ] - [ value ] - [ ... value ] [ ... <timestamp> ] - [...] ;`
 
@@ -59,6 +65,7 @@ Square brackets in this syntax documentation (`[`, `]`) indicate the enclosed te
 	  More information: | Metadata Syntax >
 	}
 
+
 	{ `**`
 
 	  Bold Text _
@@ -67,6 +74,7 @@ Square brackets in this syntax documentation (`[`, `]`) indicate the enclosed te
 
 	}
 
+
 	{ `__`
 
 	  Italic Text _
@@ -74,6 +82,7 @@ Square brackets in this syntax documentation (`[`, `]`) indicate the enclosed te
 	  Makes __italic__ text.
 
 	}
+
 
 	{ `.`
 

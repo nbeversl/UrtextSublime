@@ -5,4 +5,6 @@ Navigates to the previous visited node, if any.
 |: Nav Back >
 
 Default Sublime Text Keybinding: `ctrl+shift+,`
+Default Neovim Keybinding: `<leader>zj`
+
 All actions can be called three ways. See | Actions >

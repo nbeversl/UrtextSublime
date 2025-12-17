@@ -2,11 +2,13 @@ Metadata Syntax  _
 
 Metadata may appear anywhere. They attach to their containing (parent) node, remember their exact location, and can serve as anchors/bookmarks to context (see | COLLECT() >).
 
+
 	{ Keys _
 
 	  Keys not contain whitespace, but dash and underscore are permitted.
 
 	}
+
 
 	{ `::`
 
@@ -16,6 +18,7 @@ Metadata may appear anywhere. They attach to their containing (parent) node, rem
 
 	}
 
+
 	{ Values _
 
 	  Values may contain anything except a semicolon or a | Value Separator >.
@@ -23,6 +26,7 @@ Metadata may appear anywhere. They attach to their containing (parent) node, rem
 
 	  purpose::This node describes metadata in Urtext
 	  audience::Urtext users
+
 
 		{ Value Timestamps _
 
@@ -34,6 +38,7 @@ Metadata may appear anywhere. They attach to their containing (parent) node, rem
 	  See also | Nodes as Metadata >
 	}
 
+
 	{ ` - `
 
 	  Value Separator _
@@ -43,6 +48,7 @@ Metadata may appear anywhere. They attach to their containing (parent) node, rem
 	  some_key::value - another value - a third value
 
 	}
+
 
 	{ `;`
 
@@ -54,6 +60,7 @@ Metadata may appear anywhere. They attach to their containing (parent) node, rem
 	  some text ... one_key::some value; another_key::some_other_value <Tue., Dec. 12, 2023, 01:11 PM>; more text
 
 	}
+
 
 	{ `#`
 
@@ -68,6 +75,7 @@ Metadata may appear anywhere. They attach to their containing (parent) node, rem
 	  By default the hash is assigned the keyname "keyword". It can be modified with the `hash_key` key in | project_settings >.
 
 	}
+
 
 	{ Propagating metadata to descendents _
 
@@ -86,46 +94,55 @@ Metadata may appear anywhere. They attach to their containing (parent) node, rem
 	  +**key::value
 	}
 
+
 	{ Case-sensitivity _
 
 	  Metadata values are not case-sensitive by default. To change this, set the key(s) you wish case sensitive with the `case_sensitive` key in | project_settings >
 
 	}
 
+
 	{ System Keys _
 
 	  Some metadata keynames are created by default.
 	  With the exception of `title` (see | Title Key >), all system keys have a leading underscore `_` to avoid conflict with user keynames.
+
 
 		{ _inline_timestamp _
 
 		  Assigned to all inline timestamps (| Timestamps >)
 		}
 
+
 		{ _oldest_timestamp _
 
 		  Retrieves the oldest timestamp in the node
 		}
+
 
 		{ _newest_timestamp _
 
 		  Retrieves the newest timestamp in the node
 		}
 
+
 		{ _links_from _
 
 		  Retrieves all nodes linked from within the node
 		}
+
 
 		{ _links_to _
 
 		  Retrieves all links to the node from other nodes
 		}
 
+
 		{ _bold _
 
 		  Retrieves bold text. See | Bold Text >
 		}
+
 
 		{ _italic _
 
@@ -134,11 +151,13 @@ Metadata may appear anywhere. They attach to their containing (parent) node, rem
 
 	}
 
+
 	{ Title Key _
 
 	  The `title` metadata key overrides the node title, which is by default the full first non-whitespace line, or | Space-Underscore >. See also | Node Titles >
 
 	}
+
 
 	{ Auto-Completions _
 
@@ -146,6 +165,7 @@ Metadata may appear anywhere. They attach to their containing (parent) node, rem
 	  Start typing any key or value in the project, press tab, and completion suggestions will appear.
 
 	}
+
 
 	{ See also:
 	  | Nodes as Metadata >>

@@ -18,6 +18,7 @@ Example:
 
 Output:
 
+
 	{~ Example Use of TEXT() _
 
 	  This text appears at the top
@@ -25,16 +26,16 @@ Output:
 	  | AND/OR >
 	  | About Urtext >
 	  | Accessing Nested Metadata in Frames >
-	  | Action Links ^ Links >
-	  | Action Links ^ WHEN() >
+	  | Action Link >
+	  | Action Links Example >
 
 	  This text appears in the middle
 
 	  | target link >
 	  | self >
 	  | project_settings >
-	  | popup _ >
 	  | output dest >
+	  | oldest_timestamp >
 
 	  This text appears at the end
 	}

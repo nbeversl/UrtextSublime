@@ -5,4 +5,6 @@ Opens a random node in the active project.
 |: Random Node >
 
 Default Sublime Text Keybinding: `ctrl+shift+i`
+Default Neovim Keybinding: `<leader>zr`
+
 All actions can be called three ways. See | Actions >

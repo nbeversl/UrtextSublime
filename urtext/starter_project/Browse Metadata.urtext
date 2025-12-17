@@ -6,4 +6,4 @@ Shows a panel with all metadata keys in the project, then all values for the met
 
 If your project is simpler and you want this action to show values for only one key, set that key as the meta_browser_key in | project_settings >
 
-No default keybinding in Sublime Text; available in the | Show All Actions > Action
+No default keybinding in Sublime Text or Neovim; available in the | Show All Actions > Action

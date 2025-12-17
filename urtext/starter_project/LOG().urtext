@@ -8,17 +8,28 @@ Example:
 >(| Example use of LOG >)
 LOG() ]]
 
+
 	{~ Example use of LOG _
-	  in file |/ /Users/natebeversluis/Library/Application Support/Sublime Text/Packages/Urtext/urtext/starter_project/TARGET().urtext > dynamic node |? some node > already has a definition in node | COLLECT() > in file |/ /Users/natebeversluis/Library/Application Support/Sublime Text/Packages/Urtext/urtext/starter_project/COLLECT().urtext >
+	  in file |/ /Users/nathanielbeversluis/Library/Application Support/Sublime Text/Packages/UrtextSublime/urtext/starter_project/TARGET().urtext > dynamic node |? some node > already has a definition in node | Export > in file |/ /Users/nathanielbeversluis/Library/Application Support/Sublime Text/Packages/UrtextSublime/urtext/starter_project/Export.urtext >
 	  skipping the definition in node | Node Output >
 
-	  in file |/ /Users/natebeversluis/Library/Application Support/Sublime Text/Packages/Urtext/urtext/starter_project/TARGET().urtext > dynamic node |? some node > already has a definition in node | COLLECT() > in file |/ /Users/natebeversluis/Library/Application Support/Sublime Text/Packages/Urtext/urtext/starter_project/COLLECT().urtext >
+	  in file |/ /Users/nathanielbeversluis/Library/Application Support/Sublime Text/Packages/UrtextSublime/urtext/starter_project/TARGET().urtext > dynamic node |? some node > already has a definition in node | Export > in file |/ /Users/nathanielbeversluis/Library/Application Support/Sublime Text/Packages/UrtextSublime/urtext/starter_project/Export.urtext >
 	  skipping the definition in node | Shorthand ^ TARGET() >
 
-	  in file |/ /Users/natebeversluis/Library/Application Support/Sublime Text/Packages/Urtext/urtext/starter_project/TARGET().urtext > Example text to output to the log
-
-	  in file |/ /Users/natebeversluis/Library/Application Support/Sublime Text/Packages/Urtext/urtext/starter_project/TARGET().urtext > Dynamic node definition in | Node Output >
+	  in file |/ /Users/nathanielbeversluis/Library/Application Support/Sublime Text/Packages/UrtextSublime/urtext/starter_project/TARGET().urtext > Dynamic node definition in | Node Output >
 	  points to nonexistent node |? some node >
+
+	  in file |/ /Users/nathanielbeversluis/Library/Application Support/Sublime Text/Packages/UrtextSublime/urtext/starter_project/TARGET().urtext > Example text to output to the log
+
+
+	  in file |/ /Users/nathanielbeversluis/Library/Application Support/Sublime Text/Packages/UrtextSublime/urtext/starter_project/TARGET().urtext > dynamic node |? some node > already has a definition in node | example node > in file |/ /Users/nathanielbeversluis/Library/Application Support/Sublime Text/Packages/UrtextSublime/urtext/starter_project/EXEC().urtext >
+	  skipping the definition in node | Node Output >
+
+	  in file |/ /Users/nathanielbeversluis/Library/Application Support/Sublime Text/Packages/UrtextSublime/urtext/starter_project/TARGET().urtext > dynamic node |? some node > already has a definition in node | example node > in file |/ /Users/nathanielbeversluis/Library/Application Support/Sublime Text/Packages/UrtextSublime/urtext/starter_project/EXEC().urtext >
+	  skipping the definition in node | Shorthand ^ TARGET() >
+
+	  in file |/ /Users/nathanielbeversluis/Library/Application Support/Sublime Text/Packages/UrtextSublime/urtext/starter_project/Nathaniels-Air telekom ip  Thu , May  08, 2025, 09:19 PM CEST .urtext > Dynamic node definition in | Syntax Overview >
+	  points to nonexistent node |? a node for output >
 
 	}
 

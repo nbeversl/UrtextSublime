@@ -77,7 +77,7 @@ other_entry_points::
 Specifies entry points for other projects to compile. Accepts a relative or absolute file path. Only evaluated once -- reload the project if you change it.
 
 _lint::{ Lint Settings
-  run_when_file_modified::yes
+	run_when_file_modified::yes
   lines_between_nodes::1
 }
 

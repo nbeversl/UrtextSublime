@@ -10,6 +10,7 @@ Example:
 ]]
 Includes all nodes that have a metadata like: keyword::example value
 
+
 	{ Operators _
 
 	  `=` "equal to"
@@ -36,6 +37,7 @@ Includes all nodes that have a metadata like: keyword::example value
 
 	}
 
+
 	{ AND/OR _
 
 	  Two include nodes matching multiple overlapping criteria (an AND comparison), use multiple parameters in the same call, separated by semicolon.
@@ -51,6 +53,7 @@ Includes all nodes that have a metadata like: keyword::example value
 	  Includes all nodes that have an index metadata key AND all all nodes with key "kw" equal to "example".
 	}
 
+
 	{ EXCLUDE() _ #call
 
 	  Exclude works as INCLUDE, except that it removes nodes from inclusion in the output.
@@ -61,6 +64,7 @@ Includes all nodes that have a metadata like: keyword::example value
 
 	  EXCLUDE must be preceded by at least one INCLUDE to have any effect.
 	}
+
 
 	{ Evaluation Order _
 
@@ -77,6 +81,7 @@ Includes all nodes that have a metadata like: keyword::example value
 	  Will gather all nodes with the metadata key "topic", remove from those all with the oldest timestamp before November 13, 2021, remove all with the metadata key "archived", sort the remaining nodes alphabetically, then add all nodes with the metadata key "author" equal to "Stan".
 	}
 
+
 	{ Example Use of INCLUDE and EXCLUDE _
 
 	  [[
@@ -88,10 +93,12 @@ Includes all nodes that have a metadata like: keyword::example value
 	  Populates the node below (| All Available Calls >) with all nodes about calls in this starter project.
 	  Note each included node contains the hash meta `#call` or the metadata syntax `kw::call`.
 
+
 		{~ All Available Calls _
 		  | COLLECT() >
 		  | EXCLUDE() >
 		  | EXEC() >
+		  | Export >
 		  | INCLUDE() >
 		  | LIMIT() >
 		  | LOG() >
@@ -106,6 +113,7 @@ Includes all nodes that have a metadata like: keyword::example value
 
 	}
 
+
 	{ Shorthand _
 
 	  INCLUDE has the shorthand syntax +
@@ -116,6 +124,7 @@ Includes all nodes that have a metadata like: keyword::example value
 	  [[ +(*) -(kw=example) ]]
 	  The above two example are equivalent.
 	}
+
 
 	{ Asterisk _
 
@@ -133,6 +142,7 @@ Includes all nodes that have a metadata like: keyword::example value
 	  Includes all nodes with any key matching "example_key" ]]
 
 	}
+
 
 	{ Flags _
 

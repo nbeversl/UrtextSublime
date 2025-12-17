@@ -4,5 +4,5 @@ Opens an editor dialog to select and existing file and inserts a | File Link > a
 
 |: Insert Link to File >
 
-No default keybinding in Sublime Text; available in the | Show All Actions > Action
+No default keybinding in Sublime Text or Neovim; available in the | Show All Actions > Action
 All actions can be called three ways. See | Actions >

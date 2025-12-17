@@ -2,6 +2,7 @@ TREE() _ #call
 
 Shows a tree representation of each included node and its nested or pointer descendants, to the depth specified. (See also | Pointer >)
 
+
 	{ Parameters _
 
 	  Accepts an integer representation the depth to show (until recursion, if present).
@@ -26,6 +27,7 @@ Example:
 
 Output:
 
+
 	{~ Example Use of TREE() _
 	  | AND/OR >
 	  | About Urtext >
@@ -39,15 +41,16 @@ Output:
 	  .└── | Features >
 	  | Accessing Nested Metadata in Frames >
 	  .└── | Example of Nested Metadata Output >
-	  | Action Links ^ Links >
-	  | Action Links ^ WHEN() >
+	  | Action Link >
+	  | Action Links Example >
 	  .├── | Code to exec >
 	  .└── | Open Urtext Website >
+	  | Actions >
+	  .└── | All Actions >
+	  | All Actions >
+	  | All Actions in Scratch Buffer >
 	  | All Available Calls >
 	  | Arguments >
-	  | Assigner >
-	  | Asterisk >
-	  | Auto-Completions >
 	}
 
 See next: | COLLECT() >

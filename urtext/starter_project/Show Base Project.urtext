@@ -4,4 +4,4 @@ Show Base Project _ #action
 
 This makes the | Base Project > available in the project list. Normally, it is hidden.
 
-No default keybinding in Sublime Text; available in the | Show All Actions > Action
+No default keybinding in Sublime Text or Neovim; available in the | Show All Actions > Action

@@ -8,4 +8,6 @@ By default nodes are sorted by their time of creation, most recent first.
 This can be modified with the `node_browser_sort` key in | project_settings >.
 
 Default Sublime Text Keybinding: `ctrl+shift+e`
+Default Neovim Keybinding: `<leader>zb`
+
 All actions can be called three ways. See | Actions >

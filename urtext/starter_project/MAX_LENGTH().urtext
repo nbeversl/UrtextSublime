@@ -2,6 +2,7 @@ MAX_LENGTH() _ #call
 
 Arbitrarily limits the dynamic output to the specific number of lines. An alternative to LIMIT().
 
+
 	{ Parameters _
 
 	  Accepts a single integer.
@@ -10,18 +11,20 @@ Arbitrarily limits the dynamic output to the specific number of lines. An altern
 Example:
 
 [[
-+(| Urtext Starter Project >)
-Includes the home node of this project
+.	+(| Urtext Starter Project >)
+.	Includes the home node of this project
 
-SHOW($_contents)
-Shows the contents of the node. See | SHOW() > for more information.
+.	SHOW($_contents)
+.	Shows the contents of the node. See | SHOW() > for more information.
 
-MAX_LENGTH(4)
-Limits the output to four lines.
+.	MAX_LENGTH(4)
+.	Limits the output to four lines.
 
->(| Example Use of MAX_LENGTH >)
-Sets the node below as the output target. ]]
+.	>(| Example Use of MAX_LENGTH >)
+.	Sets the node below as the output target.
+]]
+
 
 	{~ Example Use of MAX_LENGTH _
-	  No call has text output}
+	  No call has text output  }
 

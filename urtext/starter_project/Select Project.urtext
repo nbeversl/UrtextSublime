@@ -5,4 +5,6 @@ Opens a list of available Urtext projects in the editor dropdown and switches to
 |: Select Project >
 
 Default Sublime Text Keybinding: `Ctrl + Shift + O`
+Default Neovim Keybinding: `<leader>zp`
+
 All actions can be called three ways. See | Actions >

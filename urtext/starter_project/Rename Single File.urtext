@@ -7,4 +7,6 @@ Renames the current file. The filename template can be set in `filenames` key in
 
 See also: | Rename All Files >
 Default Sublime Text Keybinding: `ctrl+shift+s`
+Default Neovim Keybinding: `<leader>zs`
+
 All actions can be called three ways. See | Actions >

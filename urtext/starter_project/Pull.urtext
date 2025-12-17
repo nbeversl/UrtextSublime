@@ -8,5 +8,8 @@ Position the cursor on the pointer.
 To reverse this, see | Pop >.
 
 Default Sublime Text Keybinding: `Shift + Ctrl + Super + right-arrow`
+Default Neovim Keybinding: `<leader>z,`
+
+
 See also | Pointer > and | Pop >
 All actions can be called three ways. See | Actions >

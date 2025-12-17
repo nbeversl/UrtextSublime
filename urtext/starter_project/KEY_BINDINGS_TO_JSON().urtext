@@ -10,7 +10,7 @@ open_urtext_link::ctrl+shift+/
 insert_timestamp::ctrl+shift+t
 nav_back::ctrl+shift+,
 nav_forward::ctrl+shift+.
-open_home::ctrl+shift+h
+open_home::ctrl+shift+hH
 compact_node::ctrl+shift+6
 random_node::ctrl+shift+i
 select_project::ctrl+shift+o
@@ -41,6 +41,7 @@ global_keybindings::show_all_actions
 .	To make this work, a file link to an existing JSON file must be passed as an argument, such as `Default.sublime-keymap`
 ]]
 
+
 	{~ keybinding output _
 
-	  KEY_BINDINGS_TO_JSON requires a link to an existing file.}
+	  KEY_BINDINGS_TO_JSON requires a link to an existing file.  }

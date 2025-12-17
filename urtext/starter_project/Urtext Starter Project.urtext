@@ -9,33 +9,42 @@ Urtext /ˈʊrtekst/ is an open-source plaintext library for writing, research, d
 
 This starter project demonstrates Urtext with examples to get you going. Add, delete or modify any parts to make the system you need.
 
-To **open a link**, hold Ctrl-Shift and click it, or put the cursor on it and press `Ctrl-Shift-/`
-
-To optimize Sublime Text for Urtext see | Sublime Text Settings and Tips >
 You can look up features and terms in the | Index >
 
-	{ Navigating the Starter Project _
 
-		{ Browsing Nodes _
+	{ Using This Project _
 
+
+		{ In Neovim _
+
+		  To **open a link**, hold put the cursor on it and press `<leader>z/`.
+
+		  Using telescope (installed with the Urtext plugin), you can browse all nodes in the project.
+		  Press `<leader>z/`, type part of a node's title to locate, and Enter to open it.
+
+		  To return to this home node at any time, `<leader>zh`.
+		  Your navigation path can be recalled with `<leader>zj` (back) and `<leader>zk` (forward).
+
+		}
+
+
+		{ In Sublime Text  _
+		  To **open a link**, hold Ctrl-Shift and click it, or put the cursor on it and press `Ctrl-Shift-/`
+		  To optimize Sublime Text for Urtext see | Sublime Text Settings and Tips >
 		  Sublime Text's dropdown will browse all nodes in the project.
 
 		  Press `Control - Shift - E`. Type part of a node's title to locate, and Enter to open it.
 
-		  Nodes sort by title.
-		  This can be modified using the `node_browser_sort` key in | project_settings >.
 
-		  Key bindings for Sublime Text are listed when helpful. These can be modified using the Sublime Text keymap files (see https://www.sublimetext.com/docs/key_bindings.html ) or from Urtext using the| KEY_BINDINGS_TO_JSON() > call.
-
-		}
-
-		{ Navigation _
+		  Key bindings for Sublime Text are listed when helpful. These can be modified using the Sublime Text keymap files (see https://www.sublimetext.com/docs/key_bindings.html ) or from Urtext using the | KEY_BINDINGS_TO_JSON() > call.
 
 		  To return to this home node at any time, press the Home Key, `Ctrl + Shift + H`.
 		  Your navigation path can be recalled with `Ctrl + Shift + <` (back) and `Ctrl + Shift + >` (forward).
 
 		}
+
 	}
+
 
 	{ Basics _
 	  | Files >>
@@ -44,11 +53,12 @@ You can look up features and terms in the | Index >
 	  | Urtext Syntax >>
 	}
 
+
 	{~ Table of Contents _
 	  | Urtext Starter Project >
-	  .├── | Navigating the Starter Project >
-	  .│   ├── | Browsing Nodes >
-	  .│   └── | Navigation >
+	  .├── | Using This Project >
+	  .│   ├── | In Neovim >
+	  .│   └── | In Sublime Text >
 	  .├── | Basics >
 	  .│   ├── | Files >
 	  .│   ├── | Projects >
@@ -168,7 +178,7 @@ You can look up features and terms in the | Index >
 	  .└── | project_settings >
 	  .    └── | Lint Settings >
 
-	  [[>(@self) +(| Urtext Starter Project >) TREE(*)]]}
+	  [[>(@self) +(| Urtext Starter Project >) TREE(*)]]  }
 
 See also:
 | Links >>

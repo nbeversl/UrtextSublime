@@ -5,4 +5,6 @@ With the cursor in any node targeted by a frame (see | Frames >), navigates to t
 |: Go To Frame >
 
 Default Sublime Text Keybinding: `Ctrl+Shift+F`
+Default Neovim Keybinding: `<leader>z[`
+
 All actions can be called three ways. See | Actions >

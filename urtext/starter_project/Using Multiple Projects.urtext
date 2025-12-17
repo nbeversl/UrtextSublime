@@ -10,10 +10,11 @@ Recall that what defines a project is a folder. This is also what separates it f
 
 To switch among projects in Sublime, select "Urtext: Select Project" from the command palette or press Ctrl-Shift-O.
 
+
 	{ Project Naming (Identification) _
 
 	  Unlike nodes, projects are uniquely identified by name. For this reason, each project must have an unique name within the running instance of Urtext. Projects can be named using the `project_title` key in the `project_settings` node. If no name is present, the project's name becomes its absolute path in the file system.
 
 	}
 
-| Cross-Project Linking >>
+|? Cross-Project Linking >>

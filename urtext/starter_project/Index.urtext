@@ -21,7 +21,6 @@
 | Browse Backlinks >
 | Browse Forward Links >
 | Browse Metadata >
-| Browsing Nodes >
 | COLLECT() >
 | Calls >
 | Case-sensitivity >
@@ -84,6 +83,8 @@
 | Hiding Tabs >
 | How to Open Links >
 | INCLUDE() >
+| In Neovim >
+| In Sublime Text >
 | Insert Link to File >
 | Insert Link to New Node >
 | Insert Timestamp >
@@ -110,8 +111,6 @@
 | Move the current file to another project >
 | Nav Back >
 | Nav Forward >
-| Navigating the Starter Project >
-| Navigation >
 | Nested EXEC()s >
 | Nested Metadata as Link >
 | New File Node >
@@ -194,6 +193,7 @@
 | Urtext Starter Project >
 | Urtext Syntax >
 | Using Multiple Projects >
+| Using This Project >
 | Using a Sublime Project for an Urtext Project >
 | Value Separator >
 | Value Timestamps >

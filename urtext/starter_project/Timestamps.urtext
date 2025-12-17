@@ -2,6 +2,7 @@ Timestamps _
 
 Text between two angled brackets (`< >`) is parsed as a timestamp. Urtext utilizes the Python `dateutil` module to loosely parse dates in almost any format. For instance, all of the following are valid:
 
+
 	{ Example Timstamps
 
 	  <Fri., Oct. 09, 2020, 09:59 AM>
@@ -12,17 +13,19 @@ Text between two angled brackets (`< >`) is parsed as a timestamp. Urtext utiliz
 
 The first character inside the brackets may not be `!`, `-`, or whitespace.
 
-Press `Ctrl+Shift+t` to insert the current date and time anywhere.
+Press `Ctrl+Shift+t` (Sublime) or Default `<leader>zt` (Neovim) to insert the current date and time anywhere.
 The format of the timestamp can be changed in | project_settings > using the `timestamp_format` > key.
 
 Timestamps may also be created manually.
 
 Timestamps may be used anywhere. Like all metadata, they remember their position and so function also as anchors/bookmarks.
 
+
 	{ Tracking Node Dates and Times _
 
 	  Reliance on the operating system's "created" or "modified" file date metadata is avoided, since these can be inadvertently overwritten during ordinary file system operations. Instead, new file-level nodes receive a "timestamp" metadata key by default when created.
 	}
+
 
 	{ Time Zones _
 

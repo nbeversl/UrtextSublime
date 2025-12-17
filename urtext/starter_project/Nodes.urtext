@@ -2,20 +2,26 @@ Nodes _
 
 Urtext’s basic unit is a node, which is a range or set of ranges of text, up to and including an entire file.
 
+
 	{ File Nodes _
 
 	  The most basic node is a single file. To create a new file node, press `Ctrl–Shift–;`
 	}
 
+
 	{ Bracket Nodes _
 
 	  Curly braces wrap nodes nested inside files, as this node is. For all purposes in Urtext, nodes’ identities are unique from their containing files, parent nodes, and child nodes. Nodes can be nested arbitrarily deep:
 
+
 		{ One node
+
 
 			{ another node
 
+
 				{ another node ...
+
 
 					{ etc.
 
@@ -28,11 +34,13 @@ Urtext’s basic unit is a node, which is a range or set of ranges of text, up t
 
 	  Urtext is self-correcting. If you do not close every opening bracket, or leave an extra one, Urtext corrects this on every file save.
 
+
 		{ Node Titles _
 
 		  By default, a node's title is its first non-whitespace line. This can be overridden by following any line of text with one space and a single whitespace underscore character. The underscore character also bolds the title.
 
 		}
+
 
 		{ Node IDs _
 

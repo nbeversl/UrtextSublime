@@ -9,6 +9,7 @@ Accepts keynames, denoted with `$`, arbitrary t
 Words preceded by `$` are are evaluated as metadata keys, replaced in the output by their value(s).
 Note that key names themselves are not displayed in the output. Add keynames manually if you want them included.
 
+
 	{ Parameters _
 
 	  SHOW accepts format strings, which are metadata keys, including | System Keys >, preceded by the dollar sign `$`. SORT will also accept arbitrary text or Unicode, such as newlines, tabs, and so on. The following format strings are also available:
@@ -56,6 +57,7 @@ Provides an output template for each included node
 
 ]]
 
+
 	{~ Example Use of SHOW() _
 	  ---
 	  Link: | Example Timstamps >
@@ -64,7 +66,17 @@ Provides an output template for each included node
 	  Excerpt:
 	  Example Timstamps
 
+
+	  ---
+	  Link: | Syntax Overview >
+
+	  Last updated: Thu , May  08, 2025, 09:20 PM CEST
+	  Excerpt:
+	  Syntax Overview _ <- the single underscore denotes the node title
+
+
 	}
+
 
 	{ See also:
 

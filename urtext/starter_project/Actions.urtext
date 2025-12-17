@@ -3,11 +3,12 @@ Actions _
 Actions are units of functionality that can be called on demand.
 They can be accessed three ways:
 
-- from the Action List, `Ctrl + Shift + z` (default)
+- from the Action List, `Ctrl + Shift + z` (Sublime) or `<leader>za` (Neovim)
 - from Keybindings
 - with the | Action Link > syntax
 
 Below is a an index of all actions links included with Urtext. You can also write your own.
+
 
 	{~ All Actions _
 	  | All Actions in Scratch Buffer >
@@ -45,5 +46,5 @@ Below is a an index of all actions links included with Urtext. You can also writ
 	  | Wrap Line >
 	  | Wrap Selection >
 
-	  [[>(@self) +(#action)]]}
+	  [[>(@self) +(#action)]]  }
 

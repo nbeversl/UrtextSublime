@@ -7,33 +7,35 @@ Arguments are keynames with optional flags.
 
 Example:
 [[
-+(*)
-SORT(title -r)
-LIMIT(15)
-TREE()
->(| Example Use of SORT() >) ]]
+.	+(*)
+.	SORT(title -r)
+.	LIMIT(15)
+.	TREE()
+.	>(| Example Use of SORT() >) ]]
 
 Includes all nodes in the project, sorts them in reverse order by title, and limits the results to 15.
 
 Output:
 
+
 	{~ Example Use of SORT() _
 	  | target link >
 	  | self >
 	  | project_settings >
-	  | popup _ >
 	  | output dest >
 	  | oldest_timestamp >
 	  | newest_timestamp >
+	  | nested bracket node >
 	  | log _ >
 	  | links_to >
 	  | links_from >
 	  | keybinding output >
 	  | italic >
 	  | inline_timestamp >
-	  | example node >
-	  | etc. >
+	  | info _ >
+	  | export example >
 	}
+
 
 	{ Arguments _
 
@@ -42,6 +44,7 @@ Output:
 	  For multi-dimensional (inner-to-outer) sort, specify multiple keys. Multiple keys are separated by semicolon or newline.
 
 	}
+
 
 	{ Flags _
 

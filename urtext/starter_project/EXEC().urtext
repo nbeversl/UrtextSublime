@@ -9,6 +9,7 @@ Example:
 .	>(| Example EXEC() output >)
 ]]
 
+
 	{ Example Python Code _
 
 	  Python code must be wrapped using embedding wrappers as below (see | Python >)
@@ -21,13 +22,16 @@ print('This text will print in the destination node.')
 %%
 	}
 
+
 	{~ Example EXEC() output _
 	  This text will print in the destination node.
 	}
 
+
 	{ Nested EXEC()s _
 
 	  Using the | self > virtual target (see | Virtual Targets >), a frame can be nested inside its target so the Python code in the node executes. EXEC() preserves the Python code on execution. The result can be used like a simple REPL buffer.
+
 
 		{~ example node _
 %%Python
@@ -38,7 +42,8 @@ print(5*5)
 		  example python code
 		  25
 
-		  [[>(@self) EXEC(@self)]]}
+		  [[>(@self) EXEC(@self)]]  }
+
 
 		{ Snippet _
 

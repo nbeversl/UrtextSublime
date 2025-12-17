@@ -3,5 +3,5 @@ Opens a panel or buffer to select another active project to which to move the cu
 
 |: Move The Current File to Another Project >
 
-No default keybinding in Sublime Text; available in the | Show All Actions > Action
+No default keybinding in Sublime Text or Neovim; available in the | Show All Actions > Action
 All actions can be called three ways. See | Actions >

@@ -11,7 +11,7 @@ class FileLink:
 
 		def insert_link(filename):
 		        self.project_list.run_editor_method("insert_text", self.project_list.make_file_link(filename))
-		self.project_list.run_editor_method('open_file_dialog', insert_link, allow_folders=True)
+		self.project_list.run_editor_method('select_file_or_folder', insert_link, allow_folders=True)
 
 ThisProject.add_action(FileLink)
 

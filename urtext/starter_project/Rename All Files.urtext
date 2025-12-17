@@ -6,4 +6,5 @@ Renames all files in the project. The filename template can be set in `filenames
 
 See also: | Rename Single File >
 Default Sublime Text Keybinding: `Ctrl + Shift + S`
+No Default Keybinding in Neovim
 All actions can be called three ways. See | Actions >

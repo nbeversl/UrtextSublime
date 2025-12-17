@@ -1,8 +1,10 @@
 Links _
 
+
 	{ Node Link _
 
 	  To link from one node to another, use the pipe and a space (`| `) followed immediately by a node ID, followed by a space and the right angle bracket (` >`). Examples of links are throughout this starter project.
+
 
 		{ Urtext Action List for Linking _
 
@@ -15,16 +17,19 @@ Links _
 
 	}
 
+
 	{ How to Open Links _
 
 	  To **open a link**, hold Ctrl-Shift and click it, or put the cursor on it and press `Ctrl-Shift-/`
 
 	}
 
+
 	{ Dynamic IDs _
 
 	  Whenever the ID of a node changes, Urtext will try to update links to that node to the new ID.
 	}
+
 
 	{ Link to Character Location _
 
@@ -38,10 +43,12 @@ Links _
 
 	}
 
+
 	{ File Link _
 
 	  Links to files can be made by writing `|/ `, followed immediately with a relative or absolute file path, and ending with a right angle bracket ` >`:
-	  Example: |/ README.md >
+	  Example: |/? README.md >
+
 
 		{ Making a File Link With a Dialog in Sublime Text _
 
@@ -55,11 +62,13 @@ Links _
 		}
 	}
 
+
 	{ Web/HTTP(S) Link _
 
 	  HTTP(S) links are recognized automatically and will open in the system default browser.
 	  Example: https://urtext.co/
 	}
+
 
 	{ Missing Link _
 
@@ -73,6 +82,7 @@ Links _
 	  Missing link markers are added and removed by Urtext and are "read-only" -- you can add or delete them but they will revert on save.
 	}
 
+
 	{ Trigger Link _
 
 	  The exclamation mark `!` can be inserted after the opening pipe to make a trigger link.
@@ -85,6 +95,7 @@ Links _
 
 	  To have an effect, the node must be the target of a frame (see | Frames >)
 	}
+
 
 	{ Action Link _
 
@@ -103,6 +114,7 @@ Links _
 	  See | Actions > for more information, including the actions included with Urtext.
 
 	}
+
 
 	{ Cross-Project Link _
 

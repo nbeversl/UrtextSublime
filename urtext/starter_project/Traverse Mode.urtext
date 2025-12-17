@@ -1,12 +1,13 @@
 Traverse Mode  _
 
-You can navigate a node tree or list of nodes by turning on Traverse mode (Shift-Ctrl-R). This will open another pane next to the one you are currently in. As you navigate the nodeview in the left side with the cursor or mouse, the selected node shows on the right. Use Sublime's Focus Group navigation keys, or the mouse, to switch between left and right panes.
+In Sublime Text you can navigate a node tree or list of nodes by turning on Traverse mode (Shift-Ctrl-R). This will open another pane next to the one you are currently in. As you navigate the nodeview in the left side with the cursor or mouse, the selected node shows on the right. Use Sublime's Focus Group navigation keys, or the mouse, to switch between left and right panes.
 
 Toggle Traverse Mode off by pressing Shift-Ctrl-R again. The status bar at the bottom of the Sublime window indicates whether Traverse is on or off.
 
 Note that if Traverse mode is off, you can also open a link manually (Shift-Ctrl-/) as normal.
 
 This feature is not built into Urtext; it is a feature of the Sublime package only.
+
 
 	{ Word Wrap in Traverse Mode _
 

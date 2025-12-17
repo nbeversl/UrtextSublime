@@ -5,5 +5,7 @@ Within a buffer, moves the cursor to and centers the previous node (if any).
 |: Previous Node >
 
 Default Sublime Text Keybinding: `ctrl+shift+b`
+Default Neovim Keybinding: `<leader>z9`
+
 See also | Next Node >
 All actions can be called three ways. See | Actions >

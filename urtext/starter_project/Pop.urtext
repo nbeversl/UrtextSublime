@@ -7,5 +7,7 @@ To reverse this, see | Pull >.
 |: Pop >
 
 Default Sublime Text Keybinding: `Shift + Ctrl + Super + right-arrow`
+Default Neovim Keybinding: `<leader>z.`
+
 See also | Pointer > and | Pull >
 All actions can be called three ways. See | Actions >

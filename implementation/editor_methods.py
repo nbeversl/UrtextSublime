@@ -36,8 +36,8 @@ def close_inactive(extensions='urtext'):
                     sheet.view().set_scratch(True)
                     sheet.close()
 
-def select_file_or_folder(callback):
-    sublime.open_dialog(callback, allow_folders=True)
+def select_file_or_folder(callback, allow_folders=True):
+    sublime.open_dialog(callback, allow_folders=allow_folders)
 
 def insert_text(text):
     view = get_view()
@@ -235,9 +235,6 @@ def get_selection():
         selection = view.substr(region)
         return selection, region.a
 
-def open_file_dialog(callback, allow_folders=True):
-    sublime.open_dialog(callback, allow_folders=allow_folders)
-
 popup_markup = """
             <body id="linked_node_contents">
                 <style>
@@ -353,7 +350,6 @@ editor_methods = {
     'preview_file_at_position' : preview_file_at_position,
     'close_inactive': close_inactive,
     'show_panel': show_panel,
-    'open_file_dialog': open_file_dialog,
     'get_current_filename': get_current_filename,
     'get_position': get_position,
     'set_position': set_position,

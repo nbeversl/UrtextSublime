@@ -4,12 +4,14 @@ Frames are instruction sets that interact programmatically with the project.
 
 Frames are abstractions on top of the Python language that can modify and extend Urtext up to the capabilities of any Python environment. If Urtext does not have a feature you want, you can add it with some Python knowledge. Frames can generate dynamic text output or execute arbitrary Python code.
 
+
 	{ Calls _
 
 	  Frames contain calls. Each call triggers an operation or transformation. The output of each call is sent as input to the next. The final output is sent to the node or other target specified.
 
 	  See | All Available Calls > for more information
 	}
+
 
 	{ Syntax _
 
@@ -19,6 +21,7 @@ Frames are abstractions on top of the Python language that can modify and extend
 
 	}
 
+
 	{ Default Execution Times _
 
 	  By default frames run at three times:
@@ -27,6 +30,7 @@ Frames are abstractions on top of the Python language that can modify and extend
 	  - When the file containing the frame's target is visited or or saved
 	  These defaults can be modified using flags in the | WHEN() > call
 	}
+
 
 	{ Snippet _
 

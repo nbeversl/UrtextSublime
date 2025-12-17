@@ -16,11 +16,13 @@ Example:
 
 Output:
 
+
 	{~ Example Use of COLLECT() _
 	  | Example Timstamps >:22
 	  | Example Timstamps >:57
 	  | Example Timstamps >:80
 	  | Example Timstamps >:94
+	  | Syntax Overview >:143
 	}
 
 Note that the output links directly to the location of the metadata entry using the syntax described in | Link to Character Location >

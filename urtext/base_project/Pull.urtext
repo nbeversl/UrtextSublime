@@ -21,6 +21,8 @@ class PullNode:
 
         self.is_running = True
         self.run_editor_method('save_file', destination_filename)
+        # Required in case the editor does not call on_modified on its own thread
+        self.project_list._on_modified(destination_filename)
         return self._pull_node(string, col_pos, destination_filename, file_pos)
 
     def _pull_node(self, string, col_pos, destination_filename, file_pos):

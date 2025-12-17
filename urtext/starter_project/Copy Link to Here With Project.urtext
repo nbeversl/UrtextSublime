@@ -4,6 +4,7 @@ Copies a link to the node containing the cursor, including the project (see | Cr
 
 |: Copy Link to Here With Project >
 Default Sublime Text Keybinding: `ctrl+shift+super+c`
+Default Neovim Keybinding: `<leader>zC`
 
 All actions can be called three ways. See | Actions >
 

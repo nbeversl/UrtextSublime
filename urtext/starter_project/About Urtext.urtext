@@ -1,6 +1,8 @@
 About Urtext _
 
+
 	{ Features and Philosophy _
+
 
 		{ Plain Text _
 
@@ -9,6 +11,7 @@ About Urtext _
 		  Urtext can also incorporate (embed) other plaintext syntaxes, including other markup languages and programming language syntaxes.
 
 		}
+
 
 		{ Freeform, Flexible Syntax _
 
@@ -22,6 +25,7 @@ About Urtext _
 
 		}
 
+
 		{ Open source _
 
 		  - Usable across multiple platforms and devices.
@@ -29,6 +33,7 @@ About Urtext _
 		  - Decoupled from any particular text editor or interface ; it can be incorporated into any environment that runs Python, including any scriptable text editor or Python-scriptable environment capable of displaying a text editing view.
 
 		}
+
 
 		{ Extensible _
 
@@ -38,6 +43,7 @@ About Urtext _
 
 		}
 
+
 		{ Future Proof _
 
 		  No reliance on anything that may not exist in 5 or 1000 years.
@@ -45,6 +51,7 @@ About Urtext _
 		  The interpreter/compiler could be implemented in any sufficiently capable language, current, past or future.
 
 		}
+
 
 		{ Local _
 
@@ -55,6 +62,7 @@ About Urtext _
 		}
 
 	}
+
 
 	{ Features _
 

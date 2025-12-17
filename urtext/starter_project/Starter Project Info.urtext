@@ -1,105 +1,109 @@
 Starter Project Info
 
+
 	{~ Log Example _
 	  Project Title : Starter Project
 	  project size in memory (bytes): 56
-	  compile time : 0.19159412384033203
-	  nodes size in memory (kB): 12.6
-	  number of files : 80
-	  number of nodes : 225
-	  number of frames : 44
+	  compile time : 0.6597540378570557
+	  nodes size in memory (kB): 13.048
+	  number of files : 82
+	  number of nodes : 233
+	  number of frames : 48
 	  ----
 	  Calls defined in this project:
-	  ANCHOR
-	  PATTERNS
-	  SHOW_ALL_ACTIONS
-	  TREE/LIST
-	  INCLUDE/+
 	  KEY_BINDINGS_TO_JSON
-	  SORT/S
-	  COLLECT
-	  TARGET/>
-	  LIMIT
-	  MAX_LENGTH
-	  INFO
-	  FILES
-	  TARGET/>
-	  SHOW
-	  EXCLUDE/-
 	  LOG
-	  INCLUDE/+
-	  TEXT
+	  INFO
 	  EXCLUDE/-
-	  SORT/S
-	  EXEC
+	  INCLUDE/+
+	  COLLECT
 	  TREE/LIST
 	  STRIP
-	  NAVIGATION
+	  EXCLUDE/-
+	  SORT/S
+	  TARGET/>
+	  TARGET/>
+	  TREE/LIST
+	  MAX_LENGTH
+	  ANCHOR
+	  PATTERNS
+	  LIMIT
+	  EXEC
 	  WHEN
+	  SHOW
+	  NAVIGATION
+	  SHOW_ALL_ACTIONS
+	  TEXT
+	  INCLUDE/+
+	  SORT/S
+	  FILES
+	  EXPORT
 	  ----
 	  Propagated calls:
-	  PATTERNS
+	  KEY_BINDINGS_TO_JSON
+	  EXCLUDE/-
+	  INFO
+	  EXCLUDE/-
+	  INCLUDE/+
+	  COLLECT
+	  LIMIT
+	  STRIP
 	  LOG
 	  SORT/S
-	  INCLUDE/+
-	  TEXT
-	  WHEN
-	  LINT
-	  SORT/S
+	  TARGET/>
+	  TARGET/>
 	  TREE/LIST
-	  COLLECT
-	  KEY_BINDINGS_TO_JSON
-	  LIMIT
 	  MAX_LENGTH
-	  INFO
-	  FILES
-	  SHOW
-	  EXCLUDE/-
-	  SHOW_ALL_ACTIONS
-	  INCLUDE/+
 	  ANCHOR
-	  EXCLUDE/-
-	  TARGET/>
-	  EXEC
+	  PATTERNS
+	  SHOW_ALL_ACTIONS
 	  TREE/LIST
-	  STRIP
+	  EXEC
+	  WHEN
+	  SHOW
 	  NAVIGATION
-	  TARGET/>
+	  LINT
+	  TEXT
+	  INCLUDE/+
+	  SORT/S
+	  FILES
+	  EXPORT
 	  ----
 	  Available actions
-	  New File Node
-	  Wrap Selection
-	  Search Patterns
-	  Next Node
-	  Move the current file to another project
-	  Insert Link to New Node
-	  Browse Metadata
-	  File Outline
-	  Select Project
-	  Node Browser All Projects
-	  Show All Actions
-	  Nav Forward
-	  Random Node
-	  Wrap Line
-	  Pull
-	  Previous Node
-	  Pop
-	  Link Preview On Hover
-	  Copy Link to Here With Project
-	  Link To Node
-	  Show Base Project
-	  Insert Timestamp
-	  Backlinks Browser
-	  Forward Links Browser
 	  Open Home
-	  Rename All Files
 	  Delete This Buffer
-	  Create Starter Project
-	  Insert Link to File
-	  All Actions in Scratch Buffer
-	  Go to Frame
-	  Copy Link to Here
-	  Rename Single File
-	  Node Browser
+	  Open Link
+	  Copy Link to Here With Project
 	  Nav Back
-	  [[>(@self) INFO()]]}
+	  Insert Timestamp
+	  Browse Metadata
+	  Move the current file to another project
+	  All Actions in Scratch Buffer
+	  Rename Single File
+	  Random Node
+	  Node Browser All Projects
+	  File Outline
+	  Nav Forward
+	  Wrap Selection
+	  Wrap Line
+	  Next Node
+	  Show Base Project
+	  Pull
+	  Pop
+	  Copy Link to Here
+	  Create Starter Project
+	  Rename All Files
+	  Search Patterns
+	  Select Project
+	  Go to Frame
+	  Browse Backlinks
+	  Node Browser
+	  turn async off (debugging)
+	  Previous Node
+	  Insert Link to New Node
+	  Browse Forward Links
+	  New File Node
+	  Link To Node
+	  Show All Actions
+	  Insert Link to File
+	  [[>(@self) INFO()]]  }

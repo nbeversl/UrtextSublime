@@ -1,5 +1,6 @@
 Sublime Text Settings and Tips _
 
+
 	{ Syntax Highlighting _
 
 	  The Sublime Text package includes a syntax definition file in YML format (`sublime_urtext.sublime_syntax`), along with two color schemes that provide syntax highlighting. Syntax highlighting makes everything easier by showing depth of node nesting and dimming certain elements of the syntax. Select the Sixteen (for light) or Monokai (for dark) color schemes in Preferences -> Color Scheme ...
@@ -7,11 +8,13 @@ Sublime Text Settings and Tips _
 	  Then change to the Urtext syntax by selecting it in View -> Syntax -> Urtext. To avoid having to do this for every file, select View -> Syntax -> Open All with Current Extension As ... -> Urtext. (This can be undone by repeating the same but selecting Plain Text.)
 	}
 
+
 	{ Hiding Tabs _
 
 	  If you prefer a spare, terminal-like view, hide tabs: View -> Hide Tabs.
 	  This preference can also be set on a per-(Sublime)-project basis. See the Sublime documentation.
 	}
+
 
 	{ Hiding Line Numbers _
 
@@ -30,10 +33,12 @@ Sublime Text Settings and Tips _
 	  (Ignore the JSON syntax pass markers above beginning with `%%`. See |? Escaping Sections of Text > )
 	}
 
+
 	{ Full Screen / Distraction Free Mode _
 
 	  Since you can navigate entirely from within files, Urtext works great in Sublime's Distraction Free Mode. View -> Enter Distraction Free Mode.
 	}
+
 
 	{ Disable Prompts for File Reload _
 
@@ -49,6 +54,7 @@ Sublime Text Settings and Tips _
 
 	}
 
+
 	{ Remove Indent Guides _
 
 	  Formatting plaintext using tab indentions can look messy if indent guides are on. To turn them off, add to your Sublime project settings file:
@@ -56,9 +62,10 @@ Sublime Text Settings and Tips _
 	  %%JSON
 			 "settings" : { 
 				"draw_indent _guides": false,
-			}
+}
 		%%
 	}
+
 
 	{ Save on Focus Lost _
 
@@ -67,10 +74,11 @@ Sublime Text Settings and Tips _
 	  %%JSON
 			"settings" : { 
 			 "save_on_focus_lost": true 
-			}
+}
 		%%
 
 	}
+
 
 	{ Using a Sublime Project for an Urtext Project _
 

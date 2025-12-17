@@ -3,5 +3,5 @@ File Outline _ #action
 Shows an outline (node hierarchy) of the current buffer, in the dropdown.
 |: File Outline >
 
-No default keybinding in Sublime Text; available in the | Show All Actions > Action
+No default keybinding in Sublime Text or Neovim; available in the | Show All Actions > Action
 All actions can be called three ways. See | Actions >

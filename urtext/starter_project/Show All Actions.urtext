@@ -5,3 +5,5 @@ Show All Actions _ #action
 Shows a dropdown panel with all actions.
 
 Deafult Sublime Text Keybinding: `Ctrl+Shift+Z`
+Default Neovim Keybinding: `<leader>za`
+
